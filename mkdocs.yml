@@ -1,0 +1,17 @@
+# Project information
+site_name: Monero Docs
+site_description: 'Unofficial Monero Documentation'
+site_author: "Piotr 'Qertoip' Włodarek"
+site_url: 'https://monerodocs.com/'
+
+theme:
+  name: 'readthedocs' # 'material'
+  palette:
+    primary: 'Deep Orange'
+    accent: 'Deep Orange'
+#  logo: 'images/monero.svg'
+  language: 'en'
+#   feature:
+#     tabs: true
+repo_name: 'monerodocs/monerodocs'
+repo_url: 'https://github.com/monerodocs/monerodocs'
