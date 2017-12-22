@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Piotr 'Qertoip' Włodarek">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Multisignature - Monero Docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Multisignature";
+    var mkdocs_page_input_path = "Multisignature.md";
+    var mkdocs_page_url = "/Multisignature/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Monero Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Unofficial Monero Documentation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Monero-Base58/">Base58</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Multisignature</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#multisignature">Multisignature</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#monero-multisignature">Monero multisignature</a></li>
+        
+            <li><a class="toctree-l3" href="#multisig-wallet-setup">Multisig wallet setup</a></li>
+        
+            <li><a class="toctree-l3" href="#receiving-funds">Receiving funds</a></li>
+        
+            <li><a class="toctree-l3" href="#spending-funds">Spending funds</a></li>
+        
+            <li><a class="toctree-l3" href="#reference">Reference</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Public-Address/">Public Address</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Subaddress/">Subaddress</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Technical-Specs/">Technical Specs</a>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Monero Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Multisignature</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/monerodocs/monerodocs/edit/master/docs/Multisignature.md"> Edit on monerodocs/monerodocs</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="multisignature">Multisignature</h1>
+<p><strong>!! This is unreleased feature !!</strong></p>
+<p>In cryptocurrencies, multisig feature allows to sign transaction with more than one private key. Funds protected with multisig can only be spent by signing with M-of-N keys.</p>
+<p>Example use cases:</p>
+<ul>
+<li>shared account (1-of-2; both husband and wife individually have full access to their funds)</li>
+<li>consensus account (2-of-2; both husband and wife must agree to spend their funds)</li>
+<li>threshold account (2-of-3; an escrow service is involved as an independent 3rd party, to co-sign with either the seller, or with the buyer, if seller and buyer do not agree)</li>
+<li>secure account (2-of-3; a single owner controlls all 3 keys but secures them via a different means to diversify risks)</li>
+<li>arbitrary threshold account (M-of-N; some cryptocurrencies provide full flexibility on the number of signers)</li>
+</ul>
+<h2 id="monero-multisignature">Monero multisignature</h2>
+<p>Monero doesn't directly implement multisignatures (at least not in a classical sense). Monero emulates the feature by secret splitting.</p>
+<p>Transactions are still signed with a single spend key. The spend key is a sum of all N private keys. The rationale for such design is to decouple multisig from ring signatures.</p>
+<p>Let's consider the 2-of-3 scheme. We have 3 participants. Each participant is granted exactly 2 private keys in a way that pairs do not repeat between participants. This way any 2 participants together have all 3 private keys required to create the private spend key.</p>
+<p>Multi-signing is a wallet-level feature. There is no way to learn from the blockchain which transactions were created using multiple signatures.</p>
+<p>It is also worth noting in Monero there is no multisig addresses as such. <a href="../Public-Address">Address structure</a> does not care how the underlying private spend key got created.</p>
+<p>In Monero, only N-of-N and (N-1)-of-N multisignature schemes are supported. This covers all common scenarios mentioned above but does not allow for arbitrary voting (like "3-of-5 board members").</p>
+<p>After multisig wallet setup every participant ends up knowing the public address and private view key. This is necessary for participants to recognize and decipher transactions they are supposed to co-sign.</p>
+<h2 id="multisig-wallet-setup">Multisig wallet setup</h2>
+<p>Let's consider a 2-of-3 scheme as it generalizes well. There will be three CLI wallet commands involved:</p>
+<h3 id="1-prepare_multisig">1. prepare_multisig</h3>
+<p>Every participant independently generates <strong>initialization data</strong>. This is <strong>not</strong> an address.</p>
+<p>Every participant sends his initialization data manually to all other participants over secure channel.</p>
+<h3 id="2-make_multisig">2. make_multisig</h3>
+<p>Every participant applies initialization data from other participants. This results in a <strong>second round of initialization data</strong>. This is still <strong>not</strong> an address.</p>
+<p>Every participants sends his second round of init data to all other participants over secure channel.</p>
+<h3 id="3-finalize_multisig">3. finalize_multisig</h3>
+<p>Every participant finalizes wallet creation by applying the second round of init data from all other participants. This finally results in a wallet <strong>public address</strong> and <strong>private view key</strong> to be known for all participants. </p>
+<p>Please note actions are symmetric for all participants. Even though we considered a 2-of-3 scheme, every participant cooperates with everyone else. The secret splitting is performed internally by the wallet.</p>
+<p>Secure sharing of initialization data between participants is manual. The wallet itself does not provide any secure communication channel. This is out of scope.</p>
+<h2 id="receiving-funds">Receiving funds</h2>
+<p>Address built by multisig setup is like any other address.</p>
+<p>You can generate integrated addresses and subaddresses based on it.</p>
+<p>All participants are able to see incoming funds as they share the private view key.</p>
+<p>With a CLI, use the following commands to see incoming payments:</p>
+<pre><code>address
+refresh
+show_transfers
+</code></pre>
+<h2 id="spending-funds">Spending funds</h2>
+<p>TODO</p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://monero.stackexchange.com/questions/5646/how-to-use-monero-multisignature-wallets-2-2-2-3">https://monero.stackexchange.com/questions/5646/how-to-use-monero-multisignature-wallets-2-2-2-3</a></li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Public-Address/" class="btn btn-neutral float-right" title="Public Address">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../Monero-Base58/" class="btn btn-neutral" title="Base58"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Monero-Base58/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../Public-Address/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>

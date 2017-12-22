@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+    
+    <url>
+     <loc>https://monerodocs.com//</loc>
+     <lastmod>2017-12-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://monerodocs.com//Monero-Base58/</loc>
+     <lastmod>2017-12-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://monerodocs.com//Multisignature/</loc>
+     <lastmod>2017-12-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://monerodocs.com//Public-Address/</loc>
+     <lastmod>2017-12-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://monerodocs.com//Subaddress/</loc>
+     <lastmod>2017-12-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://monerodocs.com//Technical-Specs/</loc>
+     <lastmod>2017-12-22</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+</urlset>

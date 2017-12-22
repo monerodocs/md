@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Piotr 'Qertoip' Włodarek">
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>Technical Specs - Monero Docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../css/highlight.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Technical Specs";
+    var mkdocs_page_input_path = "Technical-Specs.md";
+    var mkdocs_page_url = "/Technical-Specs/";
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js"></script>
+  <script src="../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../js/highlight.pack.js"></script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Monero Docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="..">Unofficial Monero Documentation</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Monero-Base58/">Base58</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Multisignature/">Multisignature</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Public-Address/">Public Address</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../Subaddress/">Subaddress</a>
+	    </li>
+          
+            <li class="toctree-l1 current">
+		
+    <a class="current" href="./">Technical Specs</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l2"><a href="#technical-specs">Technical Specs</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l3" href="#no-premine-no-instamine-no-token">No premine, no instamine, no token</a></li>
+        
+            <li><a class="toctree-l3" href="#proof-of-work">Proof of Work</a></li>
+        
+            <li><a class="toctree-l3" href="#difficulty-retarget">Difficulty retarget</a></li>
+        
+            <li><a class="toctree-l3" href="#block-time">Block time</a></li>
+        
+            <li><a class="toctree-l3" href="#block-reward">Block reward</a></li>
+        
+            <li><a class="toctree-l3" href="#block-size">Block size</a></li>
+        
+            <li><a class="toctree-l3" href="#emission-curve">Emission curve</a></li>
+        
+            <li><a class="toctree-l3" href="#max-supply">Max supply</a></li>
+        
+            <li><a class="toctree-l3" href="#sender-privacy">Sender privacy</a></li>
+        
+            <li><a class="toctree-l3" href="#recipient-privacy">Recipient privacy</a></li>
+        
+            <li><a class="toctree-l3" href="#amount-obfuscation">Amount obfuscation</a></li>
+        
+        </ul>
+    
+
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Monero Docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Technical Specs</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/monerodocs/monerodocs/edit/master/docs/Technical-Specs.md"> Edit on monerodocs/monerodocs</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="technical-specs">Technical Specs</h1>
+<h2 id="no-premine-no-instamine-no-token">No premine, no instamine, no token</h2>
+<ul>
+<li>Monero had no premine or instamine</li>
+<li>Monero did not sell any token</li>
+<li>Monero had no presale of any kind</li>
+</ul>
+<h2 id="proof-of-work">Proof of Work</h2>
+<ul>
+<li>CryptoNight</li>
+<li>may change in the future</li>
+</ul>
+<h2 id="difficulty-retarget">Difficulty retarget</h2>
+<ul>
+<li>every block</li>
+<li>based on the last 720 blocks, excluding 20% of the timestamp outliers</li>
+</ul>
+<h2 id="block-time">Block time</h2>
+<ul>
+<li>2 minutes</li>
+<li>may change in the future as long as emission curve is preserved</li>
+</ul>
+<h2 id="block-reward">Block reward</h2>
+<ul>
+<li>~6 XMR as of Dec 2017, see the <a href="https://moneroblocks.info/">latest block</a> coinbase transaction amount for current reward</li>
+<li>smoothly decreasing and subject to penalties for blocks greater then median size of the last 100 blocks (M100)</li>
+</ul>
+<h2 id="block-size">Block size</h2>
+<ul>
+<li>dynamic, maximum of two times median size of the last 100 blocks (2 * M100)</li>
+</ul>
+<h2 id="emission-curve">Emission curve</h2>
+<p><strong>Main curve</strong></p>
+<p>First, the main emission is about to produce ~18.132 million coins by the end of May 2022.</p>
+<p>As of Dec 2017 the emission is about 30 XMR per 10 minutes.</p>
+<p>See <a href="https://www.reddit.com/r/Monero/comments/512kwh/useful_for_learning_about_monero_coin_emission/">charts and details</a>.</p>
+<p><strong>Tail curve</strong></p>
+<p>The tail emission kicks in once main emission is done.</p>
+<p>It will produce 0.6 XMR per 2-minute block.</p>
+<p>This translates to &lt;1% inflation decreasing over time.</p>
+<h2 id="max-supply">Max supply</h2>
+<ul>
+<li>infinite</li>
+</ul>
+<h2 id="sender-privacy">Sender privacy</h2>
+<ul>
+<li>Ring signatures</li>
+</ul>
+<h2 id="recipient-privacy">Recipient privacy</h2>
+<ul>
+<li>Stealth addresses</li>
+</ul>
+<h2 id="amount-obfuscation">Amount obfuscation</h2>
+<ul>
+<li>Ring confidential transactions</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../Subaddress/" class="btn btn-neutral" title="Subaddress"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../Subaddress/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/require.js"></script>
+      <script src="../search/search.js"></script>
+
+</body>
+</html>
