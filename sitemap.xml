@@ -3,7 +3,7 @@
 
     
     <url>
-     <loc>https://monerodocs.com//</loc>
+     <loc>https://monerodocs.org//</loc>
      <lastmod>2017-12-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -11,7 +11,7 @@
 
     
     <url>
-     <loc>https://monerodocs.com//Technical-Specs/</loc>
+     <loc>https://monerodocs.org//Technical-Specs/</loc>
      <lastmod>2017-12-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -20,7 +20,7 @@
     
         
     <url>
-     <loc>https://monerodocs.com//primitives/Base58/</loc>
+     <loc>https://monerodocs.org//primitives/Base58/</loc>
      <lastmod>2017-12-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -30,19 +30,19 @@
     
         
     <url>
-     <loc>https://monerodocs.com//public-address/Standard-Address/</loc>
+     <loc>https://monerodocs.org//public-address/Standard-Address/</loc>
      <lastmod>2017-12-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://monerodocs.com//public-address/Integrated-Address/</loc>
+     <loc>https://monerodocs.org//public-address/Integrated-Address/</loc>
      <lastmod>2017-12-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
-     <loc>https://monerodocs.com//public-address/Subaddress/</loc>
+     <loc>https://monerodocs.org//public-address/Subaddress/</loc>
      <lastmod>2017-12-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
@@ -51,7 +51,7 @@
 
     
     <url>
-     <loc>https://monerodocs.com//Multisignature/</loc>
+     <loc>https://monerodocs.org//Multisignature/</loc>
      <lastmod>2017-12-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
