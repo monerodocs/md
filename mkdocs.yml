@@ -2,7 +2,7 @@
 site_name: Monero Docs
 site_description: 'Unofficial Monero Documentation'
 site_author: "Piotr 'Qertoip' Włodarek"
-site_url: 'https://monerodocs.com/'
+site_url: 'https://monerodocs.org/'
 
 pages:
 - Home: 'index.md'
@@ -28,5 +28,5 @@ theme:
 
 extra_css: ['extra.css']
 
-repo_name: 'monerodocs/monerodocs'
-repo_url: 'https://github.com/monerodocs/monerodocs'
+repo_name: 'monerodocs/md'
+repo_url: 'https://github.com/monerodocs/md'
