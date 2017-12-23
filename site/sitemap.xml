@@ -11,39 +11,47 @@
 
     
     <url>
-     <loc>https://monerodocs.com//Monero-Base58/</loc>
+     <loc>https://monerodocs.com//Technical-Specs/</loc>
      <lastmod>2017-12-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
+    
+
+    
+        
+    <url>
+     <loc>https://monerodocs.com//primitives/Base58/</loc>
+     <lastmod>2017-12-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    
+
+    
+        
+    <url>
+     <loc>https://monerodocs.com//public-address/Standard-Address/</loc>
+     <lastmod>2017-12-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://monerodocs.com//public-address/Integrated-Address/</loc>
+     <lastmod>2017-12-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>https://monerodocs.com//public-address/Subaddress/</loc>
+     <lastmod>2017-12-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
     
 
     
     <url>
      <loc>https://monerodocs.com//Multisignature/</loc>
-     <lastmod>2017-12-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>https://monerodocs.com//Public-Address/</loc>
-     <lastmod>2017-12-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>https://monerodocs.com//Subaddress/</loc>
-     <lastmod>2017-12-23</lastmod>
-     <changefreq>daily</changefreq>
-    </url>
-    
-
-    
-    <url>
-     <loc>https://monerodocs.com//Technical-Specs/</loc>
      <lastmod>2017-12-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
