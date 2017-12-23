@@ -4,14 +4,29 @@ site_description: 'Unofficial Monero Documentation'
 site_author: "Piotr 'Qertoip' Włodarek"
 site_url: 'https://monerodocs.com/'
 
+pages:
+- Home: 'index.md'
+- Technical Specs: 'Technical-Specs.md'
+- Primitives:
+    - 'Base 58': 'primitives/Base58.md'
+- Address:
+    - 'Standard': 'public-address/Standard-Address.md'
+    - 'Integrated': 'public-address/Integrated-Address.md'
+    - 'Subaddress': 'public-address/Subaddress.md'
+- 'Multisignature': 'Multisignature.md'
+
 theme:
-  name: 'readthedocs' # 'material'
+  name: 'material' # 'material'
   palette:
-    primary: 'Deep Orange'
-    accent: 'Deep Orange'
+#    primary: 'Deep Orange'
+    primary: 'Indigo'
+    accent: 'Indigo'
 #  logo: 'images/monero.svg'
   language: 'en'
 #   feature:
 #     tabs: true
+
+extra_css: ['extra.css']
+
 repo_name: 'monerodocs/monerodocs'
 repo_url: 'https://github.com/monerodocs/monerodocs'
