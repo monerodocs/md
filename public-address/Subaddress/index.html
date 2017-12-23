@@ -13,7 +13,7 @@
         <meta name="description" content="Unofficial Monero Documentation">
       
       
-        <link rel="canonical" href="https://monerodocs.com/Multisignature/">
+        <link rel="canonical" href="https://monerodocs.com/public-address/Subaddress/">
       
       
         <meta name="author" content="Piotr 'Qertoip' Włodarek">
@@ -33,22 +33,22 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.2.1">
     
     
       
-        <title>Multisignature - Monero Docs</title>
+        <title>Subaddress - Monero Docs</title>
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.41c6761c.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/application.41c6761c.css">
       
-        <link rel="stylesheet" href="../assets/stylesheets/application-palette.792431c1.css">
+        <link rel="stylesheet" href="../../assets/stylesheets/application-palette.792431c1.css">
       
     
     
-      <script src="../assets/javascripts/modernizr.1aa3b519.js"></script>
+      <script src="../../assets/javascripts/modernizr.1aa3b519.js"></script>
     
     
       
@@ -58,7 +58,7 @@
       <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     
     
-      <link rel="stylesheet" href="../extra.css">
+      <link rel="stylesheet" href="../../extra.css">
     
     
   </head>
@@ -102,7 +102,7 @@
                 Monero Docs
               </span>
               <span class="md-header-nav__topic">
-                Multisignature
+                Subaddress
               </span>
             
           
@@ -217,7 +217,7 @@
 
 
   <li class="md-nav__item">
-    <a href=".." title="Home" class="md-nav__link">
+    <a href="../.." title="Home" class="md-nav__link">
       Home
     </a>
   </li>
@@ -229,7 +229,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../Technical-Specs/" title="Technical Specs" class="md-nav__link">
+    <a href="../../Technical-Specs/" title="Technical Specs" class="md-nav__link">
       Technical Specs
     </a>
   </li>
@@ -260,7 +260,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../primitives/Base58/" title="Base 58" class="md-nav__link">
+    <a href="../../primitives/Base58/" title="Base 58" class="md-nav__link">
       Base 58
     </a>
   </li>
@@ -275,10 +275,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
     
     <label class="md-nav__link" for="nav-4">
       Address
@@ -296,7 +298,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../public-address/Standard-Address/" title="Standard" class="md-nav__link">
+    <a href="../Standard-Address/" title="Standard" class="md-nav__link">
       Standard
     </a>
   </li>
@@ -308,7 +310,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../public-address/Integrated-Address/" title="Integrated" class="md-nav__link">
+    <a href="../Integrated-Address/" title="Integrated" class="md-nav__link">
       Integrated
     </a>
   </li>
@@ -317,23 +319,6 @@
           
           
           
-
-
-  <li class="md-nav__item">
-    <a href="../public-address/Subaddress/" title="Subaddress" class="md-nav__link">
-      Subaddress
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
 
   
 
@@ -346,11 +331,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="toc">
-        Multisignature
+        Subaddress
       </label>
     
-    <a href="./" title="Multisignature" class="md-nav__link md-nav__link--active">
-      Multisignature
+    <a href="./" title="Subaddress" class="md-nav__link md-nav__link--active">
+      Subaddress
     </a>
     
       
@@ -364,56 +349,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#monero-multisignature" title="Monero multisignature" class="md-nav__link">
-    Monero multisignature
+  <a href="#prevent-payer-from-linking-your-payouts-together" title="Prevent payer from linking your payouts together" class="md-nav__link">
+    Prevent payer from linking your payouts together
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#multisig-wallet-setup" title="Multisig wallet setup" class="md-nav__link">
-    Multisig wallet setup
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-prepare_multisig" title="1. prepare_multisig" class="md-nav__link">
-    1. prepare_multisig
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-make_multisig" title="2. make_multisig" class="md-nav__link">
-    2. make_multisig
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-finalize_multisig" title="3. finalize_multisig" class="md-nav__link">
-    3. finalize_multisig
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#receiving-funds" title="Receiving funds" class="md-nav__link">
-    Receiving funds
+  <a href="#group-incoming-payments" title="Group incoming payments" class="md-nav__link">
+    Group incoming payments
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#spending-funds" title="Spending funds" class="md-nav__link">
-    Spending funds
+  <a href="#why-not-multiple-wallets" title="Why not multiple wallets?" class="md-nav__link">
+    Why not multiple wallets?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caveates" title="Caveates" class="md-nav__link">
+    Caveates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" title="Implementation" class="md-nav__link">
+    Implementation
   </a>
   
 </li>
@@ -431,6 +396,23 @@
   
 </nav>
     
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../Multisignature/" title="Multisignature" class="md-nav__link">
+      Multisignature
+    </a>
   </li>
 
     
@@ -455,56 +437,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#monero-multisignature" title="Monero multisignature" class="md-nav__link">
-    Monero multisignature
+  <a href="#prevent-payer-from-linking-your-payouts-together" title="Prevent payer from linking your payouts together" class="md-nav__link">
+    Prevent payer from linking your payouts together
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#multisig-wallet-setup" title="Multisig wallet setup" class="md-nav__link">
-    Multisig wallet setup
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#1-prepare_multisig" title="1. prepare_multisig" class="md-nav__link">
-    1. prepare_multisig
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#2-make_multisig" title="2. make_multisig" class="md-nav__link">
-    2. make_multisig
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#3-finalize_multisig" title="3. finalize_multisig" class="md-nav__link">
-    3. finalize_multisig
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#receiving-funds" title="Receiving funds" class="md-nav__link">
-    Receiving funds
+  <a href="#group-incoming-payments" title="Group incoming payments" class="md-nav__link">
+    Group incoming payments
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#spending-funds" title="Spending funds" class="md-nav__link">
-    Spending funds
+  <a href="#why-not-multiple-wallets" title="Why not multiple wallets?" class="md-nav__link">
+    Why not multiple wallets?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#caveates" title="Caveates" class="md-nav__link">
+    Caveates
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#implementation" title="Implementation" class="md-nav__link">
+    Implementation
   </a>
   
 </li>
@@ -530,54 +492,49 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/monerodocs/monerodocs/edit/master/docs/Multisignature.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/monerodocs/monerodocs/edit/master/docs/public-address/Subaddress.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="multisignature">Multisignature</h1>
-<p><strong>!! This is unreleased feature !!</strong></p>
-<p>In cryptocurrencies, multisig feature allows to sign transaction with more than one private key. Funds protected with multisig can only be spent by signing with M-of-N keys.</p>
-<p>Example use cases:</p>
+                <h1 id="subaddress">Subaddress</h1>
+<p>Subaddresses serve two purposes.</p>
+<h2 id="prevent-payer-from-linking-your-payouts-together">Prevent payer from linking your payouts together</h2>
+<p>To prevent the payer from linking your payouts together simply generate a new subaddress for each payout. This way services like <a href="https://shapeshift.io">Shapeshift</a> wouldn't know it is you again receving Monero.</p>
+<h2 id="group-incoming-payments">Group incoming payments</h2>
+<p>Think income streams.</p>
+<p>Subaddresses allow you to group your incoming transactions within a single wallet.</p>
+<p>You may want to organize your incoming funds into a streams like "donations", "work", "pool payouts", etc.</p>
+<p>At first glance this is similar to subaccounts in your bank account. There is a very important difference though.</p>
+<p>In Monero funds don't really sit on public addresses. Public addresses are conceptually a gateway or a routing mechanism. Funds sit on the unspent outputs. Thus, a single transaction can aggregate and spent outputs from multiple addresses. This means you can spend more than any individual address balance.</p>
+<h2 id="why-not-multiple-wallets">Why not multiple wallets?</h2>
+<p>The advantage over creating multiple wallets is that you only have a single seed to manage. All subaddresses can be derived from the wallet seed.</p>
+<h2 id="caveates">Caveates</h2>
 <ul>
-<li>shared account (1-of-2; both husband and wife individually have full access to their funds)</li>
-<li>consensus account (2-of-2; both husband and wife must agree to spend their funds)</li>
-<li>threshold account (2-of-3; an escrow service is involved as an independent 3rd party, to co-sign with either the seller, or with the buyer, if seller and buyer do not agree)</li>
-<li>secure account (2-of-3; a single owner controlls all 3 keys but secures them via a different means to diversify risks)</li>
-<li>arbitrary threshold account (M-of-N; some cryptocurrencies provide full flexibility on the number of signers)</li>
+<li>Subaddress <strong>cannot</strong> be used to receive transactions having multiple destinations (e.g. pool payouts). Only the standard address (the one with index == 0) can receive such transactions.</li>
+<li>It is not recommended to sweep all the balances of subaddress to main address in a single transaction. That links the subaddresses together on the blockchain. However, this only concerns privacy against specific sender and the situation will never get worse than not using subaddresses in the first place. If you need to join funds while preserving maximum privacy do it with individual transactions (one per subaddress).</li>
 </ul>
-<h2 id="monero-multisignature">Monero multisignature</h2>
-<p>Monero doesn't directly implement multisignatures (at least not in a classical sense). Monero emulates the feature by secret splitting.</p>
-<p>Transactions are still signed with a single spend key. The spend key is a sum of all N private keys. The rationale for such design is to decouple multisig from ring signatures.</p>
-<p>Let's consider the 2-of-3 scheme. We have 3 participants. Each participant is granted exactly 2 private keys in a way that pairs do not repeat between participants. This way any 2 participants together have all 3 private keys required to create the private spend key.</p>
-<p>Multi-signing is a wallet-level feature. There is no way to learn from the blockchain which transactions were created using multiple signatures.</p>
-<p>It is also worth noting in Monero there is no multisig addresses as such. <a href="../Public-Address">Address structure</a> does not care how the underlying private spend key got created.</p>
-<p>In Monero, only N-of-N and (N-1)-of-N multisignature schemes are supported. This covers all common scenarios mentioned above but does not allow for arbitrary voting (like "3-of-5 board members").</p>
-<p>After multisig wallet setup every participant ends up knowing the public address and private view key. This is necessary for participants to recognize and decipher transactions they are supposed to co-sign.</p>
-<h2 id="multisig-wallet-setup">Multisig wallet setup</h2>
-<p>Let's consider a 2-of-3 scheme as it generalizes well. There will be three CLI wallet commands involved:</p>
-<h3 id="1-prepare_multisig">1. prepare_multisig</h3>
-<p>Every participant independently generates <strong>initialization data</strong>. This is <strong>not</strong> an address.</p>
-<p>Every participant sends his initialization data manually to all other participants over secure channel.</p>
-<h3 id="2-make_multisig">2. make_multisig</h3>
-<p>Every participant applies initialization data from other participants. This results in a <strong>second round of initialization data</strong>. This is still <strong>not</strong> an address.</p>
-<p>Every participants sends his second round of init data to all other participants over secure channel.</p>
-<h3 id="3-finalize_multisig">3. finalize_multisig</h3>
-<p>Every participant finalizes wallet creation by applying the second round of init data from all other participants. This finally results in a wallet <strong>public address</strong> and <strong>private view key</strong> to be known for all participants. </p>
-<p>Please note actions are symmetric for all participants. Even though we considered a 2-of-3 scheme, every participant cooperates with everyone else. The secret splitting is performed internally by the wallet.</p>
-<p>Secure sharing of initialization data between participants is manual. The wallet itself does not provide any secure communication channel. This is out of scope.</p>
-<h2 id="receiving-funds">Receiving funds</h2>
-<p>Address built by multisig setup is like any other address.</p>
-<p>You can generate integrated addresses and subaddresses based on it.</p>
-<p>All participants are able to see incoming funds as they share the private view key.</p>
-<p>With a CLI, use the following commands to see incoming payments:</p>
-<pre><code>address
-refresh
-show_transfers
-</code></pre>
-<h2 id="spending-funds">Spending funds</h2>
-<p>TODO</p>
+<h2 id="implementation">Implementation</h2>
+<p>Each subaddress has an index (with 0 being the base standard address). User interface allows to assign convenience labels to subaddresses. However, labels are not preserved when recreating from seed.</p>
+<table>
+<thead>
+<tr>
+<th>Index</th>
+<th>Size in bytes</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>identifies the network and address type; <a href="https://github.com/monero-project/monero/blob/784f7b07f05a645d43f62ed3a9cefda4b0c57825/src/cryptonote_config.h#L153">42</a> - main chain; <a href="https://github.com/monero-project/monero/blob/784f7b07f05a645d43f62ed3a9cefda4b0c57825/src/cryptonote_config.h#L167">63</a> - test chain</td>
+</tr>
+</tbody>
+</table>
+<p>TODO: finish</p>
 <h2 id="reference">Reference</h2>
 <ul>
-<li><a href="https://monero.stackexchange.com/questions/5646/how-to-use-monero-multisignature-wallets-2-2-2-3">https://monero.stackexchange.com/questions/5646/how-to-use-monero-multisignature-wallets-2-2-2-3</a></li>
+<li><a href="https://github.com/monero-project/monero/pull/2056">https://github.com/monero-project/monero/pull/2056</a></li>
+<li><a href="https://www.reddit.com/r/Monero/comments/5vgjs2/subaddresses_and_disposable_addresses/">https://www.reddit.com/r/Monero/comments/5vgjs2/subaddresses_and_disposable_addresses/</a></li>
 </ul>
                 
                   
@@ -597,7 +554,7 @@ show_transfers
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../public-address/Subaddress/" title="Subaddress" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../Integrated-Address/" title="Integrated" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -606,11 +563,25 @@ show_transfers
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Subaddress
+                Integrated
               </span>
             </div>
           </a>
         
+        
+          <a href="../../Multisignature/" title="Multisignature" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Multisignature
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
         
       </nav>
     </div>
@@ -634,9 +605,9 @@ show_transfers
       
     </div>
     
-      <script src="../assets/javascripts/application.5165553b.js"></script>
+      <script src="../../assets/javascripts/application.5165553b.js"></script>
       
-      <script>app.initialize({version:"0.17.2",url:{base:".."}})</script>
+      <script>app.initialize({version:"0.17.2",url:{base:"../.."}})</script>
       
     
     
