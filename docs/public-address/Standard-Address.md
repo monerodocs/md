@@ -10,7 +10,7 @@ There are a few types of public addresses in Monero:
 
 * Standard address - the basic type of the address, also refered to as raw address
 * Integrated address - embeds payment ID so you can learn for what you are being paid
-* Subaddress - allows for organizing your funds in subaccounts within a single wallet
+* Subaddress - slightly enhances privacy and allows for organizing your funds in subaccounts within a single wallet
 
 ## Standard address
 
