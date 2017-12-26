@@ -29,6 +29,10 @@ It totals to 78 bytes. The bytes are then encoded ([src](https://github.com/mone
 
 `4LL9oSLmtpccfufTMvppY6JwXNouMBzSkbLYfpAV5Usx3skxNgYeYTRj5UzqtReoS44qo9mtmXCqY45DJ852K5Jv2bYXZKKQePHES9khPK`
 
+## Caveats
+
+Single transaction cannot pay to multiple integrated addresses.
+
 ## Reference
 
 * question on [StackExchenge](https://monero.stackexchange.com/questions/3179/what-is-an-integrated-address) 
