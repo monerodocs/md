@@ -1,4 +1,4 @@
-# Technical Specs
+# Monero Technical Specs
 
 ## No premine, no instamine, no token
 
