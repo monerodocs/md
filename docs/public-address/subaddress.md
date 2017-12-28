@@ -40,7 +40,7 @@ Index       | Size in bytes    | Description
 ------------|------------------|-------------------------------------------------------------
 0           | 1                | identifies the network and address type; [42](https://github.com/monero-project/monero/blob/784f7b07f05a645d43f62ed3a9cefda4b0c57825/src/cryptonote_config.h#L153) - main chain; [63](https://github.com/monero-project/monero/blob/784f7b07f05a645d43f62ed3a9cefda4b0c57825/src/cryptonote_config.h#L167) - test chain
 
-Otherwise the data structure is the same as for [standard address](public-address/standard-address).
+Otherwise the data structure is the same as for [standard address](/public-address/standard-address/).
 
 Each subaddress conceptually has an index (with 0 being the base standard address).
 The index is not directly included in subaddress structure but is used as input to create the private spend key.
