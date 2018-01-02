@@ -6,15 +6,15 @@ site_url: 'https://monerodocs.org/'
 
 pages:
 - Home: 'index.md'
+- Interacting: 'interacting/overview.md'
 - Technical Specs: 'technical-specs.md'
 - Primitives:
-    - 'Base58': 'primitives/base58.md'
+    - Base58: 'primitives/base58.md'
 - Address:
-    - 'Standard': 'public-address/standard-address.md'
-    - 'Integrated': 'public-address/integrated-address.md'
-    - 'Subaddress': 'public-address/subaddress.md'
-- 'Multisignature': 'multisignature.md'
-- 'Directory': 'directory/overview.md'
+    - Standard: 'public-address/standard-address.md'
+    - Integrated: 'public-address/integrated-address.md'
+    - Subaddress: 'public-address/subaddress.md'
+- Multisignature: 'multisignature.md'
 
 theme:
   name: 'material' # 'material'
