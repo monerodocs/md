@@ -1,6 +1,10 @@
 # Monero Technical Specs
 
-## No premine, no instamine, no token
+## Live
+
+* Monero blockchain is live since 18 April 2014
+
+## No premine, no instamine, no ICO/token
 
 * Monero had no premine or instamine
 * Monero did not sell any token
@@ -32,7 +36,7 @@
 
 ## Emission curve
 
-**Main curve**
+**Main emission**
 
 First, the main emission is about to produce ~18.132 million coins by the end of May 2022.
 
@@ -40,7 +44,7 @@ As of Dec 2017 the emission is about 30 XMR per 10 minutes.
 
 See [charts and details](https://www.reddit.com/r/Monero/comments/512kwh/useful_for_learning_about_monero_coin_emission/).
 
-**Tail curve**
+**Tail emission**
 
 The tail emission kicks in once main emission is done.
 
@@ -60,6 +64,12 @@ This translates to <1% inflation decreasing over time.
 
 * Stealth addresses
 
-## Amount obfuscation
+## Amount privacy
 
 * Ring confidential transactions
+
+## IP address privacy
+
+* not built in
+* use TOR or I2P
+* there is an ongoing effort to integrate I2P into Monero: the Kovri project 
