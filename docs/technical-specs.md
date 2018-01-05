@@ -70,6 +70,5 @@ This translates to <1% inflation decreasing over time.
 
 ## IP address privacy
 
-* not built in
-* use TOR or I2P
-* there is an ongoing effort to integrate I2P into Monero: the Kovri project 
+* not built in - please use TOR or I2P
+* there is an ongoing effort to integrate I2P into Monero - the Kovri project 

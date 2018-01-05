@@ -8,13 +8,13 @@ pages:
 - Home: 'index.md'
 - Interacting: 'interacting/overview.md'
 - Technical Specs: 'technical-specs.md'
-- Primitives:
-    - Base58: 'primitives/base58.md'
 - Cryptography:
     - Overview: 'cryptography/overview.md'
     - PRNG: 'cryptography/prng.md'
     - 'Keccak-256': 'cryptography/keccak-256.md'
+    - Ed25519: 'cryptography/ed25519.md'
 #    - CryptoNight PoW: 'cryptography/cryptonight.md'
+    - Base58: 'cryptography/base58.md'
 - Address:
     - Standard: 'public-address/standard-address.md'
     - Integrated: 'public-address/integrated-address.md'

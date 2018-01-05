@@ -1,11 +1,12 @@
 # Keccak-256 hash function
 
-Monero employs Keccak-256 as a hashing function.
+Monero employs Keccak as a hashing function. In most context specifically Keccak-256 is used,
+providing 32-byte hashes.
 
 Keccak is the leading hashing function, designed by non-NSA designers.
 Keccak won [NIST competition](https://en.wikipedia.org/wiki/NIST_hash_function_competition) to become the official SHA3.
 
-## Uses
+## Use Cases
 
 Monero does **not** employ Keccak for Proof-of-Work. Instead, Keccak is used for:
    
