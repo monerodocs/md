@@ -7,12 +7,14 @@ site_url: 'https://monerodocs.org/'
 pages:
 - Home: 'index.md'
 - Interacting: 'interacting/overview.md'
-- Technical Specs: 'technical-specs.md'
+- Technical specs: 'technical-specs.md'
 - Cryptography:
     - Overview: 'cryptography/overview.md'
     - PRNG: 'cryptography/prng.md'
     - 'Keccak-256': 'cryptography/keccak-256.md'
-    - Ed25519: 'cryptography/ed25519.md'
+    - Asymmetric:
+#      - Overview: 'cryptography/asymmetric/intro.md'
+      - 'Ed25519 curve': 'cryptography/asymmetric/ed25519.md'
 #    - CryptoNight PoW: 'cryptography/cryptonight.md'
     - Base58: 'cryptography/base58.md'
 - Address:
@@ -36,3 +38,11 @@ extra_css: ['extra.css']
 
 repo_name: 'monerodocs/md'
 repo_url: 'https://github.com/monerodocs/md'
+
+markdown_extensions:
+  # https://squidfunk.github.io/mkdocs-material/extensions/admonition/
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true

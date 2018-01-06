@@ -1,6 +1,7 @@
 # Subaddress
 
-**!! This is unreleased feature !!**
+!!! warning
+    This is unreleased feature.
 
 Subaddresses serve two purposes described below.
 
