@@ -13,8 +13,10 @@ pages:
     - PRNG: 'cryptography/prng.md'
     - 'Keccak-256': 'cryptography/keccak-256.md'
     - Asymmetric:
-#      - Overview: 'cryptography/asymmetric/intro.md'
-      - 'Ed25519 curve': 'cryptography/asymmetric/ed25519.md'
+      - Overview: 'cryptography/asymmetric/intro.md'
+      - Private keys: 'cryptography/asymmetric/private-key.md'
+      - Public keys: 'cryptography/asymmetric/public-key.md'
+      - Ed25519 curve: 'cryptography/asymmetric/ed25519.md'
 #    - CryptoNight PoW: 'cryptography/cryptonight.md'
     - Base58: 'cryptography/base58.md'
 - Address:
