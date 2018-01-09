@@ -1,4 +1,4 @@
-# Unofficial Monero Documentation (1% done)
+# Unofficial Monero Documentation (2% done)
 
 Monerodocs attempts to organize basic technical knowledge on Monero in one place.
 

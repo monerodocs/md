@@ -37,6 +37,11 @@ It totals to 69 bytes. The bytes are then encoded ([src](https://github.com/mone
 
 `4AdUndXHHZ6cfufTMvppY6JwXNouMBzSkbLYfpAV5Usx3skxNgYeYTRj5UzqtReoS44qo9mtmXCqY45DJ852K5Jv2684Rge`
 
+## Generating
+
+Standard address is derived from the root private key. TODO: describe.
+
 ## Reference
 
+* [StackExchenge answer](https://monero.stackexchange.com/questions/980/what-are-the-public-viewkeys-and-spendkeys)
 * [https://xmr.llcoins.net/addresstests.html](https://xmr.llcoins.net/addresstests.html)

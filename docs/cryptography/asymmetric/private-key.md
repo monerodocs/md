@@ -1,12 +1,9 @@
 # Private keys in Monero
 
 !!! danger
-    Article author is nowhere close to being a cryptographer. Be sceptical on accuracy.
+    Author is nowhere close to being a cryptographer. Be sceptical on accuracy.
 
-!!! warning
-    Article is a work in progress.
-
-Private key is generated [randomly](/cryptography/prng).
+In Monero, the root private key is generated [randomly](/cryptography/prng). Other private keys are derived deterministically from the root private key.
 
 Private key must be kept secret.
 
@@ -24,10 +21,31 @@ In user-facing contexts, private key is encoded in a [little-endian](https://en.
 
 ## Relation to Ed25519
 
-Being a simple random integer, private key is not specific to any particular asymmetric cryptography scheme.
+Being simply a random integer, private key is not specific to any particular asymmetric cryptography scheme.
 
-However, before deriving Ed25519 public key, the private key is subject to modulo `l`,
-where `l` is the maximum scalar allowed by [Ed25519 scheme](/cryptography/asymmetric/ed25519).
+In context of Monero EC cryptography the private key is a number the base point `G` is multiplied by.
+The result of the multiplication is the public key `P` (another point on the curve).
+Multiplication of a point by a number has a very special definition in EC cryptography.
+See this [this guide](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/) for details.
+
+### Key strength
+
+Before deriving Ed25519 public key, the private key is subject to modulo `l`,
+where `l` is the maximum scalar allowed by the [Ed25519 scheme](/cryptography/asymmetric/ed25519).
 
 The `l` is on the order of 2^252, so the effective key strength is technically 252 bits, not 256 bits.
-This is standard for EC cryptography and is more of a cosmetic nuance than any real concern.
+This is standard for EC cryptography and is more of a cosmetic nuance than any concern.
+
+## Private spend key
+
+Private spend key is used to spend moneros.
+ 
+More specifically, it is used to build one-time private keys which allow to spend related outputs.
+
+## Private view key
+
+Private view key is used to recognize your incoming transactions on the otherwise opaque blockchain.
+
+## One-time private keys
+
+One-time private key like construct is used in [stealth addresses](https://monero.stackexchange.com/questions/1409/constructing-a-stealth-monero-address).

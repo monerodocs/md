@@ -1,7 +1,7 @@
 # Public keys in Monero
 
 !!! danger
-    Article author is nowhere close to being a cryptographer. Be sceptical on accuracy.
+    Author is nowhere close to being a cryptographer. Be sceptical on accuracy.
 
 !!! warning
     Article is a work in progress.
@@ -36,3 +36,8 @@ However, the addition is **not** a simple vector addition. It has a very specifi
 definition nicely described in [this article](https://blog.cloudflare.com/a-relatively-easy-to-understand-primer-on-elliptic-curve-cryptography/).
 What is important is that result of addition is always a point on the curve.
 For example, G + G is another point on the curve.
+
+## Use cases
+
+[Monero address](/public-address/standard-address) is composed of public spend key and public view key.
+These keys are used to build stealth addresses to receive payments.  

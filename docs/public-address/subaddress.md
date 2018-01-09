@@ -33,6 +33,10 @@ All subaddresses can be derived from the wallet seed.
 
 Additionally, you conveniently manage your subaddresses within a single user interface.
 
+## Wallet level feature
+
+Subaddresses are a wallet-level feature to construct and interpret transactions. They do not affect the consensus. 
+
 ## Data structure
 
 Subaddress has a dedicated "network byte":
@@ -45,6 +49,20 @@ Otherwise the data structure is the same as for [standard address](/public-addre
 
 Each subaddress conceptually has an index (with 0 being the base standard address).
 The index is not directly included in subaddress structure but is used as input to create the private spend key.
+
+## Generating
+
+The private key `m` related to a subaddress is derived as follows:
+    
+    m = Hs(a || i)
+    
+Where:
+
+* `Hs` is a Keccak-256 hash function interpreted as integer and modulo `l` (maximum Ed25519 scalar)
+* `a` is a private view key
+* `i` is a subaddress index
+
+TODO: describe rest of the procedure.
 
 ## Caveates
 
