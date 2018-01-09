@@ -9,11 +9,11 @@ pages:
 - Interacting: 'interacting/overview.md'
 - Technical specs: 'technical-specs.md'
 - Cryptography:
-    - Overview: 'cryptography/overview.md'
+    - Introduction: 'cryptography/introduction.md'
     - PRNG: 'cryptography/prng.md'
     - 'Keccak-256': 'cryptography/keccak-256.md'
     - Asymmetric:
-      - Overview: 'cryptography/asymmetric/intro.md'
+      - Introduction: 'cryptography/asymmetric/introduction.md'
       - Private keys: 'cryptography/asymmetric/private-key.md'
       - Public keys: 'cryptography/asymmetric/public-key.md'
       - Ed25519 curve: 'cryptography/asymmetric/ed25519.md'

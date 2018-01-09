@@ -1,4 +1,4 @@
-# Asymmetric cryptography used in Monero
+# Asymmetric cryptography in Monero
 
 !!! danger
     Author is nowhere close to being a cryptographer. Be sceptical on accuracy.
