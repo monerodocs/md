@@ -17,6 +17,7 @@ pages:
       - Private keys: 'cryptography/asymmetric/private-key.md'
       - Public keys: 'cryptography/asymmetric/public-key.md'
       - Ed25519 curve: 'cryptography/asymmetric/ed25519.md'
+      - Key image: 'cryptography/asymmetric/key-image.md'
 #    - CryptoNight PoW: 'cryptography/cryptonight.md'
     - Base58: 'cryptography/base58.md'
 - Address:
