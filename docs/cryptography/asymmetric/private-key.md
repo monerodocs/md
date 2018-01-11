@@ -16,9 +16,6 @@ Private key is a **scalar**, meaning it is a single value.
 
 In equations scalars are represented by **lowercase letters**. 
 
-In user-facing contexts, private key is encoded in a [little-endian](https://en.wikipedia.org/wiki/Endianness#Little) hexadecimal form, like:
-`b3588a87056fb21dc4d052d59e83b54293882e646b543c29478e4cf45c28a402`
-
 ## Relation to Ed25519
 
 Being simply a random integer, private key is not specific to any particular asymmetric cryptography scheme.
@@ -35,6 +32,14 @@ where `l` is the maximum scalar allowed by the [Ed25519 scheme](/cryptography/as
 
 The `l` is on the order of 2^252, so the effective key strength is technically 252 bits, not 256 bits.
 This is standard for EC cryptography and is more of a cosmetic nuance than any concern.
+
+## Encoding
+
+In user-facing contexts, the private key integer is:
+ 
+1. Taken modulo `l` to avoid malleability
+2. Put as array of 32 bytes in a [little-endian](https://en.wikipedia.org/wiki/Endianness#Little) direction (the first byte is the least significant)
+3. Converted to hexadecimal form, like: `b3588a87056fb21dc4d052d59e83b54293882e646b543c29478e4cf45c28a402`
 
 ## Private spend key
 
