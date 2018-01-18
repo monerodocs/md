@@ -1,6 +1,6 @@
 # Monero private key image
 
-!!! danger
+!!! note
     Author is nowhere close to being a cryptographer. Be sceptical on accuracy.
 
 Private key image serves to detect double spending attempts.
@@ -8,7 +8,7 @@ Private key image serves to detect double spending attempts.
 In Monero funds are always sent to a one-time public key `P`.
 Related one-time private key `x` is specific to unspent output.
 
-As output can be spent only once (in whole), the related private key can be used only once.
+As output can be spent only once (in whole), the related private key can be used only once as well.
 
 Thus, specific private key image `I` being present on the blockchain means
 that related output was already spent, and subsequent attempts must not be allowed.
@@ -44,3 +44,4 @@ The key image `I` is a one-way function of the private key `x`.
 
 * [StackExchange answer](https://monero.stackexchange.com/questions/2883/what-is-a-key-image)
 * [Another SE answer](https://monero.stackexchange.com/questions/2158/what-is-moneros-mechanism-for-defending-against-a-double-spend-attack)
+* [Critical bug](https://getmonero.org/2017/05/17/disclosure-of-a-major-bug-in-cryptonote-based-currencies.html) regarding key image verification that was once present in Monero 

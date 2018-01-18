@@ -1,10 +1,7 @@
 # Public keys in Monero
 
-!!! danger
+!!! note
     Author is nowhere close to being a cryptographer. Be sceptical on accuracy.
-
-!!! warning
-    Article is a work in progress.
 
 Public key is deterministically derived from private key based on [Ed25519 curve](/cryptography/asymmetric/ed25519) with a little Monero-specific twist.
 

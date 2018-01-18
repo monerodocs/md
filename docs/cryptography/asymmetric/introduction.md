@@ -1,6 +1,6 @@
 # Asymmetric cryptography in Monero
 
-!!! danger
+!!! note
     Author is nowhere close to being a cryptographer. Be sceptical on accuracy.
 
 Before we get to Monero specific stuff, a little bit of context. We are talking asymmetric cryptography here.
