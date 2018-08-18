@@ -8,4 +8,4 @@ While technical explanations are out there, the information is scattered through
 
 This makes it hard to find complete and up-to-date explanations on advanced topics.
 
-If you spot errors or issues please kindly drop me an email at [qertoip@gmail.com](mailto:qertoip@gmail.com?subject=monerodocs) or submit a github pull request.
+If you spot errors or issues please kindly drop me an email at [qertoip@protonmail.com](mailto:qertoip@protonmail.com?subject=monerodocs) or submit a github pull request.
