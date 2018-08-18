@@ -25,6 +25,7 @@ nav:
     - Integrated: 'public-address/integrated-address.md'
     - Subaddress: 'public-address/subaddress.md'
 - Multisignature: 'multisignature.md'
+- Mainnet, Stagenet, Testnet: 'networks.md'
 
 theme:
   name: 'material' # 'material'
