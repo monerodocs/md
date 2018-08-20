@@ -1,8 +1,5 @@
 # Subaddress
 
-!!! warning
-    This is unreleased feature.
-
 Subaddresses serve two purposes described below.
 
 ## Prevent payer from linking your payouts together
