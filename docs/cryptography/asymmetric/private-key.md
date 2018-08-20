@@ -27,8 +27,8 @@ See this [this guide](https://blog.cloudflare.com/a-relatively-easy-to-understan
 
 ### Key strength
 
-Before deriving Ed25519 public key, the private key is subject to modulo `l`,
-where `l` is the maximum scalar allowed by the [Ed25519 scheme](/cryptography/asymmetric/ed25519).
+Before deriving the public key, private key is subject to modulo `l`,
+where `l` is the maximum scalar allowed by the [edwards25519 curve](/cryptography/asymmetric/edwards25519).
 
 The `l` is on the order of 2^252, so the effective key strength is technically 252 bits, not 256 bits.
 This is standard for EC cryptography and is more of a cosmetic nuance than any concern.

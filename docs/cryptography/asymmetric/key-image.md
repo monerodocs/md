@@ -31,8 +31,8 @@ Where:
 The `P` comes from this:
 
     P = xG
-    
-Where `G` is the [Ed25519](/cryptography/asymmetric/ed25519) base point. 
+
+Where `G` is the [edwards25519](/cryptography/asymmetric/edwards25519) base point. 
 
 Substitute `P` with `xG` and we get:
 

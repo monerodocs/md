@@ -45,19 +45,21 @@ Index       | Size in bytes    | Description
 Otherwise the data structure is the same as for [standard address](/public-address/standard-address/).
 
 Each subaddress conceptually has an index (with 0 being the base standard address).
-The index is not directly included in subaddress structure but is used as input to create the private spend key.
+The index is not directly included in subaddress structure but is used as input to create the private view key.
 
 ## Generating
 
-The private key `m` related to a subaddress is derived as follows:
+The private view key `m` for a subaddress is derived as follows:
     
     m = Hs(a || i)
     
 Where:
 
-* `Hs` is a Keccak-256 hash function interpreted as integer and modulo `l` (maximum Ed25519 scalar)
-* `a` is a private view key
+* `Hs` is a Keccak-256 hash function interpreted as integer and modulo `l` (maximum edwards25519 scalar)
+* `a` is a private view key of the base address
 * `i` is a subaddress index
+
+Deriving "sub view keys" from the "base view key" allows for creating a view only wallet that monitors entire wallet including subaddresses.
 
 TODO: describe rest of the procedure.
 

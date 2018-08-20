@@ -15,4 +15,4 @@ Historically, asymmetric cryptography was based on the problem of factorization 
 back into prime numbers (which is practically impossible for large enough integers).
 
 Recently, asymmetric cryptography is based on a mathematical notion of elliptic curves.
-Ed25519 is a specific, well researched and standardized elliptic curve used in Monero.      
+Edwards25519 is a specific, well researched and standardized elliptic curve used in Monero.
