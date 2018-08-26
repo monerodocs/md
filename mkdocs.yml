@@ -21,7 +21,7 @@ nav:
 #    - CryptoNight PoW: 'cryptography/cryptonight.md'
     - Base58: 'cryptography/base58.md'
 - Address:
-    - Standard: 'public-address/standard-address.md'
+    - Main: 'public-address/main-address.md'
     - Subaddress: 'public-address/subaddress.md'
     - Integrated: 'public-address/integrated-address.md'
 - Multisignature: 'multisignature.md'

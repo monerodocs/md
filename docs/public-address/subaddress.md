@@ -48,9 +48,9 @@ Index       | Size in bytes    | Description
 ------------|------------------|-------------------------------------------------------------
 0           | 1                | identifies the network and address type; [42](https://github.com/monero-project/monero/blob/784f7b07f05a645d43f62ed3a9cefda4b0c57825/src/cryptonote_config.h#L153) - main chain; [63](https://github.com/monero-project/monero/blob/784f7b07f05a645d43f62ed3a9cefda4b0c57825/src/cryptonote_config.h#L167) - test chain
 
-Otherwise the data structure is the same as for [standard address](/public-address/standard-address/).
+Otherwise the data structure is the same as for [main address](/public-address/main-address/).
 
-Each subaddress conceptually has an index (with 0 being the base standard address).
+Each subaddress conceptually has an index (with 0 being the main address).
 The index is not directly included in subaddress structure but is used as input to create the private view key.
 
 ## Generating
@@ -71,7 +71,7 @@ TODO: describe rest of the procedure.
 
 ## Caveates
 
-* Subaddress **cannot** be used to receive transactions having multiple destinations (e.g. pool payouts). Only the standard address (the one with index == 0) can receive such transactions.
+* Subaddress **cannot** be used to receive transactions having multiple destinations (e.g. pool payouts). Only the main address (the one with index == 0) can receive such transactions.
 * It is not recommended to sweep all the balances of subaddress to main address in a single transaction. That links the subaddresses together on the blockchain. However, this only concerns privacy against specific sender and the situation will never get worse than not using subaddresses in the first place. If you need to join funds while preserving maximum privacy do it with individual transactions (one per subaddress).
 * Convenience labels are not preserved when recreating from seed.
 

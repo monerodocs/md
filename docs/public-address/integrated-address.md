@@ -1,17 +1,14 @@
 # Integrated address
 
-Monero integrated address embeds a compact payment ID.
+Integrated addresses are ideal for accepting Monero in an automated fashion - like in online stores and exchanges.
 
-Use integrated address to learn for what you are being paid. It is ideal for accepting Monero in an automated fashion,
-like online stores and exchanges.    
+Monero integrated address embeds a payment ID. This allows you to learn for what you are being paid.
 
-You should allow Monero software to generate integrated addresses for you (instead of forcing your own payment IDs).
 Please note these are Monero technical payment IDs and must not be confused with business identifiers like order number or invoice number.
 
 The transaction to integrated address will not reveal the payment ID publicly.
 Payment ID in a transaction will be encrypted with a shared secret (one-time random key known only to sender and recipient).
 Only the recipient will be able to match the transaction against payment ID.
-TODO: explain how exactly payment IDs are encoded in transactions.
 
 Monero integrated address obsoletes the former practice of using full 32-bytes payment ID in a transaction extra field (where it was not encrypted).
 
@@ -29,9 +26,31 @@ It totals to 77 bytes. The bytes are then encoded ([src](https://github.com/mone
 
 `4LL9oSLmtpccfufTMvppY6JwXNouMBzSkbLYfpAV5Usx3skxNgYeYTRj5UzqtReoS44qo9mtmXCqY45DJ852K5Jv2bYXZKKQePHES9khPK`
 
+## Integrated addresses vs subaddresses
+
+Both types allow you to learn for what you are being paid.
+
+**Individuals** should prefer **subaddresses** to receive payments. This is to improve privacy in certain scenarios. See article on [subaddresses](/public-address/subaddress) for details.
+
+**Businesses** accepting payments in an automated way should prefer **integrated addresses**. The rationale is as follows:
+
+* Scenario where subaddresses improve privacy is not applicable for businesses b/c businesses have the same identity over time. Consequently, subaddresses provide no benefits over integrated addresses.
+
+* No private key is necessary to generate integrated address. This provides a strong security advantage because services that generate integrated addresses need no access to wallet. In contrast, to generate a subaddress, one needs a private view key.
+
+* No shared counter is necessary to generate integrated address. This allows individual services to independently generate integrated addresses w/o synchronizing on a common sequence. In contrast, subaddresses are generated sequentially, and so the sequence (the counter or index) is a coupling point between the wallet and all services that need to generate the address. Back to integrated addresses, note that embedded payment IDs are 64-bit. This means the space is large enough that one can simply generate them randomly and reliably assume uniqueness.
+
+* In very specific scenarios, preparation effort to monitor a very huge number of subaddresses, could became an issue. See [this reddit thread](https://www.reddit.com/r/Monero/comments/9aevri/is_it_fair_to_say_integrated_addresses_are/e4vf47p) for details.
+
+
 ## Caveats
 
-Single transaction cannot pay to multiple integrated addresses.
+There are some caveates:
+
+* Single transaction cannot pay to multiple integrated addresses.
+
+* As individual running a wallet you should generally prefer subaddresses. However, if you happen to use integrated addresses, you should allow Monero software to generate integrated addresses for you (instead of forcing your own payment IDs).
+
 
 ## Reference
 
