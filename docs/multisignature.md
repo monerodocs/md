@@ -1,8 +1,5 @@
 # Multisignature
 
-!!! warning
-    This is unreleased feature.
-
 In cryptocurrencies, multisig feature allows to sign transaction with more than one private key. Funds protected with multisig can only be spent by signing with M-of-N keys.
 
 Example use cases:

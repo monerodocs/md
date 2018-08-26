@@ -34,7 +34,7 @@ Both types allow you to learn for what you are being paid.
 
 **Businesses** accepting payments in an automated way should prefer **integrated addresses**. The rationale is as follows:
 
-* Scenario where subaddresses improve privacy is not applicable for businesses b/c businesses have the same identity over time. Consequently, subaddresses provide no benefits over integrated addresses.
+* Scenario where subaddresses improve privacy is not applicable to businesses b/c businesses have the same identity over time. Consequently, subaddresses provide no benefits over integrated addresses.
 
 * No private key is necessary to generate integrated address. This provides a strong security advantage because services that generate integrated addresses need no access to wallet. In contrast, to generate a subaddress, one needs a private view key.
 
