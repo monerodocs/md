@@ -6,18 +6,27 @@ An address can be generated offline and for free. It boils down to generating a 
 
 Publishing your Monero address does __not__ endanger your privacy. That's because in Monero transactions go to stealth addresses which are decoupled from your public address.
 
-There are a few types of public addresses in Monero:
+There are a few **types of public addresses** in Monero:
 
-* Standard address - the basic type of the address, also refered to as raw address
-* Integrated address - embeds payment ID so you can learn for what you are being paid
-* Subaddress - slightly enhances privacy and allows for organizing your funds in subaccounts within a single wallet
+* Standard address - basic type of an address, also refered to as raw address
+* Subaddress - what you should be using by default
+* Integrated address - relevant for exchanges, merchants, and other businesses accepting Monero in a fully automated way
 
 ## Standard address
 
-The raw address is useful for things like donations (where you don't care who donated)
-or exchange withdrawals (where you know the payer out of band). Its strength is simplicity.
+Historicaly, raw address was the only available option. For that reason it is the most widely adopted and supported address type.
 
-Monero standard address is composed of two public keys:
+Its strength is simplicity. However, these days users should prefer receiving to subaddresses instead.
+
+Technically, raw address is also a basis for creating subaddresses and integrated addresses.
+
+Raw address is **still useful for**:
+
+* accepting block reward in a solo-mining scenario as other addresses are not supported
+* accepting from senders who batch payouts (like mining pools); in this scenario the sender is paying multiple parties using a single transaction; such transaction has multiple outputs; subaddresses do not work in this scenario
+* accepting from senders who use legacy wallets (can't send to subaddress)
+
+Monero raw address is composed of two public keys:
 
 * public spend key
 * public view key

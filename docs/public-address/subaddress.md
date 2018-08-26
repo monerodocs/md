@@ -1,6 +1,12 @@
 # Subaddress
 
-Subaddresses serve two purposes described below.
+Subaddress is what you should be using by default to receive Monero.
+
+## Learn for what you are being paid
+
+By providing a unique subaddress for each anticipated payment you will know for what you are being paid.
+
+This use case overlaps with integrated addresses. Subaddresses are generally prefered for reasons outlined below.
 
 ## Prevent payer from linking your payouts together
 
