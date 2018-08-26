@@ -39,6 +39,14 @@ To get started:
 * Get free XMR from [testnet faucet](https://dis.gratis/)
 * Check the [testnet block explorer](https://testnet.xmrchain.net)
 
+## Private Testnet
+
+You can also create your private version of the testnet.
+
+Private testnet gives more flexibility to arange for specific situations for developers.
+
+Check the [private testnet guide](https://github.com/moneroexamples/private-testnet).
+
 ## Why stagenet and testnet coins have no value?
 
 If mainnet and stagenet are technically equivalent then why only mainnet coins have value?
