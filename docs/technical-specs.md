@@ -15,6 +15,7 @@
 * CryptoNight
     * v0 since block height 0
     * v1 since block height 1546000 (forked on 2018-04-06)
+    * v2 planned since tentative 2018-10-18
 * Changes every ~6 months to discourage ASIC-s
 
 ## Difficulty retarget
