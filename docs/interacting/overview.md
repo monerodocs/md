@@ -1,3 +1,7 @@
+---
+title: Interacting with Monero
+---
+
 # Interacting with Monero
 
 You can interact with Monero via desktop GUI, commandline interface, and programming API.
@@ -15,7 +19,7 @@ Wallet logic is offered through three independent user interfaces - the GUI, the
 
 | Executable                 | Description  
 | -------------------------- |:-----------------------------------------------------------------------------------------------------------------------------------
-| `monerod`                  | The full node daemon. Does not require a wallet. 
+| `monerod`                  | The full node daemon. Does not require a wallet. <br />[Documentation](/interacting/monerod/overview).
 | `monero-wallet-gui`        | Wallet logic and __graphical__ user interface. <br />Requires `monerod` running.
 | `monero-wallet-cli`        | Wallet logic and __commandline__ user interface. <br />Requires `monerod` running.
 | `monero-wallet-rpc`        | Wallet logic and __HTTP API__ (JSON-RPC protocol). <br />Requires `monerod` running.

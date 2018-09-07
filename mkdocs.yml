@@ -6,7 +6,11 @@ site_url: 'https://monerodocs.org/'
 
 nav:
 - Home: 'index.md'
-- Interacting: 'interacting/overview.md'
+- Interacting:
+  - Overview: 'interacting/overview.md'
+  - monerod:
+    - Overview: 'interacting/monerod/overview.md'
+    - Reference: 'interacting/monerod/running.md'
 - Technical specs: 'technical-specs.md'
 - Cryptography:
     - Introduction: 'cryptography/introduction.md'
@@ -25,7 +29,7 @@ nav:
     - Subaddress: 'public-address/subaddress.md'
     - Integrated: 'public-address/integrated-address.md'
 - Multisignature: 'multisignature.md'
-- Mainnet, Stagenet, Testnet: 'networks.md'
+- Mainnet, stagenet, testnet: 'networks.md'
 
 theme:
   name: 'material' # 'material'
