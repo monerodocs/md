@@ -10,7 +10,7 @@ nav:
   - Overview: 'interacting/overview.md'
   - monerod:
     - Overview: 'interacting/monerod/overview.md'
-    - Reference: 'interacting/monerod/running.md'
+    - Reference: 'interacting/monerod/reference.md'
 - Technical specs: 'technical-specs.md'
 - Cryptography:
     - Introduction: 'cryptography/introduction.md'

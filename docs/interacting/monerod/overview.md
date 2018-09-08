@@ -57,7 +57,7 @@ Watch:
 `tail -f ~/.bitmonero/stagenet/bitmonero.log`
 
 Stop:
-`killall monerod`
+`./monerod --stagenet exit`
 
 The **[mainnnet](/networks)** is when you want to deal with the real XMR.
 
@@ -67,4 +67,4 @@ Watch:
 `tail -f ~/.bitmonero/bitmonero.log`
 
 Stop:
-`killall monerod`
+`./monerod exit`
