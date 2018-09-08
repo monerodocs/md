@@ -8,6 +8,8 @@ Options affect how daemon should be working. Commands assume the daemon is alrea
 
 ## Options
 
+Following option groups are only to make the reference easier to follow. The daemon itself does not group options in any way.
+
 #### Pick network
 
 | Option           | Description                                                                                    
@@ -26,11 +28,25 @@ Options affect how daemon should be working. Commands assume the daemon is alrea
 
 #### Server
 
+The `monerod` defaults are adjusted for running it occasionally on the same computer as your Monero wallet.
+
+The following options will be helpful if you intend to have an always running node - most likely on a remote server or your own separate PC.
+
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--detach`          | Go to background (decouple from the terminal). This is useful for long-running / server scenarios. Typically, you will also want to manage `monerod` daemon with systemd or similar.
-| `--non-interactive` | Do not require tty in a foreground mode. Helpful when running in a container. By default `monerod` runs in a foreground and opens stdin for reading. This breaks containerization because no tty getss assigned and `monerod` process crashes. You can make it run in a background with `--detach` but this is inconvenient in a containerized environment because the canonical usage is that the container waits on the main process to exist (forking makes things more complicated).
+| `--config-file`     | Full path to the configuration file. By default `monerod` looks for `bitmonero.conf` in Monero [data directory](/interacting/monerod/overview/#data-directory). TODO: describe configuration file syntax.
+| `--data-dir`        | Full path to data directory. This is where the blockchain, log files, and p2p network memory are stored. For defaults and details see [data directory](/interacting/monerod/overview/#data-directory).
 | `--pidfile`         | Full path to the PID file. Works only with `--detach`. Example: <br />`./monerod --detach --pidfile=/run/monero/monerod.pid`
+| `--detach`          | Go to background (decouple from the terminal). This is useful for long-running / server scenarios. Typically, you will also want to manage `monerod` daemon with systemd or similar. By default `monerod` runs in a foreground.
+| `--non-interactive` | Do not require tty in a foreground mode. Helpful when running in a container. By default `monerod` runs in a foreground and opens stdin for reading. This breaks containerization because no tty getss assigned and `monerod` process crashes. You can make it run in a background with `--detach` but this is inconvenient in a containerized environment because the canonical usage is that the container waits on the main process to exist (forking makes things more complicated).
+
+#### Help and Version
+
+| Option              | Description
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--help`            | Enlists available options.
+| `--version`         | Shows `monerod` version to stdout. Example: <br />`Monero 'Lithium Luna' (v0.12.3.0-release)`
+
 
 TO BE CONTINUED
 
