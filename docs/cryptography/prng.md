@@ -1,3 +1,6 @@
+---
+title: Monero Pseudorandom Number Generator | Monero Documentation
+---
 # Monero Pseudorandom Number Generator
 
 Monero uses PRNG based on the Keccak hashing function.

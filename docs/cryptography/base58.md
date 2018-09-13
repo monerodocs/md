@@ -1,3 +1,6 @@
+---
+title: Base58 | Monero Documentation
+---
 # Base58
 
 Base58 is a binary-to-text encoding scheme. It is similar to Base64 but has been modified to avoid both non-alphanumeric characters and letters which might look ambiguous when printed. The characters excluded in relation to Base64 are: `IOl0+/`

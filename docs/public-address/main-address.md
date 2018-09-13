@@ -1,3 +1,6 @@
+---
+title: Main Address | Monero Documentation
+---
 # Address
 
 Monero public address is what you publish to get paid.

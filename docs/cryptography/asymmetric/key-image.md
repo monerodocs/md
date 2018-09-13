@@ -1,4 +1,7 @@
-# Monero private key image
+---
+title: Monero Private Key Image | Monero Documentation
+---
+# Monero Private Key Image
 
 !!! note
     Author is nowhere close to being a cryptographer. Be sceptical on accuracy.

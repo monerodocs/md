@@ -1,3 +1,6 @@
+---
+title: Mainnet, Stagenet, Testnet | Monero Documentation
+---
 # Networks
 
 Monero offers three separate networks and blockchains: **mainnet**, **stagenet** and **testnet**. Every blockchain has its own genesis block and is entirely seperate from others. Also, corresponding p2p networks are separate.

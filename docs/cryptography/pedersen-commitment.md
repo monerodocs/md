@@ -1,3 +1,6 @@
+---
+title: Pedersen Commitment | Monero Documentation
+---
 # Pedersen Commitment
 
 https://www.reddit.com/r/Monero/comments/9ed7vb/pedersen_commitment/

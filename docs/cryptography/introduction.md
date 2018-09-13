@@ -1,3 +1,6 @@
+---
+title: Cryptography in Monero | Monero Documentation
+---
 # Cryptography in Monero 
 
 Monero uses a wide variety of cryptographic primitives for various use cases.

@@ -1,4 +1,7 @@
-# Public keys in Monero
+---
+title: Public Keys in Monero | Monero Documentation
+---
+# Public Keys in Monero
 
 !!! note
     Author is nowhere close to being a cryptographer. Be sceptical on accuracy.

@@ -1,5 +1,5 @@
 ---
-title: Interacting with Monero
+title: Interacting with Monero | Monero Documentation
 ---
 
 # Interacting with Monero

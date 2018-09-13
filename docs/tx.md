@@ -1,3 +1,6 @@
+---
+title: Transaction | Monero Documentation
+---
 # Monero transaction
 
 https://monero.stackexchange.com/questions/2136/understanding-the-structure-of-a-monero-transaction?noredirect=1&lq=1

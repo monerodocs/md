@@ -1,4 +1,7 @@
-# Private keys in Monero
+---
+title: Private Keys in Monero | Monero Documentation
+---
+# Private Keys in Monero
 
 !!! note
     Author is nowhere close to being a cryptographer. Be sceptical on accuracy.

@@ -1,4 +1,7 @@
-# Integrated address
+---
+title: Integrated Address | Monero Documentation
+---
+# Integrated Address
 
 Integrated addresses are ideal for accepting Monero in an automated fashion - like in online stores and exchanges.
 

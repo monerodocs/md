@@ -1,4 +1,7 @@
-# Edwards25519 elliptic curve
+---
+title: Edwards25519 Elliptic Curve | Monero Documentation
+---
+# Edwards25519 Elliptic Curve
 
 !!! note
     Author is nowhere close to being a cryptographer. Be sceptical on accuracy.

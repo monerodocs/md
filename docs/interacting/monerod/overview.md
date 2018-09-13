@@ -1,3 +1,6 @@
+---
+title: monerod - Overview | Monero Documentation
+---
 # `monerod`
 
 ## Connects you to Monero network

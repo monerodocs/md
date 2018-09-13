@@ -1,3 +1,6 @@
+---
+title: Subaddress | Monero Documentation
+---
 # Subaddress
 
 Subaddress is what you should be using by default to receive Monero.

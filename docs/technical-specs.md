@@ -1,3 +1,6 @@
+---
+title: Monero Technical Specification | Monero Documentation
+---
 # Monero Technical Specs
 
 ## Live

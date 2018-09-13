@@ -1,5 +1,5 @@
 ---
-title: monerod - reference | Monero Documentation
+title: monerod - Reference | Monero Documentation
 ---
 
 # `monerod` - reference

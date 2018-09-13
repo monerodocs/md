@@ -1,3 +1,6 @@
+---
+title: CryptoNight Proof of Work | Monero Documentation
+---
 # CryptoNight Proof of Work
 
 Possibly the most controversial aspect of Monero (and other CryptoNote coins) is the CryptoNight Proof of Work,

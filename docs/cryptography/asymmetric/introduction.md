@@ -1,4 +1,7 @@
-# Asymmetric cryptography in Monero
+---
+title: Asymmetric Cryptography in Monero | Monero Documentation
+---
+# Asymmetric Cryptography in Monero
 
 !!! note
     Author is nowhere close to being a cryptographer. Be sceptical on accuracy.
