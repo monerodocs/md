@@ -27,7 +27,7 @@ You may want to organize your incoming funds into a streams like "donations", "w
 
 This is similar to subaccounts in your bank account. There is a very important difference though.
 
-In Monero funds don't really sit on public addresses. Public addresses are conceptually a gateway or a routing mechanism. Funds sit on the unspent outputs. Thus, a single transaction can aggregate and spent outputs from multiple addresses.
+In Monero funds don't really sit on public addresses. Public addresses are conceptually a gateway or a routing mechanism. Funds sit on the unspent outputs. Thus, a single transaction can aggregate and spend outputs from multiple addresses.
 
 ## Why not multiple wallets?
 

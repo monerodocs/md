@@ -1,3 +1,7 @@
+---
+title: monerod - reference | Monero Documentation
+---
+
 # `monerod` - reference
 
 ## Syntax
@@ -28,7 +32,7 @@ Following option groups are only to make the reference easier to follow. The dae
 
 #### Server
 
-The `monerod` defaults are adjusted for running it occasionally on the same computer as your Monero wallet.
+`monerod` defaults are adjusted for running it occasionally on the same computer as your Monero wallet.
 
 The following options will be helpful if you intend to have an always running node - most likely on a remote server or your own separate PC.
 
@@ -39,6 +43,24 @@ The following options will be helpful if you intend to have an always running no
 | `--pidfile`         | Full path to the PID file. Works only with `--detach`. Example: <br />`./monerod --detach --pidfile=/run/monero/monerod.pid`
 | `--detach`          | Go to background (decouple from the terminal). This is useful for long-running / server scenarios. Typically, you will also want to manage `monerod` daemon with systemd or similar. By default `monerod` runs in a foreground.
 | `--non-interactive` | Do not require tty in a foreground mode. Helpful when running in a container. By default `monerod` runs in a foreground and opens stdin for reading. This breaks containerization because no tty getss assigned and `monerod` process crashes. You can make it run in a background with `--detach` but this is inconvenient in a containerized environment because the canonical usage is that the container waits on the main process to exist (forking makes things more complicated).
+
+#### P2P network
+
+(WORK IN PROGRESS)
+
+The following options define how your node participates in Monero peer-to-peer network. This is for node-to-node communication. It does **not** affect wallet-to-node interface.
+
+| Option                 | Description
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--p2p-bind-ip`        | Network interface to bind to for p2p network protocol. Default value `0.0.0.0` binds to all network interfaces. This is typically what you want. You must change this if you want to constrain binding, for example to configure connection through TOR.
+| `--p2p-bind-port`      | TCP port to listen for p2p network connections. Defaults to `18080` for mainnet, `28080` for testnet, and 38080 for stagenet. You normally wouldn't change that.
+| `--hide-my-port`       | `monerod` will still open and listen on the p2p port. However, it will not announce itself as a peerlist candidate. Technically, it will return port `0` in a response to p2p handshake (`node_data.my_port = 0` in `get_local_node_data` function). In effect nodes you connect to won't spread your IP to other nodes. To sum up, it is not really hiding, it is more like "do not advertise".
+| `--add-priority-node`  | Specify list of peers to connect to and
+| `--add-exclusive-node` | Specify list of peers to connect to options add-priority-node and seed-node
+| `--seed-node`          | Connect to a node to retrieve peer
+| `--p2p-external-port`  | External port for p2p network protocol (if port forwarding used with NAT). Default is `0`.
+| `--no-igd`             | Disable UPnP port mapping.
+
 
 #### Help and Version
 
