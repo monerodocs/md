@@ -18,19 +18,24 @@ This way services like [Shapeshift](https://shapeshift.io) wouldn't know it is y
 
 Note it won't help if you have an account with the service. Then your payouts are already linked in the service database, regardless of Monero.
 
-## Group incoming payments
+## Group funds into accounts
 
-Think income streams.
+!!! Note
+    Feel free to skip this if your are new to Monero. Accounts are not essential and currently not supported by the GUI.
 
-Subaddresses allow to group incoming transactions within a single wallet.
+**Accounts** are a convenience wallet-level feature to group subaddresses under one label and balance.
 
-User interface allows to assign convenience labels to subaddresses.
+You may want to organize your funds into accounts like "cash", "work", "trading", "mining", "donations", etc.
 
-You may want to organize your incoming funds into a streams like "donations", "work", etc.
+As accounts are only groupings of subaddresses, they themselves do not have an address.
 
-This is similar to subaccounts in your bank account. There is a very important difference though.
+Accounts are deterministically derived from the root private key along with subaddresses.
 
-In Monero funds don't really sit on public addresses. Public addresses are conceptually a gateway or a routing mechanism. Funds sit on the unspent outputs. Thus, a single transaction can aggregate and spend outputs from multiple addresses.
+As of September 2018 accounts are only supported by the CLI wallet and missing from GUI wallet.
+
+Accounts are similar to subaccounts in your classic bank account. There is a very important difference though. In Monero funds don't really sit on accounts or public addresses. Public addresses are conceptually a gateway or a routing mechanism. Funds sit on transactions' unspent outputs. Thus, a single transaction can - in principle - aggregate and spend outputs from multiple addresses (and by extension from multiple accounts). The CLI or GUI wallet may not directly support creating such transactions for simplicity.
+
+In short, think of accounts as a **soft** grouping of your funds.
 
 ## Why not multiple wallets?
 
@@ -41,7 +46,7 @@ Additionally, you conveniently manage your subaddresses within a single user int
 
 ## Wallet level feature
 
-Subaddresses are a wallet-level feature to construct and interpret transactions. They do not affect the consensus. 
+Subaddresses and accounts are a wallet-level feature to construct and interpret transactions. They do not affect the consensus. 
 
 ## Data structure
 
