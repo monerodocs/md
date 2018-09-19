@@ -12,7 +12,7 @@ On top of that, Monero nodes interact with each other in a peer-to-peer network.
 
 [Download Monero](https://getmonero.org/downloads). Once unpacked you will see several executable files.
 
-Monero project nicely decouples node logic `monerod` from wallet logic `monero-wallet-*`.
+Monero project nicely decouples network node logic from wallet logic.
 Wallet logic is offered through three independent user interfaces - the GUI, the CLI, and the HTTP API.
 
 ![Monero Directory](/images/monero-dir.png "Monero Unpacked")
