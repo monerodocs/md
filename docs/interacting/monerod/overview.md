@@ -19,7 +19,7 @@ This allows you to run `monerod` on a separate computer or in the cloud.
 
 In fact, you can connect to a remote `monerod` instance provided by a semi-trusted 3rd party. Such 3rd party will not be able to steal your funds. This is very handy for learning and experimentation.
 
-However, there are privacy and reliability implications to using remote, untrusted node. For any real business **you should be running your own full node**.
+However, there are privacy and reliability implications to using a remote, untrusted node. For any real business **you should be running your own full node**.
 
 ## Data directory
 

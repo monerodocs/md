@@ -1,0 +1,10 @@
+
+/* Make reference options non-wrapping */
+article .md-typeset__table td:nth-child(1) {
+    white-space: nowrap;
+}
+
+/* Make reference tables occupying full width */
+article .md-typeset__table {
+    width: 100%;
+}

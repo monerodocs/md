@@ -42,7 +42,7 @@ theme:
 #   feature:
 #     tabs: true
 
-extra_css: ['extra.css']
+extra_css: ['extra.css', 'overrides.css']
 
 repo_name: 'monerodocs/md'
 repo_url: 'https://github.com/monerodocs/md'
