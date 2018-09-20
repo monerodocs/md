@@ -18,7 +18,7 @@ title: Monero Technical Specification | Monero Documentation
 * CryptoNight
     * v0 since block height 0
     * v1 since block height 1546000 (forked on 2018-04-06)
-    * v2 planned since tentative 2018-10-18
+    * (planned) v2 since block height 1685555 (will fork on ~2018-10-18)
 * Changes every ~6 months to discourage ASIC-s
 
 ## Difficulty retarget
@@ -34,7 +34,7 @@ title: Monero Technical Specification | Monero Documentation
 ## Block reward
 
 * smoothly decreasing and subject to penalties for blocks greater then median size of the last 100 blocks (M100)
-* ~4 XMR as of Aug 2018; for the current reward check the coinbase transaction of the [latest block](https://moneroblocks.info/)
+* ~3.8 XMR as of Sep 2018; for the current reward check the coinbase transaction of the [latest block](https://moneroblocks.info/)
 
 ## Block size
 
