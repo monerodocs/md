@@ -47,11 +47,9 @@ The following options will be helpful if you intend to have an always running no
 | `--detach`          | Go to background (decouple from the terminal). This is useful for long-running / server scenarios. Typically, you will also want to manage `monerod` daemon with systemd or similar. By default `monerod` runs in a foreground.
 | `--non-interactive` | Do not require tty in a foreground mode. Helpful when running in a container. By default `monerod` runs in a foreground and opens stdin for reading. This breaks containerization because no tty getss assigned and `monerod` process crashes. You can make it run in a background with `--detach` but this is inconvenient in a containerized environment because the canonical usage is that the container waits on the main process to exist (forking makes things more complicated).
 | `--no-igd`          | Disable UPnP port mapping. Add this option to improve security if you are **not** behind a NAT (you can bind directly to public IP or you run through Tor).
-
+| `--max-txpool-size arg` | Set maximum transactions pool size in bytes. By default 648000000 (~618MB). These are transactions pending for confirmations (not included in any block).
 
 #### P2P network
-
-(WORK IN PROGRESS)
 
 The following options define how your node participates in Monero peer-to-peer network.
 This is for node-to-node communication. It does **not** affect wallet-to-node interface.
@@ -63,23 +61,18 @@ The node and peer words are used interchangeably.
 | `--p2p-bind-ip`        | Network interface to bind to for p2p network protocol. Default value `0.0.0.0` binds to all network interfaces. This is typically what you want. <br /><br />You must change this if you want to constrain binding, for example to configure connection through Tor via torsocks: <br />`DNS_PUBLIC=tcp://1.1.1.1 TORSOCKS_ALLOW_INBOUND=1 torsocks ./monerod --p2p-bind-ip 127.0.0.1 --no-igd --hide-my-port`
 | `--p2p-bind-port`      | TCP port to listen for p2p network connections. Defaults to `18080` for mainnet, `28080` for testnet, and `38080` for stagenet. You normally wouldn't change that. This is helpful to run several nodes on your machine to simulate private Monero p2p network (likely using private Testnet). Example: <br/>`./monerod --p2p-bind-port=48080`
 | `--p2p-external-port`  | TCP port to listen for p2p network connections on your router. Relevant if you are behind a NAT and still want to accept incoming connections. You must then set this to relevant port on your router. This is to let `monerod` know what to advertise on the network. Default is `0`.
-| `--hide-my-port`       | `monerod` will still open and listen on the p2p port. However, it will not announce itself as a peerlist candidate. Technically, it will return port `0` in a response to p2p handshake (`node_data.my_port = 0` in `get_local_node_data` function). In effect nodes you connect to won't spread your IP to other nodes. To sum up, it is not really hiding, it is more like "do not advertise".
+| `--hide-my-port`       | `monerod` will still open and listen on the p2p port. However, it will not announce itself as a peer list candidate. Technically, it will return port `0` in a response to p2p handshake (`node_data.my_port = 0` in `get_local_node_data` function). In effect nodes you connect to won't spread your IP to other nodes. To sum up, it is not really hiding, it is more like "do not advertise".
 | `--seed-node`          | Connect to a node to retrieve other nodes' addresses, and disconnect. If not specified, `monerod` will use hardcoded seed nodes on the first run, and peers cached on disk on subsequent runs.  
-| `--add-peer`           | Manually add node to local peerlist.
+| `--add-peer`           | Manually add node to local peer list.
 | `--add-priority-node`  | Specify list of nodes to connect to and then attempt to keep the connection open. <br /><br />To add multiple nodes use the option several times. Example: <br />`./monerod --add-priority-node=178.128.192.138:18081 --add-priority-node=144.76.202.167:18081`
 | `--add-exclusive-node` | Specify list of nodes to connect to only. If this option is given the options `--add-priority-node` and `--seed-node` are ignored. <br /><br />To add multiple nodes use the option several times. Example: <br />`./monerod --add-exclusive-node=178.128.192.138:18081 --add-exclusive-node=144.76.202.167:18081`
-| `--offline`            | Do not listen for peers, nor connect to any. Useful for working with a stable local blockchain.
-| `--allow-local-ip`     | Allow local ip add to peer list, mostly in debug purposes. TODO: verify
-| `--out-peers arg` (=-1)| Set max number of outgoing connections to other peers. TODO: verify
-| `--in-peers arg` (=-1) | Set max number of incoming connections (peers actively connecting). TODO: verify
-
-#### Help and Version
-
-| Option              | Description
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--help`            | Enlists available options.
-| `--version`         | Shows `monerod` version to stdout. Example: <br />`Monero 'Lithium Luna' (v0.12.3.0-release)`
-| `--os-version`      | Shows build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Fri Aug 24 12:48:58 UTC 2018 4.18.5-arch1-1-ARCH`.
+| `--out-peers`          | Set max number of outgoing connections to other nodes. By default 8. Value `-1` represents the code default.
+| `--in-peers`           | Set max number of incoming connections (nodes actively connecting to you). By default unlimited. Value `-1` represents the code default.
+| `--limit-rate-up`      | Set outgoing data transfer limit [kB/s]. By default 2048 kB/s. Value `-1` represents the code default.
+| `--limit-rate-down`    | Set incoming data transfer limit [kB/s]. By default 8192 kB/s. Value `-1` represents the code default.
+| `--limit-rate`         | Set the same limit value for incoming and outgoing data transfer. By default (`-1`) the individual up/down default limits will be used. It is better to use `--limit-rate-up` and `--limit-rate-down` instead to avoid confusion.
+| `--offline`            | Do not listen for peers, nor connect to any. Useful for working with a local, archival blockchain.
+| `--allow-local-ip`     | Allow adding local IP to peer list. Useful mostly for debug purposes when you may want to have multiple nodes on a single machine.
 
 #### Legacy
 
@@ -91,6 +84,13 @@ These options should no longer be necessary. They are still present in `monerod`
 | `--no-fluffy-blocks`| Relay classic full blocks. Classic block contains all transactions.
 | `--db-type`         | Specify database type. The default and only available: `lmdb`.
 
+#### Help and Version
+
+| Option              | Description
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--help`            | Enlists available options.
+| `--version`         | Shows `monerod` version to stdout. Example: <br />`Monero 'Lithium Luna' (v0.12.3.0-release)`
+| `--os-version`      | Shows build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Fri Aug 24 12:48:58 UTC 2018 4.18.5-arch1-1-ARCH`.
 
 
 ## Reference
