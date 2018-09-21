@@ -29,7 +29,9 @@ nav:
     - Subaddress: 'public-address/subaddress.md'
     - Integrated: 'public-address/integrated-address.md'
 - Multisignature: 'multisignature.md'
-- Mainnet, stagenet, testnet: 'networks.md'
+- Infrastructure:
+    - Mainnet, stagenet, testnet: 'infrastructure/networks.md'
+    - MoneroPulse: 'infrastructure/monero-pulse.md'
 
 theme:
   name: 'material' # 'material'

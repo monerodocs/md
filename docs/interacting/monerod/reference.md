@@ -21,9 +21,9 @@ Following option groups are only to make this reference easier to follow. The da
 
 | Option           | Description                                                                                    
 |------------------|------------------------------------------------------------------------------------------------
-| (missing)        | By default monerod assumes [mainnet](/networks).                                               
-| `--stagenet`     | Run on [stagenet](/networks). Remember to run your wallet with `--stagenet` as well.           
-| `--testnet`      | Run on [testnet](/networks). Remember to run your wallet with `--testnet` as well.             
+| (missing)        | By default monerod assumes [mainnet](/infrastructure/networks).                                               
+| `--stagenet`     | Run on [stagenet](/infrastructure/networks). Remember to run your wallet with `--stagenet` as well.           
+| `--testnet`      | Run on [testnet](/infrastructure/networks). Remember to run your wallet with `--testnet` as well.             
 
 #### Logging
 
@@ -46,13 +46,15 @@ The following options will be helpful if you intend to have an always running no
 | `--pidfile`         | Full path to the PID file. Works only with `--detach`. Example: <br />`./monerod --detach --pidfile=/run/monero/monerod.pid`
 | `--detach`          | Go to background (decouple from the terminal). This is useful for long-running / server scenarios. Typically, you will also want to manage `monerod` daemon with systemd or similar. By default `monerod` runs in a foreground.
 | `--non-interactive` | Do not require tty in a foreground mode. Helpful when running in a container. By default `monerod` runs in a foreground and opens stdin for reading. This breaks containerization because no tty getss assigned and `monerod` process crashes. You can make it run in a background with `--detach` but this is inconvenient in a containerized environment because the canonical usage is that the container waits on the main process to exist (forking makes things more complicated).
-| `--no-igd`          | Disable UPnP port mapping. Add this option to improve security if you are **not** behind a NAT (you can bind directly to public IP or you run through Tor).
-| `--max-txpool-size arg` | Set maximum transactions pool size in bytes. By default 648000000 (~618MB). These are transactions pending for confirmations (not included in any block).
+| `--no-igd`          | Disable UPnP port mapping on the router ("Internet Gateway Device"). Add this option to improve security if you are **not** behind a NAT (you can bind directly to public IP or you run through Tor).
+| `--max-txpool-size arg`       | Set maximum transactions pool size in bytes. By default 648000000 (~618MB). These are transactions pending for confirmations (not included in any block).
+| `--enforce-dns-checkpointing` | The emergency checkpoints set by MoneroPulse operators will be enforced. It is probably a good idea to set enforcing for unattended nodes. <br /><br />If encountered block hash does not match corresponding checkpoint, the local blockchain will be rolled back a few blocks, effectively blocking following what MoneroPulse operators consider invalid fork. The log entry will be produced:  `ERROR` `Local blockchain failed to pass a checkpoint, rolling back!` Eventually, the alternative ("fixed") fork will get heavier and the node will follow it, leaving the "invalid" fork behind.<br /><br />By default checkpointing only notifies about discrepancy by producing the following log entry: `ERROR` `WARNING: local blockchain failed to pass a MoneroPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option`.<br /><br />Reference: [source code](https://github.com/monero-project/monero/blob/22a6591a70151840381e327f1b41dc27cbdb2ee6/src/cryptonote_core/blockchain.cpp#L3614).
+| `--disable-dns-checkpoints`   | The MoneroPulse checkpoints set by core developers will be discarded. The checkpoints are apparently still fetched though.
 
 #### P2P network
 
 The following options define how your node participates in Monero peer-to-peer network.
-This is for node-to-node communication. It does **not** affect wallet-to-node interface.
+This is for node-to-node communication. The following options do **not** affect wallet-to-node interface.
 
 The node and peer words are used interchangeably.
 

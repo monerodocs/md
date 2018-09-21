@@ -53,8 +53,6 @@ It totals to 69 bytes. The bytes are then encoded ([src](https://github.com/mone
 
 Main address is derived from the root private key.
 
-TODO: describe.
-
 ## Reference
 
 * [StackExchenge answer](https://monero.stackexchange.com/questions/980/what-are-the-public-viewkeys-and-spendkeys)

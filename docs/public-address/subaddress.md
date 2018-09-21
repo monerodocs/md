@@ -75,8 +75,6 @@ Where:
 
 Deriving "sub view keys" from the "base view key" allows for creating a view only wallet that monitors entire wallet including subaddresses.
 
-TODO: describe rest of the procedure.
-
 ## Caveates
 
 * Subaddress **cannot** be used to receive transactions having multiple destinations (e.g. pool payouts). Only the main address (the one with index == 0) can receive such transactions.

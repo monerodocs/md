@@ -29,7 +29,7 @@ Stagenet was introduced in March 2018 as part of Monero 0.12.0.0.
 
 ## Testnet
 
-As a normal user, use [stagenet](/networks#stagenet) instead. Testnet is for developers.
+As a normal user, use [stagenet](#stagenet) instead. Testnet is for developers.
 
 Testnet is the "experimental" network and blockchain where things get released long before mainnet.
 
