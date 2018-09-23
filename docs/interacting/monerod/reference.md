@@ -10,7 +10,7 @@ title: monerod - Reference | Monero Documentation
 
 Options define how daemon should be working. Their names follow the `--option-name` pattern.
 
-Commands give access to specific services provided by the daemon. Commands are executed against a running daemon.
+Commands give access to specific services provided by the daemon. Commands are executed against the running daemon.
 Their names follow the `command_name` pattern.
 
 ## Options
@@ -48,8 +48,8 @@ The following options will be helpful if you intend to have an always running no
 | `--non-interactive` | Do not require tty in a foreground mode. Helpful when running in a container. By default `monerod` runs in a foreground and opens stdin for reading. This breaks containerization because no tty getss assigned and `monerod` process crashes. You can make it run in a background with `--detach` but this is inconvenient in a containerized environment because the canonical usage is that the container waits on the main process to exist (forking makes things more complicated).
 | `--no-igd`          | Disable UPnP port mapping on the router ("Internet Gateway Device"). Add this option to improve security if you are **not** behind a NAT (you can bind directly to public IP or you run through Tor).
 | `--max-txpool-size arg`       | Set maximum transactions pool size in bytes. By default 648000000 (~618MB). These are transactions pending for confirmations (not included in any block).
-| `--enforce-dns-checkpointing` | The emergency checkpoints set by MoneroPulse operators will be enforced. It is probably a good idea to set enforcing for unattended nodes. <br /><br />If encountered block hash does not match corresponding checkpoint, the local blockchain will be rolled back a few blocks, effectively blocking following what MoneroPulse operators consider invalid fork. The log entry will be produced:  `ERROR` `Local blockchain failed to pass a checkpoint, rolling back!` Eventually, the alternative ("fixed") fork will get heavier and the node will follow it, leaving the "invalid" fork behind.<br /><br />By default checkpointing only notifies about discrepancy by producing the following log entry: `ERROR` `WARNING: local blockchain failed to pass a MoneroPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option`.<br /><br />Reference: [source code](https://github.com/monero-project/monero/blob/22a6591a70151840381e327f1b41dc27cbdb2ee6/src/cryptonote_core/blockchain.cpp#L3614).
-| `--disable-dns-checkpoints`   | The MoneroPulse checkpoints set by core developers will be discarded. The checkpoints are apparently still fetched though.
+| `--enforce-dns-checkpointing` | The emergency checkpoints set by [MoneroPulse](/infrastructure/monero-pulse.md) operators will be enforced. It is probably a good idea to set enforcing for unattended nodes. <br /><br />If encountered block hash does not match corresponding checkpoint, the local blockchain will be rolled back a few blocks, effectively blocking following what MoneroPulse operators consider invalid fork. The log entry will be produced:  `ERROR` `Local blockchain failed to pass a checkpoint, rolling back!` Eventually, the alternative ("fixed") fork will get heavier and the node will follow it, leaving the "invalid" fork behind.<br /><br />By default checkpointing only notifies about discrepancy by producing the following log entry: `ERROR` `WARNING: local blockchain failed to pass a MoneroPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option`.<br /><br />Reference: [source code](https://github.com/monero-project/monero/blob/22a6591a70151840381e327f1b41dc27cbdb2ee6/src/cryptonote_core/blockchain.cpp#L3614).
+| `--disable-dns-checkpoints`   | The [MoneroPulse](/infrastructure/monero-pulse.md) checkpoints set by core developers will be discarded. The checkpoints are apparently still fetched though.
 
 #### P2P network
 
@@ -76,15 +76,48 @@ The node and peer words are used interchangeably.
 | `--offline`            | Do not listen for peers, nor connect to any. Useful for working with a local, archival blockchain.
 | `--allow-local-ip`     | Allow adding local IP to peer list. Useful mostly for debug purposes when you may want to have multiple nodes on a single machine.
 
-#### Legacy
+#### Speed nad Reliability
+
+| Option                          | Description
+|---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--max-concurrency`             | Max number of threads to use for a parallel jobs. The default value `0` uses the number of CPU threads.
+| `--prep-blocks-threads`         | Max number of threads to use when computing block hashes (PoW) in groups. Defaults to 4. Decrease this if you don't want `monerod` hog your computer when syncing.
+| `--bootstrap-daemon-address`    | The host:port of a "bootstrap" remote open node that the connected wallets can use while this node is still not fully synced. Example:<br/>`./monerod --bootstrap-daemon-address=opennode.xmr-tw.org:18089`. The node will forward selected RPC calls to the bootstrap node. The wallet will handle this automatically and transparently. Obviously, such bootstraping phase has privacy implications similar to directly using a remote node.
+| `--bootstrap-daemon-login`      | Specify username:password for the bootstrap daemon login (if required). This considers the RPC interface used by the wallet. Normally, open nodes do not require any credentials.
+
+#### Mining
+
+The following options configure **solo mining** using **CPU** with the standard software stack `monerod`. This is mostly useful for:
+
+* generating your [stagenet](/infrastructure/networks#stagenet) or [testnet](/infrastructure/networks#testnet) coins
+* experimentation and learning
+* if you have super cheap access to vast CPU resources
+
+Be advised though that real mining happens **in pools** and with high-end **GPU-s** instead of CPU-s.
+
+| Option                             | Description
+|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--start-mining`                   | Specify wallet address to mining for. **This must be a [main address](/public-address/main-address)!** It can be neither a subaddres nor integrated address.
+| `--mining-threads`                 | Specify mining threads count. By default ony one thread will be used. For best results, set it to number of your physical cores.
+| `--extra-messages-file`            | Specify file for extra messages to include into coinbase transactions.
+| `--bg-mining-enable`               | Enable unobtrusive mining. In this mode mininig will use a small percentage of your system resources to never noticeably slow down your computer. This is intended to encourage people to mine to improve decentralization. That being said chances of finding a block are diminishingly small with solo CPU mining, and even lesser with its unobtrusive version. You can tweak the unobtrusivness / power trade-offs with the further `--bg-*` options below.
+| `--bg-mining-ignore-battery`       | If true, assumes plugged in when unable to query system power status.
+| `--bg-mining-min-idle-interval`    | Specify min lookback interval in seconds for determining idle state.
+| `--bg-mining-idle-threshold`       | Specify minimum avg idle percentage over lookback interval.
+| `--bg-mining-miner-target`         | Specify maximum percentage cpu use by miner(s).
+
+#### Legacy or irrelevant
 
 These options should no longer be necessary. They are still present in `monerod` for backwards compatibility.
 
-| Option              | Description
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--fluffy-blocks`   | Relay compact blocks. Default. Compact block is just a header and a list of transaction IDs.
-| `--no-fluffy-blocks`| Relay classic full blocks. Classic block contains all transactions.
-| `--db-type`         | Specify database type. The default and only available: `lmdb`.
+| Option                | Description
+|-----------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--fluffy-blocks`     | Relay compact blocks. Default. Compact block is just a header and a list of transaction IDs.
+| `--no-fluffy-blocks`  | Relay classic full blocks. Classic block contains all transactions.
+| `--show-time-stats`   | Official docs say "Show time-stats when processing blocks/txs and disk synchronization." but it does not seem to produce any output during usual blockchain synchronization.
+| `--zmq-rpc-bind-ip`   | IP for ZMQ RPC server to listen on. This is not widely used as ZMQ interface currently does not provide meaningful advantage over classic JSON-RPC interface.
+| `--zmq-rpc-bind-port` | Port for ZMQ RPC server to listen on. Defaults to `18082`, or `28082` for testnet, or `38082` for stagenet.
+| `--db-type`           | Specify database type. The default and only available: `lmdb`.
 
 #### Help and Version
 
