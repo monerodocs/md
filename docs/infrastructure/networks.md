@@ -13,6 +13,12 @@ Mainnet is the only blockchain where XMR units have value.
 
 Mainnet is what people mean by default.
 
+Default TCP ports (listening):
+
+* 18080 - p2p network
+* 18081 - JSON-RPC server
+* 18082 - ZMQ server
+
 ## Stagenet
 
 Stagenet is what you need to learn Monero safely.
@@ -24,6 +30,12 @@ To get started:
 * Connect your GUI or CLI to stagenet open node **monero-stagenet.exan.tech:38081**
 * Get free XMR from [stagenet faucet](http://stagenet.xmr-tw.org:38085/)
 * Check the [stagenet block explorer](http://162.210.173.150:8083/)
+
+Default TCP ports (listening):
+
+* 38080 - p2p network
+* 38081 - JSON-RPC server
+* 38082 - ZMQ server
 
 Stagenet was introduced in March 2018 as part of Monero 0.12.0.0.
 
@@ -41,6 +53,12 @@ To get started:
 * Connect your GUI or CLI to testnet open node **monero-testnet.exan.tech:28081**
 * Get free XMR from [testnet faucet](https://dis.gratis/)
 * Check the [testnet block explorer](https://testnet.xmrchain.net)
+
+Default TCP ports (listening):
+
+* 28080 - p2p network
+* 28081 - JSON-RPC server
+* 28082 - ZMQ server
 
 ## Private Testnet
 
