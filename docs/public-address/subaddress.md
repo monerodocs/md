@@ -77,7 +77,6 @@ Deriving "sub view keys" from the "base view key" allows for creating a view onl
 
 ## Caveates
 
-* Subaddress **cannot** be used to receive transactions having multiple destinations (e.g. pool payouts). Only the main address (the one with index == 0) can receive such transactions.
 * It is not recommended to sweep all the balances of subaddress to main address in a single transaction. That links the subaddresses together on the blockchain. However, this only concerns privacy against specific sender and the situation will never get worse than not using subaddresses in the first place. If you need to join funds while preserving maximum privacy do it with individual transactions (one per subaddress).
 * Convenience labels are not preserved when recreating from seed.
 

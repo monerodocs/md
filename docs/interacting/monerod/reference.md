@@ -117,8 +117,8 @@ These options should no longer be necessary. They are still present in `monerod`
 | `--fluffy-blocks`     | Relay compact blocks. Default. Compact block is just a header and a list of transaction IDs.
 | `--no-fluffy-blocks`  | Relay classic full blocks. Classic block contains all transactions.
 | `--show-time-stats`   | Official docs say "Show time-stats when processing blocks/txs and disk synchronization." but it does not seem to produce any output during usual blockchain synchronization.
-| `--zmq-rpc-bind-ip`   | IP for ZMQ RPC server to listen on. This is not widely used as ZMQ interface currently does not provide meaningful advantage over classic JSON-RPC interface.
-| `--zmq-rpc-bind-port` | Port for ZMQ RPC server to listen on. Defaults to `18082`, or `28082` for testnet, or `38082` for stagenet.
+| `--zmq-rpc-bind-ip`   | IP for ZMQ RPC server to listen on. By default `127.0.0.1`. This is not yet widely used as ZMQ interface currently does not provide meaningful advantage over classic JSON-RPC interface. Unfortunately, currently there is no way to disable the ZMQ server. 
+| `--zmq-rpc-bind-port` | Port for ZMQ RPC server to listen on. By default `18082` for mainnet, `38082` for stagenet, and `28082` for testnet. 
 | `--db-type`           | Specify database type. The default and only available: `lmdb`.
 
 #### Help and Version
@@ -129,7 +129,7 @@ These options should no longer be necessary. They are still present in `monerod`
 | `--version`         | Shows `monerod` version to stdout. Example: <br />`Monero 'Lithium Luna' (v0.12.3.0-release)`
 | `--os-version`      | Shows build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Fri Aug 24 12:48:58 UTC 2018 4.18.5-arch1-1-ARCH`.
 
-
+--zmq-rpc-bind-ip
 ## Reference
 
 * [Reddit answer](https://www.reddit.com/r/Monero/comments/3jhyqc/0mq_help_share_this_exciting_news/)
