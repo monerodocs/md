@@ -64,6 +64,7 @@ title: Monero Technical Specification | Monero Documentation
 ## Sender privacy
 
 * ring signatures
+    * the ring size is 11 (10 decoys)
 * assurance: probabilistic / plausible deniability
 
 ## Recipient privacy

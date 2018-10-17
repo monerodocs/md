@@ -25,8 +25,6 @@ Multi-signing is a wallet-level feature. There is no way to learn from the block
 
 It is also worth noting in Monero there is no multisig addresses as such. [Address structure](Public-Address) does not care how the underlying private spend key got created.
 
-In Monero, only N-of-N and (N-1)-of-N multisignature schemes are supported. This covers all common scenarios mentioned above but does not allow for arbitrary voting (like "3-of-5 board members").
-
 After multisig wallet setup every participant ends up knowing the public address and private view key. This is necessary for participants to recognize and decipher transactions they are supposed to co-sign.
 
 ## Multisig wallet setup
