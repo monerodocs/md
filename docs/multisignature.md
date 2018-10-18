@@ -47,8 +47,6 @@ Every participants sends his second round of init data to all other participants
 
 Every participant finalizes wallet creation by applying the second round of init data from all other participants. This finally results in a wallet **public address** and **private view key** to be known for all participants. 
 
-
-
 Please note actions are symmetric for all participants. Even though we considered a 2-of-3 scheme, every participant cooperates with everyone else. The secret splitting is performed internally by the wallet.
 
 Secure sharing of initialization data between participants is manual. The wallet itself does not provide any secure communication channel. This is out of scope.
