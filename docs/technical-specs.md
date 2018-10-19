@@ -18,7 +18,7 @@ title: Monero Technical Specification | Monero Documentation
 * CryptoNight
     * v0 since block height 0
     * v1 since block height 1546000 (forked on 2018-04-06)
-    * (planned) v2 since block height 1685555 (will fork on ~2018-10-18)
+    * v2 since block height 1685555 (forked on 2018-10-18)
 * Changes every ~6 months to discourage ASIC-s
 
 ## Difficulty retarget
