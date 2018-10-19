@@ -17,6 +17,14 @@ Their names follow the `command_name` pattern.
 
 Following option groups are only to make this reference easier to follow. The daemon itself does not group options in any way.
 
+#### Help and version
+
+| Option              | Description
+|---------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--help`            | Enlists available options.
+| `--version`         | Shows `monerod` version to stdout. Example: <br />`Monero 'Lithium Luna' (v0.12.3.0-release)`
+| `--os-version`      | Shows build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Fri Aug 24 12:48:58 UTC 2018 4.18.5-arch1-1-ARCH`.
+
 #### Pick network
 
 | Option           | Description                                                                                    
@@ -99,7 +107,15 @@ The following options define how the API behaves.
 | `--rpc-login`                   | Specify `username[:password]` required to connect to API. Practical usage seems limited because API communication is in plain text over HTTP.
 | `--rpc-access-control-origins`  | Specify a comma separated list of origins to allow cross origin resource sharing. This is useful if you want to use `monerod` API directly from a web browser via JavaScript (say in a pure-fronted web appp scenario). With this option `monerod` will put proper HTTP CORS headers to its responses. You will also need to set `--rpc-login` if you use this option. Normally though, the API is used by backend app and this option isn't necessary.
 
-#### Speed nad Reliability
+#### Accepting Monero
+
+| Option           | Description
+|------------------|------------------------------------------------------------------------------------------------
+| `--block-notify` | Run a program for each new block. The argument must be a full path. If the argument contains `%s` it will be replaced by the block hash. Example: <br />`./monerod --block-notify="/usr/bin/echo %s"`<br /><br />Couple of notes:<br />1) Block notifications are good for immediate reaction. However, you should always assume you will miss some block notifications and you should independently poll the API to cover this up.<br />2) Mind blockchain reorganizations. Block notifications can revert to same and past heights. This actually happens pretty often.<br />3) See also `--tx-notify` option of `monero-wallet-rpc` daemon [here](https://github.com/monero-project/monero/pull/4333). 
+
+#### Performance
+
+These are advanced options that allow you to optimize performance of your `monerod` node, sometimes at the expense of reliability.
 
 | Option                          | Description
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
@@ -131,7 +147,19 @@ Be advised though that real mining happens **in pools** and with high-end **GPU-
 | `--bg-mining-idle-threshold`       | Specify minimum avg idle percentage over lookback interval.
 | `--bg-mining-miner-target`         | Specify maximum percentage cpu use by miner(s).
 
-#### Legacy or irrelevant
+#### Testing Monero itself
+
+These options are useful for Monero project developers and testers. Normal users shouldn't be concerned with these.
+
+| Option                             | Description
+|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--test-drop-download`             | For net tests: in download, discard ALL blocks instead checking/saving them (very fast).
+| `--test-drop-download-height`      | Like test-drop-download but discards only after around certain height. By default `0`.
+| `--regtest`                        | Run in a regression testing mode.
+| `--fixed-difficulty`               | Fixed difficulty used for testing. By default `0`.
+| `--test-dbg-lock-sleep`            | Sleep time in ms, defaults to 0 (off), used to debug before/after locking mutex. Values 100 to 1000 are good for tests.
+
+#### Legacy
 
 These options should no longer be necessary. They are still present in `monerod` for backwards compatibility.
 
@@ -143,17 +171,3 @@ These options should no longer be necessary. They are still present in `monerod`
 | `--zmq-rpc-bind-ip`   | IP for ZMQ RPC server to listen on. By default `127.0.0.1`. This is not yet widely used as ZMQ interface currently does not provide meaningful advantage over classic JSON-RPC interface. Unfortunately, currently there is no way to disable the ZMQ server. 
 | `--zmq-rpc-bind-port` | Port for ZMQ RPC server to listen on. By default `18082` for mainnet, `38082` for stagenet, and `28082` for testnet. 
 | `--db-type`           | Specify database type. The default and only available: `lmdb`.
-
-#### Help and Version
-
-| Option              | Description
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--help`            | Enlists available options.
-| `--version`         | Shows `monerod` version to stdout. Example: <br />`Monero 'Lithium Luna' (v0.12.3.0-release)`
-| `--os-version`      | Shows build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Fri Aug 24 12:48:58 UTC 2018 4.18.5-arch1-1-ARCH`.
-
-## Reference
-
-* [Reddit answer](https://www.reddit.com/r/Monero/comments/3jhyqc/0mq_help_share_this_exciting_news/)
-* [SE 1](https://monero.stackexchange.com/questions/1482/how-much-information-is-passed-from-the-daemon-to-simplewallet-when-scanning-for?rq=1)
-* [SE 2](https://monero.stackexchange.com/questions/1134/is-it-safe-to-share-a-daemon-with-a-roommate?noredirect=1&lq=1)
