@@ -34,12 +34,14 @@ nav:
     - MoneroPulse: 'infrastructure/monero-pulse.md'
 
 theme:
-  name: 'material' # 'material'
+  name: 'material'
   palette:
+#    primary: 'Indigo'
 #    primary: 'Deep Orange'
-    primary: 'Indigo'
+#    primary: 'Orange'
+    primary: 'White'
     accent: 'Indigo'
-#  logo: 'images/monero.svg'
+  logo: 'images/monero.svg'
   language: 'en'
 #   feature:
 #     tabs: true
