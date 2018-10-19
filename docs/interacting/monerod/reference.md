@@ -97,7 +97,7 @@ The following options define how the API behaves.
 | `--confirm-external-bind`       | Confirm you consciously set `--rpc-bind-ip` to non-localhost IP and you understand the consequences.
 | `--restricted-rpc`              | Restrict API to view only commands and do not return privacy sensitive data. Note this does not make sense with `--rpc-restricted-bind-port` because you would end up with two restricted APIs.
 | `--rpc-login`                   | Specify `username[:password]` required to connect to API. Practical usage seems limited because API communication is in plain text over HTTP.
-| `--rpc-access-control-origins`  | Specify a comma separated list of origins to allow cross origin resource sharing.
+| `--rpc-access-control-origins`  | Specify a comma separated list of origins to allow cross origin resource sharing. This is useful if you want to use `monerod` API directly from a web browser via JavaScript (say in a pure-fronted web appp scenario). With this option `monerod` will put proper HTTP CORS headers to its responses. You will also need to set `--rpc-login` if you use this option. Normally though, the API is used by backend app and this option isn't necessary.
 
 #### Speed nad Reliability
 
