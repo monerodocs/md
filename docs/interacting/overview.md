@@ -10,17 +10,21 @@ On top of that, Monero nodes interact with each other in a peer-to-peer network.
 
 ## Installation directory overview
 
-[Download Monero](https://getmonero.org/downloads). Once unpacked you will see several executable files.
+[Download Monero](https://getmonero.org/downloads).
+
+Once unpacked you will see several executable files. You will also find a nice PDF guide for the GUI wallet.  
 
 Monero project nicely decouples network node logic from wallet logic.
 Wallet logic is offered through three independent user interfaces - the GUI, the CLI, and the HTTP API.
 
 ```
-# ---- PDF guide to Monero GUI ----
+# cd monero-gui-v0.13.0.3
+
+# ---- guide to Monero GUI ----
 
 monero-GUI-guide.pdf
 
-# ---- Executable files -----------
+# ---- executable files -----------
 
 monerod
 
@@ -40,7 +44,7 @@ monero-blockchain-depth
 
 start-gui.sh
 
-# ---- Directories ----------------
+# ---- directories ----------------
 
 libs
 plugins

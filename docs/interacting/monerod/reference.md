@@ -171,3 +171,20 @@ These options should no longer be necessary. They are still present in `monerod`
 | `--zmq-rpc-bind-ip`   | IP for ZMQ RPC server to listen on. By default `127.0.0.1`. This is not yet widely used as ZMQ interface currently does not provide meaningful advantage over classic JSON-RPC interface. Unfortunately, currently there is no way to disable the ZMQ server. 
 | `--zmq-rpc-bind-port` | Port for ZMQ RPC server to listen on. By default `18082` for mainnet, `38082` for stagenet, and `28082` for testnet. 
 | `--db-type`           | Specify database type. The default and only available: `lmdb`.
+
+## Commands
+
+!!! warning
+    Commands reference is a work in progress.
+
+Commands give access to specific services provided by the daemon. Commands are executed against the running daemon. Their names follow the command_name pattern.
+
+First, run the daemon:
+
+`./monerod --stagenet`
+
+Then, using a second terminal run the command:
+
+`./monerod --stagenet sync_info` 
+
+You can also type commands directly in the console of the running `monerod` (if not detached). 
