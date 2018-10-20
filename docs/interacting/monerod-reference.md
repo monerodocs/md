@@ -2,20 +2,62 @@
 title: monerod - Reference | Monero Documentation
 ---
 
-# `monerod` - reference
+# `monerod` - Reference
+
+## Overview
+
+### Connects you to Monero network
+
+The Monero daemon `monerod` keeps your computer synced up with the Monero network.
+
+It downloads and validates the blockchain from the p2p network.
+
+### Not aware of your private keys
+
+`monerod` is entirely decoupled from your wallet.
+
+`monerod` does not access your private keys - it is not aware of your transactions and balance.
+
+This allows you to run `monerod` on a separate computer or in the cloud.
+
+In fact, you can connect to a remote `monerod` instance provided by a semi-trusted 3rd party. Such 3rd party will not be able to steal your funds. This is very handy for learning and experimentation.
+
+However, there are privacy and reliability implications to using a remote, untrusted node. For any real business **you should be running your own full node**.
 
 ## Syntax
 
 `./monerod [options] [command]` 
 
-Options define how daemon should be working. Their names follow the `--option-name` pattern.
+Options define how the daemon should be working. Their names follow the `--option-name` pattern.
 
 Commands give access to specific services provided by the daemon. Commands are executed against the running daemon.
 Their names follow the `command_name` pattern.
 
+### Running
+
+Go to directory where you unpacked Monero.
+
+The [stagenet](/infrastructure/networks) is what your should be using for learning and experimentation.
+
+```
+./monerod --stagenet --detach                # run as a daemon in background
+tail -f ~/.bitmonero/stagenet/bitmonero.log  # watch the logs
+./monerod --stagenet exit                    # ask daemon to exit gracefully
+```
+
+The [mainnnet](/infrastructure/networks) is when you want to deal with the real XMR.
+
+```
+./monerod --detach                           # run as a daemon in background
+tail -f ~/.bitmonero/bitmonero.log           # watch the logs
+./monerod exit                               # ask daemon to exit gracefully
+```
+
 ## Options
 
-Following option groups are only to make this reference easier to follow. The daemon itself does not group options in any way.
+Options define how the daemon should be working. Their names follow the `--option-name` pattern.
+
+The following groups are only to make reference easier to follow. The daemon itself does not group options in any way.
 
 #### Help and version
 
@@ -50,8 +92,8 @@ The following options will be helpful if you intend to have an always running no
 
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--config-file`     | Full path to the configuration file. By default `monerod` looks for `bitmonero.conf` in Monero [data directory](/interacting/monerod/overview/#data-directory). TODO: describe configuration file syntax.
-| `--data-dir`        | Full path to data directory. This is where the blockchain, log files, and p2p network memory are stored. For defaults and details see [data directory](/interacting/monerod/overview/#data-directory).
+| `--config-file`     | Full path to the configuration file. By default `monerod` looks for `bitmonero.conf` in Monero [data directory](/interacting/overview/#data-directory). TODO: describe configuration file syntax.
+| `--data-dir`        | Full path to data directory. This is where the blockchain, log files, and p2p network memory are stored. For defaults and details see [data directory](/interacting/overview/#data-directory).
 | `--pidfile`         | Full path to the PID file. Works only with `--detach`. Example: <br />`./monerod --detach --pidfile=/run/monero/monerod.pid`
 | `--detach`          | Go to background (decouple from the terminal). This is useful for long-running / server scenarios. Typically, you will also want to manage `monerod` daemon with systemd or similar. By default `monerod` runs in a foreground.
 | `--non-interactive` | Do not require tty in a foreground mode. Helpful when running in a container. By default `monerod` runs in a foreground and opens stdin for reading. This breaks containerization because no tty gets assigned and `monerod` process crashes. You can make it run in a background with `--detach` but this is inconvenient in a containerized environment because the canonical usage is that the container waits on the main process to exist (forking makes things more complicated).
@@ -111,7 +153,7 @@ The following options define how the API behaves.
 
 | Option           | Description
 |------------------|------------------------------------------------------------------------------------------------
-| `--block-notify` | Run a program for each new block. The argument must be a full path. If the argument contains `%s` it will be replaced by the block hash. Example: <br />`./monerod --block-notify="/usr/bin/echo %s"`<br /><br />Couple of notes:<br />1) Block notifications are good for immediate reaction. However, you should always assume you will miss some block notifications and you should independently poll the API to cover this up.<br />2) Mind blockchain reorganizations. Block notifications can revert to same and past heights. This actually happens pretty often.<br />3) See also `--tx-notify` option of `monero-wallet-rpc` daemon [here](https://github.com/monero-project/monero/pull/4333). 
+| `--block-notify` | Run a program for each new block. The argument must be a **full path**. If the argument contains `%s` it will be replaced by the block hash. Example: <br />`./monerod --block-notify="/usr/bin/echo %s"`<br /><br />Couple of notes:<br />1) Block notifications are good for immediate reaction. However, you should always assume you will miss some block notifications and you should independently poll the API to cover this up.<br />2) Mind blockchain reorganizations. Block notifications can revert to same and past heights. This actually happens pretty often.<br />3) See also `--tx-notify` option of `monero-wallet-rpc` daemon [here](https://github.com/monero-project/monero/pull/4333). 
 
 #### Performance
 
@@ -119,6 +161,7 @@ These are advanced options that allow you to optimize performance of your `moner
 
 | Option                          | Description
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--db-sync-mode`                | Specify sync option, using format:<br />`[safe|fast|fastest]:[sync|async]:[<nblocks_per_sync>[blocks]|<nbytes_per_sync>[bytes]]`<br /><br />The default is `fast:async:250000000bytes`.<br /><br />The `fast:async:*` can corrupt blockchain database in case of a system crash. It should not corrupt if just `monerod` crashes. If you are concerned with system crashes use `safe:sync`.
 | `--max-concurrency`             | Max number of threads to use for a parallel jobs. The default value `0` uses the number of CPU threads.
 | `--prep-blocks-threads`         | Max number of threads to use when computing block hashes (PoW) in groups. Defaults to 4. Decrease this if you don't want `monerod` hog your computer when syncing.
 | `--fast-block-sync`             | Sync up most of the way by using embedded, "known" block hashes. Pass `1` to turn on and `0` to turn off. This is on (`1`) by default. Normally, for every block the full node must calculate the block hash to verify miner's proof of work. Because the CryptoNight PoW used in Monero is very expensive (even for verification), `monerod` offers skipping these calculations for old blocks. In other words, it's a mechanism to trust `monerod` binary regarding old blocks' PoW validity, to sync up faster.
@@ -158,6 +201,7 @@ These options are useful for Monero project developers and testers. Normal users
 | `--regtest`                        | Run in a regression testing mode.
 | `--fixed-difficulty`               | Fixed difficulty used for testing. By default `0`.
 | `--test-dbg-lock-sleep`            | Sleep time in ms, defaults to 0 (off), used to debug before/after locking mutex. Values 100 to 1000 are good for tests.
+| `--save-graph`                     | Save data for dr monero.
 
 #### Legacy
 
@@ -174,17 +218,81 @@ These options should no longer be necessary. They are still present in `monerod`
 
 ## Commands
 
-!!! warning
-    Commands reference is a work in progress.
+Commands give access to specific services provided by the daemon.
+Commands are executed against the running daemon.
+Their names follow the `command_name` pattern.
 
-Commands give access to specific services provided by the daemon. Commands are executed against the running daemon. Their names follow the command_name pattern.
+The following groups are only to make reference easier to follow.
+The daemon itself does not group commands in any way.
 
-First, run the daemon:
-
-`./monerod --stagenet`
-
-Then, using a second terminal run the command:
-
-`./monerod --stagenet sync_info` 
-
+See [running](#running) for example usage.
 You can also type commands directly in the console of the running `monerod` (if not detached). 
+
+#### Help, version, status
+
+| Option                             | Description
+|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `help [<command>]`                 | Show help for `<command>`.
+| `version`                          | Show version information. Example output:<br />`Monero 'Beryllium Bullet' (v0.13.0.2-release)`
+| `status`                           | Show status. Example output:<br />`Height: 186754/186754 (100.0%) on stagenet, not mining, net hash 317 H/s, v9, up to date, 8(out)+0(in) connections, uptime 0d 3h 48m 47s`
+
+#### P2P network
+
+| Option                             | Description
+|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `print_pl`                         | Show the full peer list. 
+| `print_pl_stats`                   | Show the full peer list statistics (white vs gray peers). White peers are online and reachable. Grey peers are offline but your `monerod` remembers them from past sessions.
+| `print_cn`                         | Show connected peers with connection initiative (incoming/outgoing) and other stats.
+| `sync_info`                        | Show connected peers along with download / upload stats. Useful mostly when syncing up the blockchain.
+| `ban <IP> [<seconds>]`             | Ban a given <IP> for a given amount of <seconds>. By default the ban is for 24h. Example:<br />`./monerod ban 187.63.135.161`.
+| `unban <IP>`                       | Unban a given <IP>.
+| `bans`                             | Show the currently banned IPs. Example output:<br />`187.63.135.161 banned for 86397 seconds`.
+| `in_peers <max_number>`            | Set the <max_number> of incoming connections from other peers.
+| `out_peers <max_number>`           | Set the <max_number> of outgoing connections to other peers.
+| `limit [<kB/s>]`                   | Get or set the download and upload limit.
+| `limit_down [<kB/s>]`              | Get or set the download limit.
+| `limit_up [<kB/s>]`                | Get or set the upload limit.
+
+#### Transaction pool
+
+| Option                             | Description
+|------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `flush_txpool [<txid>]`            | Flush specified transaction from transactions pool, or flush the whole transactions pool if <txid> was not provided.
+| `print_pool`                       | Print the transaction pool using a verbose format.
+| `print_pool_sh`                    | Print the transaction pool using a short format.
+| `print_pool_stats`                 | Print the transaction pool's statistics (number of transactions, memory size, fees, double spend attempts etc).
+
+#### Blockchain
+
+| Option                                                     | Description
+|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `print_bc <begin_height> [<end_height>]`                   | Show blocks in range `<begin_height>`..`<end_height>`. The information will include block id, height, timestamp, version, size, weight, number of non-coinbase transactions, difficulty, nonce, and reward.  
+| `print_block <block_hash> \| <block_height>`               | Show detailed data of specified block.
+| `print_height`                                             | Show blockchain height.
+
+#### Manage daemon
+
+| Option                                                     | Description
+|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `exit`, `stop_daemon`                                      | Ask daemon to exit gracefully. The `exit` and `stop_daemon` are identical (one is alias of the other).
+| `set_log <level>|<{+,-,}categories>`                       | Set the current log level/categories where `<level>` is a number 0-4.
+| `print_status`                                             | Show if daemon is running.
+| `update (check|download)`                                  | Check if update is available. The downloading is recommended to be done manually (you should check signature etc).
+
+#### Mining
+
+| Option                                                     | Description
+|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `show_hr`                                                  | Ask `monerod` daemon to stop printing current hash rate. Relevant only if `monerod` is mining. 
+| `hide_hr`                                                  | Ask `monerod` daemon to print current hash rate. Relevant only if `monerod` is mining.
+| `start_mining <addr> [<threads>] [do_background_mining] [ignore_battery]`   | Ask `monerod`daemon to start mining. Block reward will go to `<addr>`.
+| `stop_mining`                                              | Ask `monerod` daemon to stop mining.
+
+#### Legacy
+
+| Option                                                     | Description
+|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `save`                                                     | Flush blockchain data to disk. This is normally no longer necessary as `monerod` saves the blockchain automatically on exit. 
+
+
+<!-- https://monero.stackexchange.com/questions/2663/how-do-i-start-using-monero-with-the-command-line-tools -->

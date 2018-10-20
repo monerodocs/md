@@ -83,3 +83,29 @@ All wallet implementations depend on the `monerod` running.
 | `monero-wallet-cli`        |                     |                            |               | ✔                            |                 |
 | `monero-wallet-rpc`        |                     |                            |               |                              | ✔               |
 | `monero-wallet-gui`        |                     |                            |               |                              |                 | ✔
+
+## Data directory
+
+This is where the blockchain, log files, and p2p network memory are stored.
+
+By default data directory is at:
+
+* `$HOME/.bitmonero/` on Linux
+* `$HOME/Library/Application\ Support/` on macOS
+* `C:\ProgramData\bitmonero\` on Windows
+
+Please mind:
+
+* data directory is hidden as per OS convention
+* the `bitmonero` directory name is historical artefact from before Monero forked away from Bitmonero, about 2000 years Before Christ
+
+Data directory contains:
+
+* `lmdb/` - the blockchain database directory
+* `p2pstate.bin` - saved memory of discovered and rated peers
+* `bitmonero.log` - log file
+
+It can also contain subdirectories for stagenet and testnet, mirroring the same structure:
+
+* `stagenet/` - data directory for Stagenet
+* `testnet/` - data directory for Testnet
