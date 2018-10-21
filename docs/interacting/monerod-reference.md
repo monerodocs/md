@@ -243,7 +243,6 @@ You can also type commands directly in the console of the running `monerod` (if 
 | `print_pl`                         | Show the full peer list. 
 | `print_pl_stats`                   | Show the full peer list statistics (white vs gray peers). White peers are online and reachable. Grey peers are offline but your `monerod` remembers them from past sessions.
 | `print_cn`                         | Show connected peers with connection initiative (incoming/outgoing) and other stats.
-| `sync_info`                        | Show connected peers along with download / upload stats. Useful mostly when syncing up the blockchain.
 | `ban <IP> [<seconds>]`             | Ban a given <IP> for a given amount of <seconds>. By default the ban is for 24h. Example:<br />`./monerod ban 187.63.135.161`.
 | `unban <IP>`                       | Unban a given <IP>.
 | `bans`                             | Show the currently banned IPs. Example output:<br />`187.63.135.161 banned for 86397 seconds`.
@@ -266,9 +265,12 @@ You can also type commands directly in the console of the running `monerod` (if 
 
 | Option                                                     | Description
 |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `print_height`                                             | Show local blockchain height.
+| `sync_info`                                                | Show blockchain sync progress and connected peers along with download / upload stats.
 | `print_bc <begin_height> [<end_height>]`                   | Show blocks in range `<begin_height>`..`<end_height>`. The information will include block id, height, timestamp, version, size, weight, number of non-coinbase transactions, difficulty, nonce, and reward.  
-| `print_block <block_hash> \| <block_height>`               | Show detailed data of specified block.
-| `print_height`                                             | Show blockchain height.
+| `print_block <block_hash> | <block_height>`                | Show detailed data of specified block.
+| `hard_fork_info`                                           | Show current consensus version and future hard fork block height, if any.
+| `is_key_image_spent`                                       | Check if specified [key image](/cryptography/asymmetric/key-image/) is spent.
 
 #### Manage daemon
 
@@ -293,6 +295,4 @@ You can also type commands directly in the console of the running `monerod` (if 
 | Option                                                     | Description
 |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `save`                                                     | Flush blockchain data to disk. This is normally no longer necessary as `monerod` saves the blockchain automatically on exit. 
-
-
-<!-- https://monero.stackexchange.com/questions/2663/how-do-i-start-using-monero-with-the-command-line-tools -->
+| `output_histogram [@<amount>] <min_count> [<max_count>]`   | Show number of outputs for each amount denomination. This was only relevant in the pre-RingCT era. The old wallet used this to determine which outputs can be used for the requested mixin. With RingCT denominations are irrelevant as amounts are hidden. More info in [these SA answers](https://monero.stackexchange.com/search?q=%22output_histogram%22).
