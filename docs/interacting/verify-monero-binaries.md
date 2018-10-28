@@ -1,12 +1,12 @@
 ---
-title: Verify Monero Binaries Signature | Monero Documentation
+title: Verifying Monero Binaries Signature | Monero Documentation
 ---
 
 # Verify Monero Binaries
 
 Verification must be carried on **before extracting the archive and before using Monero**.
 
-Instructions are for Linux but should also work on macOS with cosmetic modifications. 
+Instructions were tested on Linux. They should also work on macOS with slight modifications. 
 
 ## 0. Import core dev PGP key
 
@@ -20,11 +20,15 @@ Import Riccardo's public key to your keyring:
 
 `curl https://raw.githubusercontent.com/monero-project/monero/master/utils/gpg_keys/fluffypony.asc | gpg --import`
 
-Trust Riccardo's public key:
+Trust Riccardo's public key (fingerprint must be exactly this):
 
-    gpg --edit-key '7455C5E3C0CDCEB9'
+    gpg --edit-key 'BDA6BD7042B721C467A9759D7455C5E3C0CDCEB9'
     trust
     4 
+
+!!! danger
+    If key with this fingerprint was not found then remove imported key immediately (gpg --delete-keys ...).
+    That would mean the key changed (likely was compromised).
 
 ## 1. Verify signature of hash list  
 
@@ -44,21 +48,23 @@ The expected output is:
 
 By this step we checked that published hashes were not tampered with.
 
-The last step is to compare published hash with hash of downloaded archive.
+The last step is to compare published hash with downloaded archive SHA-256 hash.
 
 Replace file name with yours:
 
     file_name=monero-linux-x64-v0.13.0.4.tar.bz2
 
-    file_hash=`sha256sum $filename | cut -c 1-64`
+    file_hash=`sha256sum $file_name | cut -c 1-64`
 
     curl https://www.getmonero.org/downloads/hashes.txt > /tmp/reference-hashes.txt
 
     # verify the signature (previous step repeated here)
     gpg --verify /tmp/reference-hashes.txt
 
+    # Grep must print the hash (output cannot be empty)
     grep $file_hash /tmp/reference-hashes.txt 
 
-If grep displayed a line containing your binary name and a hash then all is fine!
+!!! danger
+    If the grep output is empty then double check everything because apparently the hashes don't match.
 
-If the output is empty then double check everything because apparently the hashes don't match.
+If grep printed filename and a hash then everything is alright.
