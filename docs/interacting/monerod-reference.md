@@ -243,8 +243,8 @@ You can also type commands directly in the console of the running `monerod` (if 
 | `print_pl`                         | Show the full peer list. 
 | `print_pl_stats`                   | Show the full peer list statistics (white vs gray peers). White peers are online and reachable. Grey peers are offline but your `monerod` remembers them from past sessions.
 | `print_cn`                         | Show connected peers with connection initiative (incoming/outgoing) and other stats.
-| `ban <IP> [<seconds>]`             | Ban a given <IP> for a given amount of <seconds>. By default the ban is for 24h. Example:<br />`./monerod ban 187.63.135.161`.
-| `unban <IP>`                       | Unban a given <IP>.
+| `ban <IP> [<seconds>]`             | Ban a given `<IP>` for a given amount of `<seconds>`. By default the ban is for 24h. Example:<br />`./monerod ban 187.63.135.161`.
+| `unban <IP>`                       | Unban a given `<IP>`.
 | `bans`                             | Show the currently banned IPs. Example output:<br />`187.63.135.161 banned for 86397 seconds`.
 | `in_peers <max_number>`            | Set the <max_number> of incoming connections from other peers.
 | `out_peers <max_number>`           | Set the <max_number> of outgoing connections to other peers.
@@ -261,6 +261,14 @@ You can also type commands directly in the console of the running `monerod` (if 
 | `print_pool_sh`                    | Print the transaction pool using a short format.
 | `print_pool_stats`                 | Print the transaction pool's statistics (number of transactions, memory size, fees, double spend attempts etc).
 
+#### Transactions
+
+| Option                                                     | Description
+|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `print_coinbase_tx_sum <start_height> [<block_count>]`     | Show a sum of all emitted coins and paid fees within specified range. Example:<br />`./monerod print_coinbase_tx_sum 0 1000000000000`
+| `print_tx <transaction_hash> [+hex] [+json]`               | Show specified transaction as JSON and/or HEX.
+| `relay_tx <txid>`                                          | Force relaying the transaction. Useful if you want to rebroadcast the transaction for any reason or if transaction was previously created with "do_not_relay":true.
+
 #### Blockchain
 
 | Option                                                     | Description
@@ -270,7 +278,7 @@ You can also type commands directly in the console of the running `monerod` (if 
 | `print_bc <begin_height> [<end_height>]`                   | Show blocks in range `<begin_height>`..`<end_height>`. The information will include block id, height, timestamp, version, size, weight, number of non-coinbase transactions, difficulty, nonce, and reward.  
 | `print_block <block_hash> | <block_height>`                | Show detailed data of specified block.
 | `hard_fork_info`                                           | Show current consensus version and future hard fork block height, if any.
-| `is_key_image_spent`                                       | Check if specified [key image](/cryptography/asymmetric/key-image/) is spent.
+| `is_key_image_spent <key_image>`                           | Check if specified [key image](/cryptography/asymmetric/key-image/) is spent. Key image is a hash.
 
 #### Manage daemon
 
@@ -279,7 +287,8 @@ You can also type commands directly in the console of the running `monerod` (if 
 | `exit`, `stop_daemon`                                      | Ask daemon to exit gracefully. The `exit` and `stop_daemon` are identical (one is alias of the other).
 | `set_log <level>|<{+,-,}categories>`                       | Set the current log level/categories where `<level>` is a number 0-4.
 | `print_status`                                             | Show if daemon is running.
-| `update (check|download)`                                  | Check if update is available. The downloading is recommended to be done manually (you should check signature etc).
+| `update (check|download)`                                  | Check if update is available and optionally download it. The hash is SHA-256. On linux use `sha256sum` to verify. Example output:<br />`Update available: v0.13.0.4: https://downloads.getmonero.org/cli/monero-linux-x64-v0.13.0.4.tar.bz2, hash 693e1a0210201f65138ace679d1ab1928aca06bb6e679c20d8b4d2d8717e50d6`<br/>`Update downloaded to: /opt/monero-v0.13.0.2/monero-linux-x64-v0.13.0.4.tar.bz2`
+
 
 #### Mining
 
@@ -289,6 +298,13 @@ You can also type commands directly in the console of the running `monerod` (if 
 | `hide_hr`                                                  | Ask `monerod` daemon to print current hash rate. Relevant only if `monerod` is mining.
 | `start_mining <addr> [<threads>] [do_background_mining] [ignore_battery]`   | Ask `monerod`daemon to start mining. Block reward will go to `<addr>`.
 | `stop_mining`                                              | Ask `monerod` daemon to stop mining.
+
+#### Testing Monero itself
+
+| Option                                                     | Description
+|------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `start_save_graph`                                         | Start saving data for dr Monero.
+| `stop_save_graph`                                          | Stop saving data for dr Monero.
 
 #### Legacy
 
