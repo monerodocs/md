@@ -3,7 +3,7 @@ title: Multisignature | Monero Documentation
 ---
 # Multisignature
 
-In cryptocurrencies, multisig feature allows to sign transaction with more than one private key. Funds protected with multisig can only be spent by signing with M-of-N keys.
+In cryptocurrencies, multisig feature allows to sign a transaction with more than one private key. Funds protected with multisig can only be spent by signing with M-of-N keys.
 
 Example use cases:
 
@@ -23,13 +23,24 @@ Let's consider the 2-of-3 scheme. We have 3 participants. Each participant is gr
 
 Multi-signing is a wallet-level feature. There is no way to learn from the blockchain which transactions were created using multiple signatures.
 
-It is also worth noting in Monero there is no multisig addresses as such. [Address structure](Public-Address) does not care how the underlying private spend key got created.
+It is also worth noting in Monero there is no multisig addresses as such. [Address structure](/public-address/main-address/) does not care how the underlying private spend key got created.
 
 After multisig wallet setup every participant ends up knowing the public address and private view key. This is necessary for participants to recognize and decipher transactions they are supposed to co-sign.
 
 ## Multisig wallet setup
 
-Let's consider a 2-of-3 scheme as it generalizes well. There will be three CLI wallet commands involved:
+Multisig feature is only available via a command line wallet. You should be familiar with the CLI wallet before playing with multisig.
+
+Let's consider a 2-of-3 scheme as it generalizes well.
+
+### 0. Open your wallet 
+
+Access your (stagenet) wallet:
+
+```
+./monerod --stagenet --daemon                     # Run your full node; make sure it is fully synced    
+./monero-wallet-cli --stagenet --wallet-file=...  # Run your wallet; make sure you have some funds to play with    
+```
 
 ### 1. prepare_multisig
 
