@@ -7,6 +7,8 @@ site_url: 'https://monerodocs.org/'
 nav:
 - Home: 'index.md'
 - Interacting:
+  - Download: 'interacting/download-monero-binaries.md'
+  - Verify: 'interacting/verify-monero-binaries.md'
   - Overview: 'interacting/overview.md'
   - monerod: 'interacting/monerod-reference.md'
 - Technical specs: 'technical-specs.md'

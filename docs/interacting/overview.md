@@ -10,8 +10,6 @@ On top of that, Monero nodes interact with each other in a peer-to-peer network.
 
 ## Installation directory overview
 
-[Download Monero](https://getmonero.org/downloads).
-
 Once unpacked you will see several executable files. You will also find a nice PDF guide for the GUI wallet.  
 
 Monero project nicely decouples network node logic from wallet logic.
