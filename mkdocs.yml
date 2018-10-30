@@ -10,6 +10,7 @@ nav:
   - Download: 'interacting/download-monero-binaries.md'
   - Verify: 'interacting/verify-monero-binaries.md'
   - Overview: 'interacting/overview.md'
+  - Config: 'interacting/monero-config-file.md'
   - monerod: 'interacting/monerod-reference.md'
 - Technical specs: 'technical-specs.md'
 - Cryptography:
