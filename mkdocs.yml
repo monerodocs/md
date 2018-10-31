@@ -12,6 +12,7 @@ nav:
   - Overview: 'interacting/overview.md'
   - Config: 'interacting/monero-config-file.md'
   - monerod: 'interacting/monerod-reference.md'
+  - monero-wallet-gui: 'interacting/monero-wallet-gui-reference.md'
 - Technical specs: 'technical-specs.md'
 - Cryptography:
     - Introduction: 'cryptography/introduction.md'

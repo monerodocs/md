@@ -32,7 +32,7 @@ Options define how the daemon should be working. Their names follow the `--optio
 Commands give access to specific services provided by the daemon. Commands are executed against the running daemon.
 Their names follow the `command_name` pattern.
 
-### Running
+## Running
 
 Go to directory where you unpacked Monero.
 
