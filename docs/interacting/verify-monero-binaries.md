@@ -32,7 +32,7 @@ Trust Riccardo's public key (fingerprint must be exactly this):
 ## 1. Verify signature of hash list  
 
 The list of binaries and their hashes is published on [getmonero.org](https://www.getmonero.org/downloads/hashes.txt) and a few other places like release notes on [r/monero](https://reddit.com/r/monero).
-Please note the publication channel does not matter as long as you properly verify the signature!  
+Please note the publication channel does not matter as long as you properly verify the signature!                                                                        u 
 
 To verify these are real hashes (not tampered with) run: 
 
@@ -49,7 +49,9 @@ By this step we checked that published hashes were not tampered with.
 
 The last step is to compare published hash with downloaded archive SHA-256 hash.
 
-Replace file name with yours:
+[Download Monero](/interacting/download-monero-binaries) if you didn't already (but do not unpack).
+
+Replace the example file name with actual one:
 
     file_name=monero-linux-x64-v0.13.0.4.tar.bz2
 
@@ -57,13 +59,13 @@ Replace file name with yours:
 
     curl https://www.getmonero.org/downloads/hashes.txt > /tmp/reference-hashes.txt
 
-    # verify the signature (previous step repeated here)
+    # verify the signature (previous step is repeated here for completeness)
     gpg --verify /tmp/reference-hashes.txt
 
-    # Grep must print the hash (output cannot be empty)
+    # grep must print the hash (output cannot be empty)
     grep $file_hash /tmp/reference-hashes.txt 
 
 !!! danger
     If the grep output is empty then double check everything because apparently the hashes don't match.
 
-If grep printed filename and a hash then everything is alright.
+If grep printed filename and a hash then everything is alright!
