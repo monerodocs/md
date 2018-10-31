@@ -1,7 +1,6 @@
 ---
 title: Interacting with Monero | Monero Documentation
 ---
-
 # Interacting with Monero
 
 You can interact with Monero via desktop GUI, commandline interface, and programming API.

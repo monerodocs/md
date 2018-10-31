@@ -1,7 +1,6 @@
 ---
 title: monerod - Reference | Monero Documentation
 ---
-
 # `monerod` - Reference
 
 ## Overview
@@ -92,7 +91,7 @@ The following options will be helpful if you intend to have an always running no
 
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--config-file`     | Full path to the configuration file. By default `monerod` looks for `bitmonero.conf` in Monero [data directory](/interacting/overview/#data-directory). TODO: describe configuration file syntax.
+| `--config-file`     | Full path to the [configuration file](/interacting/monero-config-file). By default `monerod` looks for `bitmonero.conf` in Monero [data directory](/interacting/overview/#data-directory).
 | `--data-dir`        | Full path to data directory. This is where the blockchain, log files, and p2p network memory are stored. For defaults and details see [data directory](/interacting/overview/#data-directory).
 | `--pidfile`         | Full path to the PID file. Works only with `--detach`. Example: <br />`./monerod --detach --pidfile=/run/monero/monerod.pid`
 | `--detach`          | Go to background (decouple from the terminal). This is useful for long-running / server scenarios. Typically, you will also want to manage `monerod` daemon with systemd or similar. By default `monerod` runs in a foreground.

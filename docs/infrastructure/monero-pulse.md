@@ -1,7 +1,6 @@
 ---
 title: MoneroPulse | Monero Documentation
 ---
-
 # MoneroPulse
 
 ## What is MoneroPulse?

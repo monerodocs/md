@@ -1,14 +1,13 @@
 ---
 title: Monero Configuration File | Monero Documentation
 ---
-
 # Monero Configuration File
 
 ## Applicability
 
-By default Monero does not read configuration file.
+By default Monero looks for `bitmonero.conf` in Monero [data directory](/interacting/overview/#data-directory).
 
-To use config file add `--config-file` option:
+To use a specific config file add `--config-file` option:
 
 `./monerod --config-file=/etc/monero.conf`
 

@@ -1,7 +1,6 @@
 ---
 title: Download Monero | Monero Documentation
 ---
-
 # Download Monero
 
 A single archive contains all you need to start using Monero (the full node and the wallet).

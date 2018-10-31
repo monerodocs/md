@@ -1,7 +1,6 @@
 ---
 title: Verifying Monero Binaries Signature | Monero Documentation
 ---
-
 # Verify Monero Binaries
 
 Verification must be carried on **before extracting the archive and before using Monero**.
