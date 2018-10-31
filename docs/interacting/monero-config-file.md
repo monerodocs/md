@@ -49,7 +49,7 @@ translates to:
     
     # Log file
     log-file=/var/log/monero/monero.log
-    max-log-file-size=1073741824   # Set to 1GB to mitigate log trimming by monerod; we prefer logrotate
+    max-log-file-size=0            # Prevent monerod from managing the log files; we want logrotate to take care of that
     
     # P2P full node
     p2p-bind-ip=0.0.0.0            # Bind to all interfaces (the default)
