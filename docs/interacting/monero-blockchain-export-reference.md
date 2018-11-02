@@ -4,7 +4,7 @@ title: monero-blockchain-export - Reference | Monero Documentation
 # `monero-blockchain-export` - Reference
 
 !!! warning
-    Nowadays, there is little usage for raw blockchain export / import. In the past the p2p blockchain download was much slower. Back than blockchain.raw file was used to speed up the process at the expense of trusting the source. 
+    Nowadays, there is little usage for raw blockchain export / import. In the past the p2p blockchain download was much slower. Back than blockchain.raw file was used to speed up the process of bootstrapping a node. 
 
 ## Overview
 
@@ -13,7 +13,7 @@ The tool dumps local blockchain to raw format, known as the `blockchain.raw` fil
 This could be useful if you want to process blockchain efficiently with your custom tools,
 as the raw format is probably easier to work with than Monero's custom lmdb database.
 
-The tool works on your local copy of the blockchain. It does **not** require `monerod` running.
+The tool works on your local copy of the blockchain. It does not require `monerod` running.
 
 ## Syntax
 
@@ -42,7 +42,7 @@ Go to directory where you unpacked Monero.
 
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| (missing)           | By default monero-blockchain-export assumes [mainnet](/infrastructure/networks#mainnet).
+| (missing)           | By default `monero-blockchain-export` assumes [mainnet](/infrastructure/networks#mainnet).
 | `--stagenet`        | Export [stagenet](/infrastructure/networks#stagenet) blockchain.
 | `--testnet`         | Export [testnet](/infrastructure/networks#testnet) blockchain.
 
@@ -56,10 +56,10 @@ Specifying the log file path is not supported.
 
 ### Input
 
-| Option              | Description
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--data-dir`        | Full path to data directory. This is where the blockchain, log files, and p2p network memory are stored. For defaults and details see [data directory](/interacting/overview/#data-directory).
-| `--database`        | The only valid value seems to be `lmdb` (the default).
+| Option                     | Description
+|----------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--data-dir`               | Full path to data directory. This is where the blockchain, log files, and p2p network memory are stored. For defaults and details see [data directory](/interacting/overview/#data-directory).
+| `--database`, `--db-type`  | The default and only valid value is `lmdb`.
 
 ### Output
 
@@ -67,7 +67,7 @@ Specifying the log file path is not supported.
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--output-file`     | Specify output file path. The default is `$DATA_DIR/export/blockchain.raw`. Example: <br />`./monero-blockchain-export --output-file=/tmp/blockchain.raw`
 | `--blocksdat`       | Output in blocks.dat format.
-| `--block-stop`      | Block number to stop the export at. Value `0` means full export (the default).
+| `--block-stop`      | Only export up to this block number. By default do the full export (value `0`).
 
 ## Reference
 

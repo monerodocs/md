@@ -14,6 +14,7 @@ nav:
   - monerod: 'interacting/monerod-reference.md'
   - monero-wallet-gui: 'interacting/monero-wallet-gui-reference.md'
   - monero-blockchain-export: 'interacting/monero-blockchain-export-reference.md'
+  - monero-blockchain-import: 'interacting/monero-blockchain-import-reference.md'
 - Technical specs: 'technical-specs.md'
 - Cryptography:
     - Introduction: 'cryptography/introduction.md'
