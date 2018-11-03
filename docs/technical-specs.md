@@ -61,6 +61,11 @@ title: Monero Technical Specification | Monero Documentation
 * ~18.132 million XMR + 0.6 XMR per 2 minutes
 * technically infinite but practicaly deflationary if accounted for lost coins
 
+## Divisibility
+
+* Monero is divisible up to 12 digits
+* The smallest unit is called piconero and equals 1e-12 XMR, or 0.000000000001 XMR 
+
 ## Sender privacy
 
 * ring signatures

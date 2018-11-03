@@ -26,12 +26,15 @@ nav:
       - Public keys: 'cryptography/asymmetric/public-key.md'
       - Edwards25519 curve: 'cryptography/asymmetric/edwards25519.md'
       - Key image: 'cryptography/asymmetric/key-image.md'
-#    - CryptoNight PoW: 'cryptography/cryptonight.md'
     - Base58: 'cryptography/base58.md'
 - Address:
     - Main: 'public-address/main-address.md'
     - Subaddress: 'public-address/subaddress.md'
     - Integrated: 'public-address/integrated-address.md'
+- Proof of Work:
+    - What is PoW?: 'proof-of-work/what-is-pow.md'
+    - PoW in Cryptocurrencies: 'proof-of-work/pow-in-cryptocurrencies.md'
+    - CryptoNight: 'proof-of-work/cryptonight.md'
 - Multisignature: 'multisignature.md'
 - Infrastructure:
     - Mainnet, stagenet, testnet: 'infrastructure/networks.md'

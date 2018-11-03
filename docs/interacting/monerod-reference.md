@@ -164,7 +164,7 @@ These are advanced options that allow you to optimize performance of your `moner
 | `--max-concurrency`             | Max number of threads to use for a parallel jobs. The default value `0` uses the number of CPU threads.
 | `--prep-blocks-threads`         | Max number of threads to use when computing block hashes (PoW) in groups. Defaults to 4. Decrease this if you don't want `monerod` hog your computer when syncing.
 | `--fast-block-sync`             | Sync up most of the way by using embedded, "known" block hashes. Pass `1` to turn on and `0` to turn off. This is on (`1`) by default. Normally, for every block the full node must calculate the block hash to verify miner's proof of work. Because the CryptoNight PoW used in Monero is very expensive (even for verification), `monerod` offers skipping these calculations for old blocks. In other words, it's a mechanism to trust `monerod` binary regarding old blocks' PoW validity, to sync up faster.
-| `--block-sync-size`             | How many blocks are processed in a single batch during chaing synchronization. By default this is 20 blocks for newer history and 100 blocks for older history ("pre v4"). Default behavior is represented by value `0`. Intuitively, the more resources you have, the bigger batch size you may want to try out. Example:<br />`./monerod --block-sync-size=500`
+| `--block-sync-size`             | How many blocks are processed in a single batch during chain synchronization. By default this is 20 blocks for newer history and 100 blocks for older history ("pre v4"). Default behavior is represented by value `0`. Intuitively, the more resources you have, the bigger batch size you may want to try out. Example:<br />`./monerod --block-sync-size=500`
 | `--bootstrap-daemon-address`    | The host:port of a "bootstrap" remote open node that the connected wallets can use while this node is still not fully synced. Example:<br/>`./monerod --bootstrap-daemon-address=opennode.xmr-tw.org:18089`. The node will forward selected RPC calls to the bootstrap node. The wallet will handle this automatically and transparently. Obviously, such bootstraping phase has privacy implications similar to directly using a remote node.
 | `--bootstrap-daemon-login`      | Specify username:password for the bootstrap daemon login (if required). This considers the RPC interface used by the wallet. Normally, open nodes do not require any credentials.
 
@@ -183,7 +183,7 @@ Be advised though that real mining happens **in pools** and with high-end **GPU-
 | `--start-mining`                   | Specify wallet address to mining for. **This must be a [main address](/public-address/main-address)!** It can be neither a subaddres nor integrated address.
 | `--mining-threads`                 | Specify mining threads count. By default ony one thread will be used. For best results, set it to number of your physical cores.
 | `--extra-messages-file`            | Specify file for extra messages to include into coinbase transactions.
-| `--bg-mining-enable`               | Enable unobtrusive mining. In this mode mininig will use a small percentage of your system resources to never noticeably slow down your computer. This is intended to encourage people to mine to improve decentralization. That being said chances of finding a block are diminishingly small with solo CPU mining, and even lesser with its unobtrusive version. You can tweak the unobtrusivness / power trade-offs with the further `--bg-*` options below.
+| `--bg-mining-enable`               | Enable unobtrusive mining. In this mode mining will use a small percentage of your system resources to never noticeably slow down your computer. This is intended to encourage people to mine to improve decentralization. That being said chances of finding a block are diminishingly small with solo CPU mining, and even lesser with its unobtrusive version. You can tweak the unobtrusivness / power trade-offs with the further `--bg-*` options below.
 | `--bg-mining-ignore-battery`       | If true, assumes plugged in when unable to query system power status.
 | `--bg-mining-min-idle-interval`    | Specify min lookback interval in seconds for determining idle state.
 | `--bg-mining-idle-threshold`       | Specify minimum avg idle percentage over lookback interval.
@@ -200,7 +200,7 @@ These options are useful for Monero project developers and testers. Normal users
 | `--regtest`                        | Run in a regression testing mode.
 | `--fixed-difficulty`               | Fixed difficulty used for testing. By default `0`.
 | `--test-dbg-lock-sleep`            | Sleep time in ms, defaults to 0 (off), used to debug before/after locking mutex. Values 100 to 1000 are good for tests.
-| `--save-graph`                     | Save data for dr monero.
+| `--save-graph`                     | Save data for dr Monero.
 
 #### Legacy
 
