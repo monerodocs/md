@@ -21,7 +21,7 @@ Efficient CryptoNight ASIC was developed in 2017 by Bitmain.
 
 Monero inherited CryptoNight as its proof of work in 2014.
 Since then Monero slightly evolved the algorithm to intentionally break compatibility with released ASIC-s.
-Currently Monero implements CryptoNight v2, a third iteration of original CryptoNight.
+Currently Monero implements CryptoNight v2, a third iteration of original CryptoNight (v0, v1, v2).
 
 ## The goal is to find small-enough hash
 
@@ -46,7 +46,7 @@ They also have a power over which transactions are included in the block and how
 CryptoNight is based on:
 
 * AES encryption
-* 5 hashing functions, all of which were finalist in NIST SHA-3 competition:
+* 5 hashing functions, all of which were finalists in NIST SHA-3 competition:
     * Keccak (the primary one)
     * BLAKE
     * Groestl
@@ -75,7 +75,7 @@ See [get_block_hashing_blob()](https://github.com/monero-project/monero/blob/mas
 CryptoNight attempts to make memory access a bottleneck for performance ("memory hardness"). It has three steps:
 
 1. Initialize large area of memory with pseudo-random data. This memory is known as the scratchpad.
-2. Perform numerous read/write operations at pseudo-random addresses on the scratchpad.
+2. Perform numerous read/write operations at pseudo-random (but deterministic) addresses on the scratchpad.
 3. Hash the entire scratchpad to produce the resulting value.
 
 ### Step 1: scratchpad initialization
@@ -93,7 +93,7 @@ The next payload is encryption result of the previous payload.
 
 Each 128-byte payload is actually encrypted 10 times.
 
-The details are a bit more nuanced, see "Scratchpad Initialization" on [CryptoNote Standard](https://cryptonote.org/cns/cns008.txt).  
+The details are a bit more nuanced, see "Scratchpad Initialization" in [CryptoNote Standard](https://cryptonote.org/cns/cns008.txt).  
 
 ### Step 2: memory-hard loop
 
@@ -127,7 +127,7 @@ The resulting 256-bit hash is the final output of CryptoNight algorithm.
 
 ### CryptoNight v0
 
-This is how Monero refers to original implementation of CryptoNight.
+This is how Monero community refers to original implementation of CryptoNight.
 
 ### CryptoNight v1
 

@@ -7,7 +7,7 @@ title: Proof of Work in Cryptocurrencies | Monero Documentation
 
 ## PoW protects against Sybil attack
 
-In decentralized cryptocurrencies **untrusted** actors sign (blocks of) transactions.
+In decentralized cryptocurrencies **untrusted** actors confirm (blocks of) transactions.
 
 If threshold voting was employed then the scheme would break immediately.
 This is because nothing prevents a single actor from creating arbitrary number of pseudonyms and take over the voting.
