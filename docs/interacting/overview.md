@@ -52,7 +52,7 @@ qml
 
 | Executable                 | Description  
 | -------------------------- |:-----------------------------------------------------------------------------------------------------------------------------------
-| `monerod`                  | The full node daemon. Does not require a wallet. <br />[Documentation](/interacting/monerod/overview).
+| `monerod`                  | The full node daemon. Does not require a wallet. <br />[Documentation](/interacting/monerod-reference/).
 | `monero-wallet-gui`        | Wallet logic and __graphical__ user interface. <br />Requires `monerod` running.
 | `monero-wallet-cli`        | Wallet logic and __commandline__ user interface. <br />Requires `monerod` running.
 | `monero-wallet-rpc`        | Wallet logic and __HTTP API__ (JSON-RPC protocol). <br />Requires `monerod` running.
