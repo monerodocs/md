@@ -48,7 +48,7 @@ Both types allow you to learn for what you are being paid.
 
 ## Caveats
 
-There are some caveates:
+There are some caveats:
 
 * Single transaction cannot pay to multiple integrated addresses.
 

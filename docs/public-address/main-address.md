@@ -36,7 +36,7 @@ Monero raw address is composed of two public keys:
 
 It also contains a checksum and a "network byte" which actually identifies both the network and the address type.
 
-Data structure ([src](https://github.com/monero-project/monero/blob/f7b9f44c1b0d53170fd7f53d37fc67648f3247a2/src/cryptonote_basic/cryptonote_basic_impl.cpp#L159)):
+## Data structure
 
 Index       | Size in bytes    | Description
 ------------|------------------|-------------------------------------------------------------
@@ -48,6 +48,8 @@ Index       | Size in bytes    | Description
 It totals to 69 bytes. The bytes are then encoded ([src](https://github.com/monero-project/monero/blob/8f1f43163a221153403a46902d026e3b72f1b3e3/src/common/base58.cpp#L240)) in [Monero specific Base58](/cryptography/base58) format, resulting in a 95 chars long string. Example main address:
 
 `4AdUndXHHZ6cfufTMvppY6JwXNouMBzSkbLYfpAV5Usx3skxNgYeYTRj5UzqtReoS44qo9mtmXCqY45DJ852K5Jv2684Rge`
+
+See the [source code](https://github.com/monero-project/monero/blob/f7b9f44c1b0d53170fd7f53d37fc67648f3247a2/src/cryptonote_basic/cryptonote_basic_impl.cpp#L159).
 
 ## Generating
 

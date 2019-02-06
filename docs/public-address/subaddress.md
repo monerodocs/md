@@ -54,33 +54,79 @@ Subaddress has a dedicated "network byte":
 
 Index       | Size in bytes    | Description
 ------------|------------------|-------------------------------------------------------------
-0           | 1                | identifies the network and address type; [42](https://github.com/monero-project/monero/blob/784f7b07f05a645d43f62ed3a9cefda4b0c57825/src/cryptonote_config.h#L153) - main chain; [63](https://github.com/monero-project/monero/blob/784f7b07f05a645d43f62ed3a9cefda4b0c57825/src/cryptonote_config.h#L167) - test chain
+0           | 1                | identifies the network and address type; [42](https://github.com/monero-project/monero/blob/31bdf7bd113c2576fe579ef3a25a2d8fef419ffc/src/cryptonote_config.h#L171) - mainnet; [36](https://github.com/monero-project/monero/blob/31bdf7bd113c2576fe579ef3a25a2d8fef419ffc/src/cryptonote_config.h#L200) - stagenet; [63](https://github.com/monero-project/monero/blob/31bdf7bd113c2576fe579ef3a25a2d8fef419ffc/src/cryptonote_config.h#L185) - testnet
 
-Otherwise the data structure is the same as for [main address](/public-address/main-address/).
-
-Each subaddress conceptually has an index (with 0 being the main address).
-The index is not directly included in subaddress structure but is used as input to create the private view key.
+Otherwise the data structure is the same as for the [main address](/public-address/main-address/#data-structure).
 
 ## Generating
 
-The private view key `m` for a subaddress is derived as follows:
-    
-    m = Hs(a || i)
+Each subaddress conceptually has:
+ 
+* account index (also known as "major" index)
+* subaddress index within the account (also known as "minor" index)
+
+The indexes are 0-based. By default wallets use account index 0.
+
+The indexes are not directly included in the subaddress data structure.
+Instead, they are used as input to generating subaddress keys.
+
+### Private view key
+
+The subaddress private view key `m` is derived as follows:
+
+    m = Hs("SubAddr" || a || account_index || subaddress_index_within_account)
     
 Where:
 
 * `Hs` is a Keccak-256 hash function interpreted as integer and modulo `l` (maximum edwards25519 scalar)
-* `a` is a private view key of the base address
-* `i` is a subaddress index
+* `||` is a byte array concatenation operator
+* `SubAddr` is a 0-terminated fixed string (8 bytes total)
+* `a` is a private view key of the main address (a 32 byte little endian unsigned integer)
+* `account_index` is index of an account (a 32 bit little endian unsigned integer)
+* `subaddress_index_within_account` is index of the subaddress within the account (a 32 bit little endian unsigned integer)
 
-Deriving "sub view keys" from the "base view key" allows for creating a view only wallet that monitors entire wallet including subaddresses.
+Deriving "sub view keys" from the main view key allows for creating a view only wallet that monitors the entire wallet including subaddresses.
 
-## Caveates
+### Public spend key
+
+The subaddress public spend key `D` is derived as follows:
+
+    D = B + m*G
+
+Where:
+
+* `B` is main address public spend key
+* `m` is subaddress private view key
+* `G` is the "base point"; this is simply a constant specific to [edwards25519](/cryptography/asymmetric/edwards25519)
+
+### Public view key
+
+The subaddress public view key `C` is derived as follows:
+
+    C = a*D
+
+Where:
+
+* `a` is a private view key of the main address
+* `D` is a public spend key of the subaddress
+
+### Special case for (0, 0)
+
+The subaddress #0 on the account #0 is the [main address](/public-address/main-address).
+As main address has different generation rules, this is simply implemented via an `if` statement.
+
+### Building the address string
+
+The procedure is the same as for the [main address](/public-address/main-address).
+
+## Caveats
 
 * It is not recommended to sweep all the balances of subaddress to main address in a single transaction. That links the subaddresses together on the blockchain. However, this only concerns privacy against specific sender and the situation will never get worse than not using subaddresses in the first place. If you need to join funds while preserving maximum privacy do it with individual transactions (one per subaddress).
 * Convenience labels are not preserved when recreating from seed.
 
 ## Reference
 
-* [https://github.com/monero-project/monero/pull/2056](https://github.com/monero-project/monero/pull/2056)
-* [https://www.reddit.com/r/Monero/comments/5vgjs2/subaddresses_and_disposable_addresses/](https://www.reddit.com/r/Monero/comments/5vgjs2/subaddresses_and_disposable_addresses/)
+* [monero-python](https://github.com/emesik/monero-python/blob/125d5eac0d4583b586b98e21b28fb9a291db26e5/monero/wallet.py#L195) - the easiest to follow implementation by Michał Sałaban
+* [get_subaddress_spend_public_key()](https://github.com/monero-project/monero/blob/16dc6900fb556b61edaba5e323497e9b8c677ae2/src/device/device_default.cpp#L143) - Monero reference implementation
+* [historical discussion on Github](https://github.com/monero-project/monero/pull/2056) - gives context but is not up to date with all details
+* [StackExchange answer](https://monero.stackexchange.com/questions/10674/how-are-subaddresses-and-account-addresses-generated-from-master-wallet-keys/10676#10676) - excellent summary by knaccc
