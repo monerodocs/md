@@ -40,7 +40,7 @@ nav:
     - Mainnet, stagenet, testnet: 'infrastructure/networks.md'
     - MoneroPulse: 'infrastructure/monero-pulse.md'
 - Accepting Monero:
-    - Boring Businesses: 'accepting-monero/boring-businesses.md'
+    - Common Businesses: 'accepting-monero/common-businesses.md'
     - Regulated Businesses: 'accepting-monero/regulated-businesses.md'
     - Anonymous Businesses: 'accepting-monero/anonymous-businesses.md'
 

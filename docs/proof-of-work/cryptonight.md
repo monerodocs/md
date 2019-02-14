@@ -33,7 +33,7 @@ This includes Bitcoin's double-SHA-256 and Monero's CryptoNight.
 
 Miner randomly tweaks input data until the hash fits under specified threshold.
 The threshold (also a large integer) is established collectively by the network as part of the consensus mechanism.
-The PoW is only considered valid (solved) if hash fits under the threshold.  
+The PoW is only considered valid (solved) if hash is lower than or equal to the threshold.  
 
 Because hash functions are one-way, it is not possible to analytically calculate input data that would result in a small-enough hash.
 The solution must be brute-forced by tweaking the input data and recalculating the hash over and over again.
@@ -145,7 +145,7 @@ See the [rationale](https://github.com/SChernykh/xmr-stak-cpu/blob/master/README
 * CryptoNight ultimately failed to prevent ASIC-s.
 * Complexity of CryptoNight kills competition in ASIC manufacturing.
 
-CryptoNight proof of work remains one of the most controversial aspect of Monero.
+CryptoNight proof of work remains one of the most controversial aspects of Monero.
 
 ## Reference
 
