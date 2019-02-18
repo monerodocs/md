@@ -2814,3 +2814,7 @@ $ curl -X POST http://localhost:18082/json_rpc -d '{"jsonrpc":"2.0","id":"0","me
   }
 }
 ```
+
+## Sources:
+
+Reworked from [GetMonero.org](https://ww.getmonero.org/resources/developer-guides/wallet-rpc.html)
