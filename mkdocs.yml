@@ -9,13 +9,13 @@ nav:
 - Interacting:
   - Download: 'interacting/download-monero-binaries.md'
   - Verify: 'interacting/verify-monero-binaries.md'
-  - Overview: 'interacting/overview.md'
-  - Config: 'interacting/monero-config-file.md'
+  - What is what overview: 'interacting/overview.md'
   - monerod: 'interacting/monerod-reference.md'
   - monero-wallet-cli: 'interacting/monero-wallet-cli-reference.md'
   - monero-wallet-gui: 'interacting/monero-wallet-gui-reference.md'
   - monero-blockchain-export: 'interacting/monero-blockchain-export-reference.md'
   - monero-blockchain-import: 'interacting/monero-blockchain-import-reference.md'
+  - Config file: 'interacting/monero-config-file.md'
 - Technical specs: 'technical-specs.md'
 - Cryptography:
     - Introduction: 'cryptography/introduction.md'
