@@ -63,16 +63,16 @@ The following groups are only to make reference easier to follow. The daemon its
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--help`            | Enlist available options.
-| `--version`         | Show `monerod` version to stdout. Example: <br />`Monero 'Lithium Luna' (v0.12.3.0-release)`
+| `--version`         | Show `monerod` version to stdout. Example: <br />`Monero 'Beryllium Bullet' (v0.13.0.4-release)`
 | `--os-version`      | Show build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Fri Aug 24 12:48:58 UTC 2018 4.18.5-arch1-1-ARCH`.
 
 #### Pick network
 
-| Option           | Description                                                                                    
+| Option           | Description
 |------------------|------------------------------------------------------------------------------------------------
-| (missing)        | By default monerod assumes [mainnet](/infrastructure/networks).                                               
-| `--stagenet`     | Run on [stagenet](/infrastructure/networks). Remember to run your wallet with `--stagenet` as well.           
-| `--testnet`      | Run on [testnet](/infrastructure/networks). Remember to run your wallet with `--testnet` as well.             
+| (missing)        | By default monerod assumes [mainnet](/infrastructure/networks).
+| `--stagenet`     | Run on [stagenet](/infrastructure/networks). Remember to run your wallet with `--stagenet` as well.
+| `--testnet`      | Run on [testnet](/infrastructure/networks). Remember to run your wallet with `--testnet` as well.
 
 #### Logging
 
@@ -161,7 +161,7 @@ These are advanced options that allow you to optimize performance of your `moner
 | Option                          | Description
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--db-sync-mode`                | Specify sync option, using format:<br />`[safe|fast|fastest]:[sync|async]:[<nblocks_per_sync>[blocks]|<nbytes_per_sync>[bytes]]`<br /><br />The default is `fast:async:250000000bytes`.<br /><br />The `fast:async:*` can corrupt blockchain database in case of a system crash. It should not corrupt if just `monerod` crashes. If you are concerned with system crashes use `safe:sync`.
-| `--max-concurrency`             | Max number of threads to use for a parallel jobs. The default value `0` uses the number of CPU threads.
+| `--max-concurrency`             | Max number of threads to use for parallel jobs. The default value `0` uses the number of CPU threads.
 | `--prep-blocks-threads`         | Max number of threads to use when computing block hashes (PoW) in groups. Defaults to 4. Decrease this if you don't want `monerod` hog your computer when syncing.
 | `--fast-block-sync`             | Sync up most of the way by using embedded, "known" block hashes. Pass `1` to turn on and `0` to turn off. This is on (`1`) by default. Normally, for every block the full node must calculate the block hash to verify miner's proof of work. Because the CryptoNight PoW used in Monero is very expensive (even for verification), `monerod` offers skipping these calculations for old blocks. In other words, it's a mechanism to trust `monerod` binary regarding old blocks' PoW validity, to sync up faster.
 | `--block-sync-size`             | How many blocks are processed in a single batch during chain synchronization. By default this is 20 blocks for newer history and 100 blocks for older history ("pre v4"). Default behavior is represented by value `0`. Intuitively, the more resources you have, the bigger batch size you may want to try out. Example:<br />`./monerod --block-sync-size=500`
@@ -180,7 +180,7 @@ Be advised though that real mining happens **in pools** and with high-end **GPU-
 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--start-mining`                   | Specify wallet address to mining for. **This must be a [main address](/public-address/main-address)!** It can be neither a subaddres nor integrated address.
+| `--start-mining`                   | Specify wallet address to mining for. **This must be a [standard address](/public-address/standard-address)!** It can be neither a subaddres nor integrated address.
 | `--mining-threads`                 | Specify mining threads count. By default ony one thread will be used. For best results, set it to number of your physical cores.
 | `--extra-messages-file`            | Specify file for extra messages to include into coinbase transactions.
 | `--bg-mining-enable`               | Enable unobtrusive mining. In this mode mining will use a small percentage of your system resources to never noticeably slow down your computer. This is intended to encourage people to mine to improve decentralization. That being said chances of finding a block are diminishingly small with solo CPU mining, and even lesser with its unobtrusive version. You can tweak the unobtrusivness / power trade-offs with the further `--bg-*` options below.
@@ -287,7 +287,6 @@ You can also type commands directly in the console of the running `monerod` (if 
 | `set_log <level>|<{+,-,}categories>`                       | Set the current log level/categories where `<level>` is a number 0-4.
 | `print_status`                                             | Show if daemon is running.
 | `update (check|download)`                                  | Check if update is available and optionally download it. The hash is SHA-256. On linux use `sha256sum` to verify. Example output:<br />`Update available: v0.13.0.4: https://downloads.getmonero.org/cli/monero-linux-x64-v0.13.0.4.tar.bz2, hash 693e1a0210201f65138ace679d1ab1928aca06bb6e679c20d8b4d2d8717e50d6`<br/>`Update downloaded to: /opt/monero-v0.13.0.2/monero-linux-x64-v0.13.0.4.tar.bz2`
-
 
 #### Mining
 

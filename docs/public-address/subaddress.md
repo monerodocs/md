@@ -56,7 +56,7 @@ Index       | Size in bytes    | Description
 ------------|------------------|-------------------------------------------------------------
 0           | 1                | identifies the network and address type; [42](https://github.com/monero-project/monero/blob/31bdf7bd113c2576fe579ef3a25a2d8fef419ffc/src/cryptonote_config.h#L171) - mainnet; [36](https://github.com/monero-project/monero/blob/31bdf7bd113c2576fe579ef3a25a2d8fef419ffc/src/cryptonote_config.h#L200) - stagenet; [63](https://github.com/monero-project/monero/blob/31bdf7bd113c2576fe579ef3a25a2d8fef419ffc/src/cryptonote_config.h#L185) - testnet
 
-Otherwise the data structure is the same as for the [main address](/public-address/main-address/#data-structure).
+Otherwise the data structure is the same as for the [standard address](/public-address/standard-address/#data-structure).
 
 ## Generating
 
@@ -81,7 +81,7 @@ Where:
 * `Hs` is a Keccak-256 hash function interpreted as integer and modulo `l` (maximum edwards25519 scalar)
 * `||` is a byte array concatenation operator
 * `SubAddr` is a 0-terminated fixed string (8 bytes total)
-* `a` is a private view key of the main address (a 32 byte little endian unsigned integer)
+* `a` is a private view key of the standard address (a 32 byte little endian unsigned integer)
 * `account_index` is index of an account (a 32 bit little endian unsigned integer)
 * `subaddress_index_within_account` is index of the subaddress within the account (a 32 bit little endian unsigned integer)
 
@@ -95,7 +95,7 @@ The subaddress public spend key `D` is derived as follows:
 
 Where:
 
-* `B` is main address public spend key
+* `B` is standard address public spend key
 * `m` is subaddress private view key
 * `G` is the "base point"; this is simply a constant specific to [edwards25519](/cryptography/asymmetric/edwards25519)
 
@@ -107,21 +107,21 @@ The subaddress public view key `C` is derived as follows:
 
 Where:
 
-* `a` is a private view key of the main address
+* `a` is a private view key of the standard address
 * `D` is a public spend key of the subaddress
 
 ### Special case for (0, 0)
 
-The subaddress #0 on the account #0 is the [main address](/public-address/main-address).
-As main address has different generation rules, this is simply implemented via an `if` statement.
+The subaddress #0 on the account #0 is the [standard address](/public-address/standard-address).
+As standard address has different generation rules, this is simply implemented via an `if` statement.
 
 ### Building the address string
 
-The procedure is the same as for the [main address](/public-address/main-address).
+The procedure is the same as for the [standard address](/public-address/standard-address).
 
 ## Caveats
 
-* It is not recommended to sweep all the balances of subaddress to main address in a single transaction. That links the subaddresses together on the blockchain. However, this only concerns privacy against specific sender and the situation will never get worse than not using subaddresses in the first place. If you need to join funds while preserving maximum privacy do it with individual transactions (one per subaddress).
+* It is not recommended to sweep all the balances of subaddress to standard address in a single transaction. That links the subaddresses together on the blockchain. However, this only concerns privacy against specific sender and the situation will never get worse than not using subaddresses in the first place. If you need to join funds while preserving maximum privacy do it with individual transactions (one per subaddress).
 * Convenience labels are not preserved when recreating from seed.
 
 ## Reference

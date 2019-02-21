@@ -9,7 +9,7 @@ By default Monero looks for `bitmonero.conf` in Monero [data directory](/interac
 
 To use a specific config file add `--config-file` option:
 
-`./monerod --config-file=/etc/monero.conf`
+`./monerod --config-file=/etc/monerod.conf`
 
 The `--config-file` option is available for: 
 
@@ -22,7 +22,7 @@ The `--config-file` option is available for:
 
 * `option-name=value`
 * `valueless-option-name=1` for options that don't expect value
-* `# I am a comment`
+* `# comment`
 * whitespace is ignored
 
 ## Reference
@@ -38,17 +38,17 @@ Example:
 translates to:
 
     log-level=4
-    stagenet=1     # use value "1" for 
+    stagenet=1     # use value "1" to enable the value-less options like --stagenet 
 
 ## Example
 
-    # /etc/monero.conf
+    # /etc/monerod.conf
     
     # Data directory (blockchain db and indices)
     data-dir=/home/monero/.monero
     
     # Log file
-    log-file=/var/log/monero/monero.log
+    log-file=/var/log/monero/monerod.log
     max-log-file-size=0            # Prevent monerod from managing the log files; we want logrotate to take care of that
     
     # P2P full node
