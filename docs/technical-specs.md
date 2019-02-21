@@ -20,7 +20,7 @@ title: Monero Technical Specification | Monero Documentation
     * v1 since block height 1546000 (forked on 2018-04-06)
     * v2 since block height 1685555 (forked on 2018-10-18)
     * v3 since block height 1788000 (scheduled to fork on 2018-03-09); "CryptonightR"
-* Changes every ~6 months to discourage ASIC-s
+* Changes every ~6 months to discourage ASIC-s development
 
 ## Difficulty retarget
 
@@ -35,20 +35,20 @@ title: Monero Technical Specification | Monero Documentation
 ## Block reward
 
 * smoothly decreasing and subject to penalties for blocks greater then median size of the last 100 blocks (M100)
-* ~3.8 XMR as of Sep 2018; for the current reward check the coinbase transaction of the [latest block](https://moneroblocks.info/)
+* ~3.1 XMR as of Feb 2019; for the current reward check the coinbase transaction of the [latest block](https://xmrchain.net/)
 
 ## Block size
 
 * dynamic
 * maximum of two times the median size of the last 100 blocks (2 * M100)
-* ~100KB as of Aug 2018; check [the latest block size](https://bitinfocharts.com/comparison/monero-size.html#3m)
+* ~20KB as of Feb 2019; check [the latest block size](https://bitinfocharts.com/comparison/monero-size.html#3m)
 
 ## Emission curve
 
 ### Main emission
 
 * first, the main emission is about to produce ~18.132 million coins by the end of May 2022
-* as of Aug 2018 the emission is about 20 XMR per 10 minutes
+* as of Feb 2019 the emission is about 15 XMR per 10 minutes
 * see [charts and details](https://www.reddit.com/r/Monero/comments/512kwh/useful_for_learning_about_monero_coin_emission/)
 
 ### Tail emission
@@ -85,5 +85,5 @@ title: Monero Technical Specification | Monero Documentation
 
 ## IP address privacy
 
-* there is an ongoing effort to integrate I2P into Monero - the [Kovri](https://github.com/monero-project/kovri) project 
+* there is an ongoing effort to integrate Tor into Monero wallet for transaction sending
 * assurance: none at the moment - please use TOR or I2P
