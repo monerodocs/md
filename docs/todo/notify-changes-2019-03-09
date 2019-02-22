@@ -1,0 +1,73 @@
+https://paste.debian.net/hidden/0d0d3694
+
+How to use notifiers
+
+monerod can call external programs upon certain events. These can be set with the following options:
+
+--block-notify SPEC
+  call a program when a new block is added to the chain
+
+--block-rate-notify SPEC
+  call a program when the number of blocks received in the recent past deviates significantly from the expectation
+
+--reorg-notify SPEC
+  call a program when a reorganization happens (ie, at least one block is removed from the top of the blockchain)
+
+The wallets have another:
+
+--tx-notify SPEC
+  call a program whenever the wallet receives or spends monero
+
+
+For all these, the SPEC argument is a string representing a command line. It includes the fully qualified path
+to the program that should be run, along with any arguments. Each of the events above will have predefined tags
+which will be replaced by relevant information in the SPEC string. The SPEC string does not have to contain
+all of those, and some of those may be used more than once.
+
+--block-notify
+  %s: the block hash
+
+--reorg-notify
+  %s: the height at which the split occurs
+  %h: the height of the new blockchain
+  %n: the number of blocks being added
+
+--block-rate-notify
+  %t: the number of minutes in the observation window
+  %b: the number of blocks observed in that window
+  %e: the ideal number of blocks expected in that window
+
+--tx-notify:
+  %s: the transaction hash
+
+
+For example, if using "--reorg-notify /usr/local/bin/monero-event reorg %n", then a reorg of 2 blocks will
+call: /usr/local/bin/monero-event reorg 2
+
+Note that the SPEC string is not interpreted by the shell, so you should include the full path to the binary,
+and may not use shell escapes (including quoting). Everything is passed as is.
+
+Some of these may be used to partially protect against some 51% attacks, should they happen, by using
+both --reorg-notify and --block-rate-notify:
+
+--block-rate-notify will let you know if the network hash rate drops by a lot. This may be indicative of
+a large section of the network miners moving off to mine a private chain, to be later released to the
+network. Note that if this event triggers, it is not incontrovertible proof that this is happening. It
+might just be chance. The longer the window (the %t parameter), and the larger the distance between
+actual and expected number of blocks, the likelier it is that the hash rate is fluctuating, and the
+higher the fluctuations.
+
+--reorg-notify will let you know when a block is removed from the chain to be replaced by other blocks.
+This happens when a 51% attack occurs, but small reorgs also happen in the normal course of things. The
+%d parameter will be set to the number of blocks discarded from the old chain (so if this is higher than
+the number of confirmations you wait to act upon an incoming payment, that payment might have been
+cancelled). The %n parameter wil be set to the number of blocks in the new chain (so if this is higher
+than the number of confirmations you wait to act upon an incoming payment, any incoming payment in the
+first block will be automatically acted upon by your platform).
+
+Using both of these, you can use --block-rate-notify to automatically increase the number of
+confirmations to accept payments when the actual number of blocks is much lower than the expected number
+of blocks, working on the temporary assumption that a reorg might happen later, and reset the number
+of confirmations after some time if no reorg has happened. If the --block-rate-notify happens repeatedly,
+it is recommended that the timer to reset confirmations to their default value be reset to its original
+value.

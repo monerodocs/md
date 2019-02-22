@@ -171,9 +171,143 @@ Log files are created in the same directory as `monero-wallet-cli` binary. Use `
 
 ## Commands
 
-Usually you will use commands interactively in the `monero-wallet-cli` prompt.
+Commands are used interactively in the `monero-wallet-cli` prompt.
 
 You can also run a one-off command by providing it as a commandline parameter.
-This is probably rarely useful though. For any automation use `monero-wallet-rpc` instead.
+This is rarely useful though. For automation prefer `monero-wallet-rpc`.
 
-TODO: document commands.
+The CLI wallet has **built-in help for individual commands** - we will not attempt to reproduce that.
+Instead we focus on grouping commands so you can quickly find what you are looking for.
+Use `help command_name` to learn more.
+
+### Help and version
+
+`help` - list all commands
+
+`help command_name` - show help for individual command
+
+`version` - show version of the monero-wallet-cli binary
+
+### Balance
+
+`account` - total balance; list accounts with respective balances
+
+`balance detail` - within the current account, list addresses with respective balances  
+
+### Manage accounts
+
+`account`
+
+`account new`
+
+`account switch`
+
+`account label`
+
+### Manage addresses
+
+`address all`
+
+`address new`
+
+`address label`
+
+### Network status
+
+`status` - show if synced up to the blockchain height
+
+`fee` - show current fee-per-byte and full node's mempool (the backlog of transactions depending on the priority)
+
+`wallet_info` - show wallet file path, standard address, type and network
+    
+### Secret mnemonic seed
+
+`seed` - show raw mnemonic seed
+
+`encrypted_seed` - create mnemonic seed encrypted with the passphrase; you will need to remember or store the passphrase separately; restoring will not be possible without the passphrase
+
+### Secret keys
+
+`spendkey` - show secret spend key and public spend key
+
+`viewkey` - show secret view key and public view key
+
+### Proofs
+
+`get_reserve_proof` -> `check_reserve_proof` - prove the balance
+
+`get_spend_proof` -> `check_spend_proof` - prove you made the payment
+
+`sign <file>` -> `verify <filename> <address> <signature>` - prove ownership of the address; allows to verify the file was signed by the owner of specific Monero address  
+
+`get_tx_proof` -> `check_tx_proof`
+
+### Multisig
+
+#### Setup
+
+`prepare_multisig`
+
+`make_multisig`
+
+`finalize_multisig`
+
+#### Update
+
+`export_multisig_info`
+
+`import_multisig_info`
+
+#### Other
+
+`submit_multisig`
+
+`exchange_multisig_keys`
+
+`export_raw_multisig_tx`
+
+### Tx private key
+
+These allow to learn and verify transaction's private key `r`.
+This was useful to create a [proof of payment](https://www.getmonero.org/resources/user-guides/prove-payment.html)
+but got superseded by `get_spend_proof`.
+                                                          
+`get_tx_key <txid>`
+
+`check_tx_key <txid> <txkey> <address>`
+
+`set_tx_key <txid> <tx_key>`
+
+### Advanced
+
+`unspent_outputs` - show a list of, and a histogram of unspent outputs (indivisible pieces of your total balance)
+
+`export_key_images <file>` -> `import_key_images <file>` - used to inform the view-only wallet about outgoing transactions so it can calculate the real balance; normally view-only wallets only learn about incoming transactions, not outgoing
+
+`export_outputs <file>` - export a set of outputs owned by this wallet to a `<file>`
+
+### Mining
+
+`start_mining`
+
+`stop_mining`
+
+### Donate
+
+`donate <amount>` - donate `<amount> to development team.
+  
+### Non essential or legacy
+
+`address_book [(add ((<address> [pid <id>])|<integrated address>) [<description possibly with whitespaces>])|(delete <index>)]`
+
+`set_description [free text note]` -> `get_description` - manage convenience description of the wallet (the information is local)
+
+`save` - this now happens automatically
+
+`save_bc` - this now happens automatically
+
+`bc_height` - show blockchain height (superseded with `status`)
+
+`sweep_unmixable` - only relevant for very old wallets (<= 2016); send all unmixable outputs to yourself with ring_size 10
+
+TODO: document remaining commands
