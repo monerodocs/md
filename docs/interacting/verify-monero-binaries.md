@@ -7,7 +7,7 @@ Verification must be carried on **before extracting the archive and before using
 
 Instructions were tested on Linux. They should also work on macOS with slight modifications. 
 
-## 0. Import core dev PGP key
+## 1. Import core dev PGP key
 
 This is a one time action. Skip this step for subsequent Monero releases.
 
@@ -29,7 +29,7 @@ Trust Riccardo's public key (fingerprint must be exactly this):
     If key with this fingerprint was not found then remove imported key immediately (gpg --delete-keys ...).
     That would mean the key changed (likely was compromised).
 
-## 1. Verify signature of hash list  
+## 2. Verify signature of hash list  
 
 The list of binaries and their hashes is published on [getmonero.org](https://www.getmonero.org/downloads/hashes.txt) and a few other places like release notes on [r/monero](https://reddit.com/r/monero).
 Please note the publication channel does not matter as long as you properly verify the signature!                                                                        u 
@@ -38,12 +38,11 @@ To verify these are real hashes (not tampered with) run:
 
 `curl https://www.getmonero.org/downloads/hashes.txt | gpg --verify` 
 
-The expected output is:
+The expected output should contain the line:
 
-    ...
-    gpg: Good signature from "Riccardo Spagni <ric@spagni.net>" [full]
+`gpg: Good signature from "Riccardo Spagni <ric@spagni.net>" [full]`
 
-## 2. Verify the hash
+## 3. Verify the hash
 
 By this step we checked that published hashes were not tampered with.
 
@@ -53,7 +52,7 @@ The last step is to compare published hash with downloaded archive SHA-256 hash.
 
 Replace the example file name with actual one:
 
-    file_name=monero-linux-x64-v0.13.0.4.tar.bz2
+    file_name=monero-linux-x64-v0.14.0.0.tar.bz2
 
     file_hash=`sha256sum $file_name | cut -c 1-64`
 

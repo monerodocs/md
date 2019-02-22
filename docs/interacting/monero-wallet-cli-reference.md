@@ -63,7 +63,7 @@ In a separate terminal window, run the wallet:
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--help`            | Enlist available options.
-| `--version`         | Show `monero-wallet-cli` version to stdout. Example: <br />`Monero 'Beryllium Bullet' (v0.13.0.4-release)`
+| `--version`         | Show `monero-wallet-cli` version to stdout. Example: <br />`Monero 'Boron Butterfly' (v0.14.0.0-release)`
 
 #### Pick network
 

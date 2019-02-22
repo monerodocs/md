@@ -63,7 +63,7 @@ The following groups are only to make reference easier to follow. The daemon its
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--help`            | Enlist available options.
-| `--version`         | Show `monerod` version to stdout. Example: <br />`Monero 'Beryllium Bullet' (v0.13.0.4-release)`
+| `--version`         | Show `monerod` version to stdout. Example: <br />`Monero 'Boron Butterfly' (v0.14.0.0-release)`
 | `--os-version`      | Show build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Fri Aug 24 12:48:58 UTC 2018 4.18.5-arch1-1-ARCH`.
 
 #### Pick network
@@ -150,9 +150,13 @@ The following options define how the API behaves.
 
 #### Accepting Monero
 
-| Option           | Description
-|------------------|------------------------------------------------------------------------------------------------
-| `--block-notify` | Run a program for each new block. The argument must be a **full path**. If the argument contains `%s` it will be replaced by the block hash. Example: <br />`./monerod --block-notify="/usr/bin/echo %s"`<br /><br />Couple of notes:<br />1) Block notifications are good for immediate reaction. However, you should always assume you will miss some block notifications and you should independently poll the API to cover this up.<br />2) Mind blockchain reorganizations. Block notifications can revert to same and past heights. This actually happens pretty often.<br />3) See also `--tx-notify` option of `monero-wallet-rpc` daemon [here](https://github.com/monero-project/monero/pull/4333). 
+These are network notifications offered by `monerod`. There are also wallet notifications like `--tx-notify` offered by `monero-wallet-rpc` [here](https://github.com/monero-project/monero/pull/4333).
+
+| Option                       | Description
+|------------------------------|------------------------------------------------------------------------------------------------
+| `--block-notify <arg>`       | Run a program for each new block. The `<arg>` must be a **full path**. If the `<arg>` contains `%s` it will be replaced by the block hash. Example: <br />`./monerod --block-notify="/usr/bin/echo %s"`<br /><br />Block notifications are good for immediate reaction. However, you should always assume you will miss some block notifications and you should independently poll the API to cover this up. <br /><br />Mind blockchain reorganizations. Block notifications can revert to same and past heights. Small reorganizations are natural and happen every day.
+| `--block-rate-notify <arg>`  | Run a program when the number of blocks received in the recent past deviates significantly from the expectation. The `<arg>` must be a **full path**. The `<arg`> can contain any of `%t`, `%b`, `%e` symbols to interpolate: <br /><br >`%t`: the number of minutes in the observation window<br /><br >`%b`: the number of blocks observed in that window<br /><br >`%e`: the ideal number of blocks expected in that window<br /><br > The option will let you know if the network hash rate drops by a lot. This may be indicative of a large section of the network miners moving off to mine a private chain, to be later released to the network. Note that if this event triggers, it is not incontrovertible proof that this is happening. It might just be chance. The longer the window (the %t parameter), and the larger the distance between actual and expected number of blocks, the more indicative it is of a possible chain reorg double-spend attack being prepared.<br /><br />**Recommendation:** unless you run economically significant Monero exchange or operation, do **not** act on this data. It is hard to calibrate and easy to misinterpret. If this is a real attack, it will target high-liquidity entities and not small merchants.
+| `--reorg-notify <arg>`       | Run a program when reorganization happens (ie, at least one block is removed from the top of the blockchain). The `<arg>` must be a **full path**. The `<arg`> can contain any of `%s`, `%h`, `%n` symbols to interpolate: <br /><br >`%s`: the height at which the split occurs <br /><br />`%h`: the height of the new blockchain<br /><br />`%d`: the number of blocks discarded from the old chain <br /><br />`%n`: the number of blocks being added <br /><br /> The option will let you know when a block is removed from the chain to be replaced by other blocks. This happens when a 51% attack occurs, but small reorgs also happen in the normal course of things. The `%d` parameter will be set to the number of blocks discarded from the old chain (so if this is higher than the number of confirmations you wait to act upon an incoming payment, that payment might have been cancelled). The `%n` parameter wil be set to the number of blocks in the new chain (so if this is higher than the number of confirmations you wait to act upon an incoming payment, any incoming payment in the first block will be automatically acted upon by your platform). <br /><br />**Recommendation**: unless you run economically significant Monero exchange or operation, you do **not** need to bother with this option. Simply account for reorganizations by requiring at least 10 confirmations before shipping valuable goods.
 
 #### Performance
 
@@ -232,7 +236,7 @@ You can also type commands directly in the console of the running `monerod` (if 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `help [<command>]`                 | Show help for `<command>`.
-| `version`                          | Show version information. Example output:<br />`Monero 'Beryllium Bullet' (v0.13.0.2-release)`
+| `version`                          | Show version information. Example output:<br />`Monero 'Boron Butterfly' (v0.14.0.0-release)`
 | `status`                           | Show status. Example output:<br />`Height: 186754/186754 (100.0%) on stagenet, not mining, net hash 317 H/s, v9, up to date, 8(out)+0(in) connections, uptime 0d 3h 48m 47s`
 
 #### P2P network
