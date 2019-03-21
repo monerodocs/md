@@ -20,9 +20,6 @@ Note it won't help if you have an account with the service. Then your payouts ar
 
 ## Group funds into accounts
 
-!!! Note
-    Feel free to skip this if your are new to Monero. Accounts are not essential and currently not supported by the GUI.
-
 **Accounts** are a convenience wallet-level feature to group subaddresses under one label and balance.
 
 You may want to organize your funds into accounts like "cash", "work", "trading", "mining", "donations", etc.
@@ -30,8 +27,6 @@ You may want to organize your funds into accounts like "cash", "work", "trading"
 As accounts are only groupings of subaddresses, they themselves do not have an address.
 
 Accounts are deterministically derived from the root private key along with subaddresses.
-
-As of September 2018 accounts are only supported by the CLI wallet and missing from GUI wallet.
 
 Accounts are similar to subaccounts in your classic bank account. There is a very important difference though. In Monero funds don't really sit on accounts or public addresses. Public addresses are conceptually a gateway or a routing mechanism. Funds sit on transactions' unspent outputs. Thus, a single transaction can - in principle - aggregate and spend outputs from multiple addresses (and by extension from multiple accounts). The CLI or GUI wallet may not directly support creating such transactions for simplicity.
 
