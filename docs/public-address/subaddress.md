@@ -21,7 +21,7 @@ Note it won't help if you have an account with the service. Then your payouts ar
 ## Group funds into accounts
 
 !!! Note
-    Feel free to skip this if your are new to Monero. Accounts are not essential and currently not supported by the GUI.
+    Feel free to skip this if your are new to Monero. Accounts are supported in many wallets, but they are not essential.
 
 **Accounts** are a convenience wallet-level feature to group subaddresses under one label and balance.
 
