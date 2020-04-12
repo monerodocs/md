@@ -36,6 +36,7 @@ nav:
     - What is PoW?: 'proof-of-work/what-is-pow.md'
     - PoW in Cryptocurrencies: 'proof-of-work/pow-in-cryptocurrencies.md'
     - CryptoNight: 'proof-of-work/cryptonight.md'
+    - RandomX: 'proof-of-work/random-x.md'
 - Multisignature: 'multisignature.md'
 - Infrastructure:
     - Mainnet, stagenet, testnet: 'infrastructure/networks.md'
