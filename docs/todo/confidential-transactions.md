@@ -1,0 +1,32 @@
+
+https://www.reddit.com/r/Bitcoin/comments/8dr4fw/benedikt_b%C3%BCnz_bulletproofs/dxpv4q6/
+
+Pieter Wuille on CT:
+
+In a system that uses CT, if someone finds a break in the fundamental security of elliptic curve cryptography (ECC), he can print money. Worse, because the amounts are all private, he can do so undetectably. That's an existential threat for a currency which has controlled inflation as prime goal.
+
+Such a break would be dangerous for Bitcoin (even without CT) regardless, as it relies on ECC for protecting against theft. However, Bitcoin can migrate to use a different signature scheme if necessary. It would be chaotic, but not necessarily pose an existential risk.
+
+There are people who agree with this perspective. It's a mathematical fact that any privacy system that hides amounts and is built on top of ECC will at least have one of the properties below:
+
+    An ECC break will permit printing money undetectaby.
+
+    An ECC break will permit deanonymizing amounts in the historical chain.
+
+In other words:
+
+    An ECC break means the currency can undetectably be inflated (going forward).
+
+    An ECC break means the ledger's history can retroactively be deanonymized (goin backward).
+
+So we are faced with a choice between those two regardless if we want better privacy. Some people believe the second is worse than the first, and choosing the first actually allows for more efficient technology. This is a choice that Zcash, Monero, Grin, all make. CT with Bulletproofs would do the same.
+
+However, regardless of your own opinion in this matter, Bitcoin's evolution is a large collaborative process, where such fundamental changes need buy-in from large parts of the ecosystem. My fear is that the question of giving up the ability to exactly audit the monetary supply is going to make it hard to make CT acceptable.
+
+Furthermore, there are other challenges. CT makes transactions larger, slower to verify, and poses a very significant engineering challenge to incorporate into Bitcoin without breaking backward compatibility.
+
+++++
+
+> Also, is there any possible system that can have unconditional soundness and privacy at the same time (something other than ECC obviously)?
+
+No, that's mathematically impossible.

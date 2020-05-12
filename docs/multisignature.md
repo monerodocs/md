@@ -23,7 +23,7 @@ Let's consider the 2-of-3 scheme. We have 3 participants. Each participant is gr
 
 Multi-signing is a wallet-level feature. There is no way to learn from the blockchain which transactions were created using multiple signatures.
 
-It is also worth noting in Monero there is no multisig addresses as such. [Address structure](/public-address/main-address/) does not care how the underlying private spend key got created.
+It is also worth noting in Monero there is no multisig addresses as such. [Address structure](/public-address/standard-address/) does not care how the underlying private spend key got created.
 
 After multisig wallet setup every participant ends up knowing the public address and private view key. This is necessary for participants to recognize and decipher transactions they are supposed to co-sign.
 

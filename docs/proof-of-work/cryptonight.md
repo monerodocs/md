@@ -131,12 +131,15 @@ This is how Monero community refers to original implementation of CryptoNight.
 
 ### CryptoNight v1
 
-See the [source code diff](https://github.com/monero-project/monero/pull/3253/files) for CryptoNight v1 modifications. 
+See the [source code diff](https://github.com/monero-project/monero/pull/3253/files). 
 
 ### CryptoNight v2
 
-The v2 changes were more involved.
 See the [rationale](https://github.com/SChernykh/xmr-stak-cpu/blob/master/README.md) and the [source code diff](https://github.com/monero-project/monero/commit/5fd83c13fbf8dc304909345e60a853c15b0de1e5#diff-7000dc02c792439471da62856f839d62).
+
+### CryptoNight v3 aka CryptoNightR
+
+See the [rationale](https://github.com/monero-project/monero/pull/5126) and the [source code diff](https://github.com/monero-project/monero/pull/5126/files).
 
 ## Critique
 

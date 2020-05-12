@@ -15,7 +15,7 @@ Monero project nicely decouples network node logic from wallet logic.
 Wallet logic is offered through three independent user interfaces - the GUI, the CLI, and the HTTP API.
 
 ```
-# cd monero-gui-v0.13.0.3
+# cd monero-gui-v0.14.0.0
 
 # ---- guide to Monero GUI ----
 
@@ -87,8 +87,7 @@ This is where the blockchain, log files, and p2p network memory are stored.
 
 By default data directory is at:
 
-* `$HOME/.bitmonero/` on Linux
-* `$HOME/Library/Application\ Support/` on macOS
+* `$HOME/.bitmonero/` on Linux and macOS
 * `C:\ProgramData\bitmonero\` on Windows
 
 Please mind:

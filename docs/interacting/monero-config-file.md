@@ -9,7 +9,7 @@ By default Monero looks for `bitmonero.conf` in Monero [data directory](/interac
 
 To use a specific config file add `--config-file` option:
 
-`./monerod --config-file=/etc/monero.conf`
+`./monerod --config-file=/etc/monerod.conf`
 
 The `--config-file` option is available for: 
 
@@ -22,12 +22,16 @@ The `--config-file` option is available for:
 
 * `option-name=value`
 * `valueless-option-name=1` for options that don't expect value
-* `# I am a comment`
+* `# comment`
 * whitespace is ignored
 
 ## Reference
 
-All command line options work as configuration file options. See [monerod reference](/interacting/monerod-reference).
+All configuration options are the same as command line options for the binary.
+
+* [monerod reference](/interacting/monerod-reference)
+* [monero-wallet-cli reference](/interacting/monero-wallet-cli-reference)
+* [monero-wallet-rpc reference](/interacting/monero-wallet-rpc-reference)
 
 Skip the `--` from `--option-name`.
 
@@ -38,17 +42,21 @@ Example:
 translates to:
 
     log-level=4
-    stagenet=1     # use value "1" for 
+    stagenet=1     # use value "1" to enable the value-less options like --stagenet 
 
-## Example
+## Examples
 
-    # /etc/monero.conf
+### `monerod.conf`
+
+This config is tailored for production server usage.
+
+    # /etc/monero/monerod.conf
     
     # Data directory (blockchain db and indices)
-    data-dir=/home/monero/.monero
+    data-dir=/home/monero/.monero  # Remember to create the monero user first
     
     # Log file
-    log-file=/var/log/monero/monero.log
+    log-file=/var/log/monero/monerod.log
     max-log-file-size=0            # Prevent monerod from managing the log files; we want logrotate to take care of that
     
     # P2P full node
@@ -74,3 +82,21 @@ translates to:
     
     limit-rate-up=1048576     # 1048576 kB/s == 1GB/s; a raise from default 2048 kB/s; contribute more to p2p network
     limit-rate-down=1048576   # 1048576 kB/s == 1GB/s; a raise from default 8192 kB/s; allow for faster initial sync
+
+### `monero-wallet-cli.conf`
+
+This config is tailored for desktop usage on [stagenet](/infrastructure/networks).
+
+    # $HOME/.bitmonero/stagenet/monero-wallet-cli.conf
+
+    # Pick network
+    stagenet=1
+
+    # Connect to a remote full node    
+    daemon-address=monero-stagenet.exan.tech:38081
+    untrusted-daemon=1
+
+    # Log file
+    log-file=/tmp/monero-wallet-cli.log
+    
+    # wallet-file=/home/YOUR-USER/.bitmonero/stagenet/wallets/MoneroExampleStagenetWallet

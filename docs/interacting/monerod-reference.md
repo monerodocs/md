@@ -63,16 +63,16 @@ The following groups are only to make reference easier to follow. The daemon its
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--help`            | Enlist available options.
-| `--version`         | Show `monerod` version to stdout. Example: <br />`Monero 'Lithium Luna' (v0.12.3.0-release)`
+| `--version`         | Show `monerod` version to stdout. Example: <br />`Monero 'Boron Butterfly' (v0.14.0.0-release)`
 | `--os-version`      | Show build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Fri Aug 24 12:48:58 UTC 2018 4.18.5-arch1-1-ARCH`.
 
 #### Pick network
 
-| Option           | Description                                                                                    
+| Option           | Description
 |------------------|------------------------------------------------------------------------------------------------
-| (missing)        | By default monerod assumes [mainnet](/infrastructure/networks).                                               
-| `--stagenet`     | Run on [stagenet](/infrastructure/networks). Remember to run your wallet with `--stagenet` as well.           
-| `--testnet`      | Run on [testnet](/infrastructure/networks). Remember to run your wallet with `--testnet` as well.             
+| (missing)        | By default monerod assumes [mainnet](/infrastructure/networks).
+| `--stagenet`     | Run on [stagenet](/infrastructure/networks). Remember to run your wallet with `--stagenet` as well.
+| `--testnet`      | Run on [testnet](/infrastructure/networks). Remember to run your wallet with `--testnet` as well.
 
 #### Logging
 
@@ -98,8 +98,8 @@ The following options will be helpful if you intend to have an always running no
 | `--non-interactive` | Do not require tty in a foreground mode. Helpful when running in a container. By default `monerod` runs in a foreground and opens stdin for reading. This breaks containerization because no tty gets assigned and `monerod` process crashes. You can make it run in a background with `--detach` but this is inconvenient in a containerized environment because the canonical usage is that the container waits on the main process to exist (forking makes things more complicated).
 | `--no-igd`          | Disable UPnP port mapping on the router ("Internet Gateway Device"). Add this option to improve security if you are **not** behind a NAT (you can bind directly to public IP or you run through Tor).
 | `--max-txpool-weight`         | Set maximum transactions pool size in bytes. By default 648000000 (~618MB). These are transactions pending for confirmations (not included in any block).
-| `--enforce-dns-checkpointing` | The emergency checkpoints set by [MoneroPulse](/infrastructure/monero-pulse.md) operators will be enforced. It is probably a good idea to set enforcing for unattended nodes. <br /><br />If encountered block hash does not match corresponding checkpoint, the local blockchain will be rolled back a few blocks, effectively blocking following what MoneroPulse operators consider invalid fork. The log entry will be produced:  `ERROR` `Local blockchain failed to pass a checkpoint, rolling back!` Eventually, the alternative ("fixed") fork will get heavier and the node will follow it, leaving the "invalid" fork behind.<br /><br />By default checkpointing only notifies about discrepancy by producing the following log entry: `ERROR` `WARNING: local blockchain failed to pass a MoneroPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option`.<br /><br />Reference: [source code](https://github.com/monero-project/monero/blob/22a6591a70151840381e327f1b41dc27cbdb2ee6/src/cryptonote_core/blockchain.cpp#L3614).
-| `--disable-dns-checkpoints`   | The [MoneroPulse](/infrastructure/monero-pulse.md) checkpoints set by core developers will be discarded. The checkpoints are apparently still fetched though.
+| `--enforce-dns-checkpointing` | The emergency checkpoints set by [MoneroPulse](/infrastructure/monero-pulse) operators will be enforced. It is probably a good idea to set enforcing for unattended nodes. <br /><br />If encountered block hash does not match corresponding checkpoint, the local blockchain will be rolled back a few blocks, effectively blocking following what MoneroPulse operators consider invalid fork. The log entry will be produced:  `ERROR` `Local blockchain failed to pass a checkpoint, rolling back!` Eventually, the alternative ("fixed") fork will get heavier and the node will follow it, leaving the "invalid" fork behind.<br /><br />By default checkpointing only notifies about discrepancy by producing the following log entry: `ERROR` `WARNING: local blockchain failed to pass a MoneroPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option`.<br /><br />Reference: [source code](https://github.com/monero-project/monero/blob/22a6591a70151840381e327f1b41dc27cbdb2ee6/src/cryptonote_core/blockchain.cpp#L3614).
+| `--disable-dns-checkpoints`   | The [MoneroPulse](/infrastructure/monero-pulse) checkpoints set by core developers will be discarded. The checkpoints are apparently still fetched though.
 
 #### P2P network
 
@@ -150,9 +150,13 @@ The following options define how the API behaves.
 
 #### Accepting Monero
 
-| Option           | Description
-|------------------|------------------------------------------------------------------------------------------------
-| `--block-notify` | Run a program for each new block. The argument must be a **full path**. If the argument contains `%s` it will be replaced by the block hash. Example: <br />`./monerod --block-notify="/usr/bin/echo %s"`<br /><br />Couple of notes:<br />1) Block notifications are good for immediate reaction. However, you should always assume you will miss some block notifications and you should independently poll the API to cover this up.<br />2) Mind blockchain reorganizations. Block notifications can revert to same and past heights. This actually happens pretty often.<br />3) See also `--tx-notify` option of `monero-wallet-rpc` daemon [here](https://github.com/monero-project/monero/pull/4333). 
+These are network notifications offered by `monerod`. There are also wallet notifications like `--tx-notify` offered by `monero-wallet-rpc` [here](https://github.com/monero-project/monero/pull/4333).
+
+| Option                       | Description
+|------------------------------|------------------------------------------------------------------------------------------------
+| `--block-notify <arg>`       | Run a program for each new block. The `<arg>` must be a **full path**. If the `<arg>` contains `%s` it will be replaced by the block hash. Example: <br />`./monerod --block-notify="/usr/bin/echo %s"`<br /><br />Block notifications are good for immediate reaction. However, you should always assume you will miss some block notifications and you should independently poll the API to cover this up. <br /><br />Mind blockchain reorganizations. Block notifications can revert to same and past heights. Small reorganizations are natural and happen every day.
+| `--block-rate-notify <arg>`  | Run a program when the number of blocks received in the recent past deviates significantly from the expectation. The `<arg>` must be a **full path**. The `<arg`> can contain any of `%t`, `%b`, `%e` symbols to interpolate: <br /><br >`%t`: the number of minutes in the observation window<br /><br >`%b`: the number of blocks observed in that window<br /><br >`%e`: the ideal number of blocks expected in that window<br /><br > The option will let you know if the network hash rate drops by a lot. This may be indicative of a large section of the network miners moving off to mine a private chain, to be later released to the network. Note that if this event triggers, it is not incontrovertible proof that this is happening. It might just be chance. The longer the window (the %t parameter), and the larger the distance between actual and expected number of blocks, the more indicative it is of a possible chain reorg double-spend attack being prepared.<br /><br />**Recommendation:** unless you run economically significant Monero exchange or operation, do **not** act on this data. It is hard to calibrate and easy to misinterpret. If this is a real attack, it will target high-liquidity entities and not small merchants.
+| `--reorg-notify <arg>`       | Run a program when reorganization happens (ie, at least one block is removed from the top of the blockchain). The `<arg>` must be a **full path**. The `<arg`> can contain any of `%s`, `%h`, `%n` symbols to interpolate: <br /><br >`%s`: the height at which the split occurs <br /><br />`%h`: the height of the new blockchain<br /><br />`%d`: the number of blocks discarded from the old chain <br /><br />`%n`: the number of blocks being added <br /><br /> The option will let you know when a block is removed from the chain to be replaced by other blocks. This happens when a 51% attack occurs, but small reorgs also happen in the normal course of things. The `%d` parameter will be set to the number of blocks discarded from the old chain (so if this is higher than the number of confirmations you wait to act upon an incoming payment, that payment might have been cancelled). The `%n` parameter wil be set to the number of blocks in the new chain (so if this is higher than the number of confirmations you wait to act upon an incoming payment, any incoming payment in the first block will be automatically acted upon by your platform). <br /><br />**Recommendation**: unless you run economically significant Monero exchange or operation, you do **not** need to bother with this option. Simply account for reorganizations by requiring at least 10 confirmations before shipping valuable goods.
 
 #### Performance
 
@@ -161,7 +165,7 @@ These are advanced options that allow you to optimize performance of your `moner
 | Option                          | Description
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--db-sync-mode`                | Specify sync option, using format:<br />`[safe|fast|fastest]:[sync|async]:[<nblocks_per_sync>[blocks]|<nbytes_per_sync>[bytes]]`<br /><br />The default is `fast:async:250000000bytes`.<br /><br />The `fast:async:*` can corrupt blockchain database in case of a system crash. It should not corrupt if just `monerod` crashes. If you are concerned with system crashes use `safe:sync`.
-| `--max-concurrency`             | Max number of threads to use for a parallel jobs. The default value `0` uses the number of CPU threads.
+| `--max-concurrency`             | Max number of threads to use for parallel jobs. The default value `0` uses the number of CPU threads.
 | `--prep-blocks-threads`         | Max number of threads to use when computing block hashes (PoW) in groups. Defaults to 4. Decrease this if you don't want `monerod` hog your computer when syncing.
 | `--fast-block-sync`             | Sync up most of the way by using embedded, "known" block hashes. Pass `1` to turn on and `0` to turn off. This is on (`1`) by default. Normally, for every block the full node must calculate the block hash to verify miner's proof of work. Because the CryptoNight PoW used in Monero is very expensive (even for verification), `monerod` offers skipping these calculations for old blocks. In other words, it's a mechanism to trust `monerod` binary regarding old blocks' PoW validity, to sync up faster.
 | `--block-sync-size`             | How many blocks are processed in a single batch during chain synchronization. By default this is 20 blocks for newer history and 100 blocks for older history ("pre v4"). Default behavior is represented by value `0`. Intuitively, the more resources you have, the bigger batch size you may want to try out. Example:<br />`./monerod --block-sync-size=500`
@@ -180,7 +184,7 @@ Be advised though that real mining happens **in pools** and with high-end **GPU-
 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--start-mining`                   | Specify wallet address to mining for. **This must be a [main address](/public-address/main-address)!** It can be neither a subaddres nor integrated address.
+| `--start-mining`                   | Specify wallet address to mining for. **This must be a [standard address](/public-address/standard-address)!** It can be neither a subaddres nor integrated address.
 | `--mining-threads`                 | Specify mining threads count. By default ony one thread will be used. For best results, set it to number of your physical cores.
 | `--extra-messages-file`            | Specify file for extra messages to include into coinbase transactions.
 | `--bg-mining-enable`               | Enable unobtrusive mining. In this mode mining will use a small percentage of your system resources to never noticeably slow down your computer. This is intended to encourage people to mine to improve decentralization. That being said chances of finding a block are diminishingly small with solo CPU mining, and even lesser with its unobtrusive version. You can tweak the unobtrusivness / power trade-offs with the further `--bg-*` options below.
@@ -232,7 +236,7 @@ You can also type commands directly in the console of the running `monerod` (if 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `help [<command>]`                 | Show help for `<command>`.
-| `version`                          | Show version information. Example output:<br />`Monero 'Beryllium Bullet' (v0.13.0.2-release)`
+| `version`                          | Show version information. Example output:<br />`Monero 'Boron Butterfly' (v0.14.0.0-release)`
 | `status`                           | Show status. Example output:<br />`Height: 186754/186754 (100.0%) on stagenet, not mining, net hash 317 H/s, v9, up to date, 8(out)+0(in) connections, uptime 0d 3h 48m 47s`
 
 #### P2P network
@@ -287,7 +291,6 @@ You can also type commands directly in the console of the running `monerod` (if 
 | `set_log <level>|<{+,-,}categories>`                       | Set the current log level/categories where `<level>` is a number 0-4.
 | `print_status`                                             | Show if daemon is running.
 | `update (check|download)`                                  | Check if update is available and optionally download it. The hash is SHA-256. On linux use `sha256sum` to verify. Example output:<br />`Update available: v0.13.0.4: https://downloads.getmonero.org/cli/monero-linux-x64-v0.13.0.4.tar.bz2, hash 693e1a0210201f65138ace679d1ab1928aca06bb6e679c20d8b4d2d8717e50d6`<br/>`Update downloaded to: /opt/monero-v0.13.0.2/monero-linux-x64-v0.13.0.4.tar.bz2`
-
 
 #### Mining
 

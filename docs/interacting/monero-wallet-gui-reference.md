@@ -16,7 +16,7 @@ However, wallet does not store the blockchain and does not directly participate 
 
 ### Depends on the full node 
 
-Wallet connects to [full node](/interacting/monerod-reference) to scan the blockchain for your transaction outputs and to send your transactions out to the network.   
+Wallet connects to a [full node](/interacting/monerod-reference) to scan the blockchain for your transaction outputs and to send your transactions out to the network.   
 
 The full node can be either local (same computer) or remote.
 
@@ -27,7 +27,7 @@ Connection happens over HTTP and uses [this API](https://www.getmonero.org/resou
 Any transaction leaving the wallet is already blinded by all Monero privacy features.
 This means plain text HTTP communication isn't an issue on its own even if you connect to a remote node.
 
-However, connecting to a remote node has other nuanced trade-offs, which is a topic for a separate article. TODO: write an article or link the best available source. 
+However, connecting to a remote node has other nuanced trade-offs, which is a topic for a separate article. 
 
 ### User guide PDF
 
@@ -58,7 +58,18 @@ In a separate terminal window, run the wallet:
 
 ## Options
 
+There are very few options because everything is set up via a GUI.
+
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--help`            | Enlists available options.
 | `--log-file`        | Full path to the log file. Example (mind file permissions): <br/>`./monerod --log-file=/var/log/monero/mainnet/monerod.log`
+
+## Defaults
+
+The wallet is created in `$HOME/Monero/wallets/`.
+You may want to change it to `$HOME/.bitmonero/wallets/` to have all Monero related files in one place.
+This is possible on wallet creation wizard in the GUI. 
+
+The log file is created directly in the home directory `$HOME/monero-wallet-gui.log`.
+You may want to change with `--log-file=$HOME/.bitmonero/monero-wallet-gui.log` option. 
