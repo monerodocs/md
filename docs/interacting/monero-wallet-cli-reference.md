@@ -188,11 +188,21 @@ Use `help command_name` to learn more.
 
 `version` - show version of the monero-wallet-cli binary
 
+### Network status
+
+`status` - show if synced up to the blockchain height
+
+`fee` - show current fee-per-byte and full node's mempool (the backlog of transactions depending on the priority)
+
+`wallet_info` - show wallet file path, standard address, type and network
+    
 ### Balance
 
 `account` - total balance; list accounts with respective balances
 
 `balance detail` - within the current account, list addresses with respective balances  
+
+`refresh` - force refresh the balance and transactions by pulling latest blocks from the full node; this is often useful because auto-refresh only kicks in once in 90 seconds
 
 ### Manage accounts
 
@@ -212,25 +222,33 @@ Use `help command_name` to learn more.
 
 `address label`
 
-### Network status
+### View transactions
 
-`status` - show if synced up to the blockchain height
+`show_transfers` - show all transactions on the current account; optionally provide a filter: `in` | `out` | `pending` | `failed` | `pool` | `coinbase`; optionally provide subaddress index for output selection
 
-`fee` - show current fee-per-byte and full node's mempool (the backlog of transactions depending on the priority)
+`show_transfer <txid>` - show details of specific transaction
 
-`wallet_info` - show wallet file path, standard address, type and network
-    
-### Secret mnemonic seed
+`incoming_transfers [available|unavailable] [verbose] [index=<N1>[,<N2>[,...]]]` - show the incoming transactions, all or filtered by availability and address index within current account; this will only show confirmed transactions; you will not see transactions awaiting in the mempool
+
+`get_tx_note <txid>` - get a string note for transaction id
+
+### Keys and Passwords
+
+#### Secret mnemonic seed
 
 `seed` - show raw mnemonic seed
 
 `encrypted_seed` - create mnemonic seed encrypted with the passphrase; you will need to remember or store the passphrase separately; restoring will not be possible without the passphrase
 
-### Secret keys
+#### Secret keys
 
 `spendkey` - show secret spend key and public spend key
 
 `viewkey` - show secret view key and public view key
+
+#### Wallet password
+
+`password` - change wallet password; this password is used to encrypt the local wallet files; it does not change secret keys or backups
 
 ### Proofs
 
@@ -266,7 +284,38 @@ Use `help command_name` to learn more.
 
 `export_raw_multisig_tx`
 
-### Tx private key
+`sign_multisig <filename>`
+
+### Hardware wallet
+
+`hw_reconnect` - attempts to reconnect HW wallet
+
+### Mining
+
+`start_mining`
+
+`stop_mining`
+
+### Advanced
+
+#### Outputs
+
+`unspent_outputs` - show a list of, and a histogram of unspent outputs (indivisible pieces of your total balance)
+
+`export_outputs <file>` -> `import_outputs <file>` - helps with cold spending; export outputs from a view-wallet to the cold-wallet to make it aware of what had been sent to it
+
+`mark_output_spent <amount>/<offset> | <filename> [add]`
+
+`mark_output_unspent <amount>/<offset>`
+
+`is_output_spent <amount>/<offset>`
+
+
+#### Key images
+
+`export_key_images <file>` -> `import_key_images <file>` - used to inform the view-only wallet about outgoing transactions so it can calculate the real balance; normally view-only wallets only learn about incoming transactions, not outgoing
+
+#### Tx private key
 
 These allow to learn and verify transaction's private key `r`.
 This was useful to create a [proof of payment](https://www.getmonero.org/resources/user-guides/prove-payment.html)
@@ -278,29 +327,19 @@ but got superseded by `get_spend_proof`.
 
 `set_tx_key <txid> <tx_key>`
 
-### Advanced
+### Debugging
 
-`unspent_outputs` - show a list of, and a histogram of unspent outputs (indivisible pieces of your total balance)
+`rescan_spent` - rescan the blockchain for spent outputs; sometimes, the wallet's idea of what outputs are spent and what outputs are not get out of sync with the blockchain. This can happen if you exit the wallet without saving after sending a tx, or if it crashes. This will look for the key images on the blockchain to make sure it's up to date.
 
-`export_key_images <file>` -> `import_key_images <file>` - used to inform the view-only wallet about outgoing transactions so it can calculate the real balance; normally view-only wallets only learn about incoming transactions, not outgoing
+### Cosmetics
 
-`export_outputs <file>` - export a set of outputs owned by this wallet to a `<file>`
-
-### Mining
-
-`start_mining`
-
-`stop_mining`
-
-### Donate
-
-`donate <amount>` - donate `<amount> to development team.
-  
-### Non essential or legacy
+`donate <amount>` - donate `<amount>` to development team
 
 `address_book [(add ((<address> [pid <id>])|<integrated address>) [<description possibly with whitespaces>])|(delete <index>)]`
 
 `set_description [free text note]` -> `get_description` - manage convenience description of the wallet (the information is local)
+  
+### Legacy
 
 `save` - this now happens automatically
 
@@ -309,5 +348,10 @@ but got superseded by `get_spend_proof`.
 `bc_height` - show blockchain height (superseded with `status`)
 
 `sweep_unmixable` - only relevant for very old wallets (<= 2016); send all unmixable outputs to yourself with ring_size 10
+
+`locked_sweep_all` - see
+
+
+`rescan_bc` - rescan the blockchain from scratch, losing any information which can not be recovered from the blockchain itself
 
 TODO: document remaining commands
