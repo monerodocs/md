@@ -87,8 +87,7 @@ This is where the blockchain, log files, and p2p network memory are stored.
 
 By default data directory is at:
 
-* `$HOME/.bitmonero/` on Linux
-* `$HOME/Library/Application\ Support/` on macOS
+* `$HOME/.bitmonero/` on Linux and macOS
 * `C:\ProgramData\bitmonero\` on Windows
 
 Please mind:
