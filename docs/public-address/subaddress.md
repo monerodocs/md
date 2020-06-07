@@ -67,7 +67,7 @@ Instead, they are used as input to generating subaddress keys.
 
 ### Private view key
 
-The subaddress private view key `m` is derived as follows:
+A per-subaddress scalar `m` is derived as follows:
 
     m = Hs("SubAddr" || a || account_index || subaddress_index_within_account)
     
@@ -91,7 +91,7 @@ The subaddress public spend key `D` is derived as follows:
 Where:
 
 * `B` is standard address public spend key
-* `m` is subaddress private view key
+* `m` is a per-subaddress scalar that is derived from the private spend key
 * `G` is the "base point"; this is simply a constant specific to [edwards25519](/cryptography/asymmetric/edwards25519)
 
 ### Public view key
