@@ -24,13 +24,13 @@ Download the latest version matching your operating system and processor archite
 
 The CLI version is released earlier and is suitable for server deployments.
 
-The GUI version contains both CLI and GUI. It is preferable for end-users. 
+The GUI version contains both CLI and GUI. It is preferable for end-users.
 
 All versions contain a full node and a wallet.
 
-## Why prefer GitHub over getmonero.org? 
+## Why prefer GitHub over getmonero.org?
 
 Binaries appear earlier on GitHub.
 
 On top of that, if you fail to properly verify the signature, GitHub is safer, simply because you don't need to trust a separate website to not be compromised.
-Obviously, you should still carefully verify the signature for each release. Signature verification is always the primary line of defense.  
+Obviously, you should still carefully verify the signature for each release. Signature verification is always the primary line of defense.
