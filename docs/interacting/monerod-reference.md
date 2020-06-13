@@ -25,7 +25,7 @@ However, there are privacy and reliability implications to using a remote, untru
 
 ## Syntax
 
-`./monerod [options] [command]` 
+`./monerod [options] [command]`
 
 Options define how the daemon should be working. Their names follow the `--option-name` pattern.
 
@@ -64,7 +64,8 @@ The following groups are only to make reference easier to follow. The daemon its
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--help`            | Enlist available options.
 | `--version`         | Show `monerod` version to stdout. Example: <br />`Monero 'Boron Butterfly' (v0.14.0.0-release)`
-| `--os-version`      | Show build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Fri Aug 24 12:48:58 UTC 2018 4.18.5-arch1-1-ARCH`.
+| `--os-version`      | Show build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Wed, 27 May 2020 23:42:26 +0000 5.6.15-arch1-1`.
+| `--check-updates`   | One of: `disabled` \| `notify` \| `download` (=`notify` by default). Check for new versions of Monero and optionally download it. You should probably prefer your OS package manager to do the update, if possible. There is also unimplemented `update` option shown by the help system.
 
 #### Pick network
 
@@ -76,11 +77,11 @@ The following groups are only to make reference easier to follow. The daemon its
 
 #### Logging
 
-| Option                | Description                                                                                    
+| Option                | Description
 |-----------------------|----------------------------------------------------------------------------------------------------------------------------------------
 | `--log-file`          | Full path to the log file. Example (mind file permissions): <br/>`./monerod --log-file=/var/log/monero/mainnet/monerod.log`
 | `--log-level`         | `0-4` with `0` being minimal logging and `4` being full tracing. Defaults to `0`. These are general presets and do not directly map to severity levels. For example, even with minimal `0`, you may see some most important `INFO` entries. Temporarily changing to `1` allows for much better understanding of how the full node operates. Example: <br />`./monerod --log-level=1`
-| `--max-log-file-size` | Soft limit in bytes for the log file (=104850000 by default, which is just under 100MB). Once log file grows past that limit, `monerod` creates the next log file with a UTC timestamp postfix `-YYYY-MM-DD-HH-MM-SS`.<br /><br />In production deployments, you would probably prefer to use established solutions like logrotate instead. In that case, set `--max-log-file-size=0` to prevent monerod from managing the log files. 
+| `--max-log-file-size` | Soft limit in bytes for the log file (=104850000 by default, which is just under 100MB). Once log file grows past that limit, `monerod` creates the next log file with a UTC timestamp postfix `-YYYY-MM-DD-HH-MM-SS`.<br /><br />In production deployments, you would probably prefer to use established solutions like logrotate instead. In that case, set `--max-log-file-size=0` to prevent monerod from managing the log files.
 | `--max-log-files`     | Limit on the number of log files (=50 by default). The oldest log files are removed. In production deployments, you would probably prefer to use established solutions like logrotate instead.
 
 #### Server
@@ -96,6 +97,7 @@ The following options will be helpful if you intend to have an always running no
 | `--pidfile`         | Full path to the PID file. Works only with `--detach`. Example: <br />`./monerod --detach --pidfile=/run/monero/monerod.pid`
 | `--detach`          | Go to background (decouple from the terminal). This is useful for long-running / server scenarios. Typically, you will also want to manage `monerod` daemon with systemd or similar. By default `monerod` runs in a foreground.
 | `--non-interactive` | Do not require tty in a foreground mode. Helpful when running in a container. By default `monerod` runs in a foreground and opens stdin for reading. This breaks containerization because no tty gets assigned and `monerod` process crashes. You can make it run in a background with `--detach` but this is inconvenient in a containerized environment because the canonical usage is that the container waits on the main process to exist (forking makes things more complicated).
+| `--no-zmq`          | Disable ZMQ RPC server. You **should** use this option to limit attack surface and number of unnecessarily open ports (the ZMQ server is unfinished thing and you are unlikely to ever use it).
 | `--no-igd`          | Disable UPnP port mapping on the router ("Internet Gateway Device"). Add this option to improve security if you are **not** behind a NAT (you can bind directly to public IP or you run through Tor).
 | `--max-txpool-weight`         | Set maximum transactions pool size in bytes. By default 648000000 (~618MB). These are transactions pending for confirmations (not included in any block).
 | `--enforce-dns-checkpointing` | The emergency checkpoints set by [MoneroPulse](/infrastructure/monero-pulse) operators will be enforced. It is probably a good idea to set enforcing for unattended nodes. <br /><br />If encountered block hash does not match corresponding checkpoint, the local blockchain will be rolled back a few blocks, effectively blocking following what MoneroPulse operators consider invalid fork. The log entry will be produced:  `ERROR` `Local blockchain failed to pass a checkpoint, rolling back!` Eventually, the alternative ("fixed") fork will get heavier and the node will follow it, leaving the "invalid" fork behind.<br /><br />By default checkpointing only notifies about discrepancy by producing the following log entry: `ERROR` `WARNING: local blockchain failed to pass a MoneroPulse checkpoint, and you could be on a fork. You should either sync up from scratch, OR download a fresh blockchain bootstrap, OR enable checkpoint enforcing with the --enforce-dns-checkpointing command-line option`.<br /><br />Reference: [source code](https://github.com/monero-project/monero/blob/22a6591a70151840381e327f1b41dc27cbdb2ee6/src/cryptonote_core/blockchain.cpp#L3614).
@@ -110,11 +112,14 @@ The node and peer words are used interchangeably.
 
 | Option                 | Description
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--p2p-bind-ip`        | Network interface to bind to for p2p network protocol. Default value `0.0.0.0` binds to all network interfaces. This is typically what you want. <br /><br />You must change this if you want to constrain binding, for example to configure connection through Tor via torsocks: <br />`DNS_PUBLIC=tcp://1.1.1.1 TORSOCKS_ALLOW_INBOUND=1 torsocks ./monerod --p2p-bind-ip 127.0.0.1 --no-igd --hide-my-port`
+| `--p2p-bind-ip`        | IPv4 network interface to bind to for p2p network protocol. Default value `0.0.0.0` binds to all network interfaces. This is typically what you want. <br /><br />You must change this if you want to constrain binding, for example to configure connection through Tor via torsocks: <br />`DNS_PUBLIC=tcp://1.1.1.1 TORSOCKS_ALLOW_INBOUND=1 torsocks ./monerod --p2p-bind-ip 127.0.0.1 --no-igd --hide-my-port`
 | `--p2p-bind-port`      | TCP port to listen for p2p network connections. Defaults to `18080` for mainnet, `28080` for testnet, and `38080` for stagenet. You normally wouldn't change that. This is helpful to run several nodes on your machine to simulate private Monero p2p network (likely using private Testnet). Example: <br/>`./monerod --p2p-bind-port=48080`
 | `--p2p-external-port`  | TCP port to listen for p2p network connections on your router. Relevant if you are behind a NAT and still want to accept incoming connections. You must then set this to relevant port on your router. This is to let `monerod` know what to advertise on the network. Default is `0`.
+| `--p2p-use-ipv6`       | Enable IPv6 for p2p.
+| `--p2p-bind-ipv6-address` | IPv6 network interface to bind to for p2p network protocol. Default value `::` binds to all network interfaces.
+| `--p2p-ignore-ipv4`    | Ignore unsuccessful IPv4 bind for p2p. Useful if you only want to use IPv6.
 | `--hide-my-port`       | `monerod` will still open and listen on the p2p port. However, it will not announce itself as a peer list candidate. Technically, it will return port `0` in a response to p2p handshake (`node_data.my_port = 0` in `get_local_node_data` function). In effect nodes you connect to won't spread your IP to other nodes. To sum up, it is not really hiding, it is more like "do not advertise".
-| `--seed-node`          | Connect to a node to retrieve other nodes' addresses, and disconnect. If not specified, `monerod` will use hardcoded seed nodes on the first run, and peers cached on disk on subsequent runs.  
+| `--seed-node`          | Connect to a node to retrieve other nodes' addresses, and disconnect. If not specified, `monerod` will use hardcoded seed nodes on the first run, and peers cached on disk on subsequent runs.
 | `--add-peer`           | Manually add node to local peer list.
 | `--add-priority-node`  | Specify list of nodes to connect to and then attempt to keep the connection open. <br /><br />To add multiple nodes use the option several times. Example: <br />`./monerod --add-priority-node=178.128.192.138:18081 --add-priority-node=144.76.202.167:18081`
 | `--add-exclusive-node` | Specify list of nodes to connect to only. If this option is given the options `--add-priority-node` and `--seed-node` are ignored. <br /><br />To add multiple nodes use the option several times. Example: <br />`./monerod --add-exclusive-node=178.128.192.138:18081 --add-exclusive-node=144.76.202.167:18081`
@@ -125,6 +130,16 @@ The node and peer words are used interchangeably.
 | `--limit-rate`         | Set the same limit value for incoming and outgoing data transfer. By default (`-1`) the individual up/down default limits will be used. It is better to use `--limit-rate-up` and `--limit-rate-down` instead to avoid confusion.
 | `--offline`            | Do not listen for peers, nor connect to any. Useful for working with a local, archival blockchain.
 | `--allow-local-ip`     | Allow adding local IP to peer list. Useful mostly for debug purposes when you may want to have multiple nodes on a single machine.
+
+#### Tor/I2P
+
+This is experimental. It may be best to start with this [guide](https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#p2p-commands).
+
+| Option                 | Description
+|------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--tx-proxy`           | Send out your local transactions through SOCKS5 proxy (Tor or I2P). Format:<br />`<network-type>,<socks-ip:port>[,max_connections][,disable_noise]` <br /><br />Example:<br />`./monerod --tx-proxy "tor,127.0.0.1:9050,10,disable_noise"`<br /><br />This was introduced to make publishing transactions over Tor easier (no need for torsocks) while allowing clearnet for blocks at the same time (while torsocks affected everything). <br /><br />Note that forwarded transactions (those not originating from connected wallet) will still be relayed over clearnet.<br /><br />Requires multiple `--add-peer`. See [commit](https://github.com/monero-project/monero/pull/6021) and [guide](https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#p2p-commands).
+| `--anonymous-inbound`  | Allow anonymous incoming connections to your onionized P2P interface. Format: <br />`<hidden-service-address>,<[bind-ip:]port>[,max_connections]`<br /><br />Example:<br />`./monerod --anonymous-inbound "rveahdfho7wo4b2m.onion:18083,127.0.0.1:18083,100"`.<br /><br />Obviously, you first need to setup the hidden service in your Tor config. See the [guide](https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#p2p-commands).
+
 
 #### Node RPC API
 
@@ -140,6 +155,7 @@ The following options define how the API behaves.
 
 | Option                          | Description
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--public-node`                 | Advertise to other users they can use this node as a remote one for connecting their wallets. Requires `--restricted-rpc`, `--rpc-bind-ip` and `--confirm-external-bind`. Without `--public-node` the node can still be public (assuming other relevant options are set) but won't be advertised as such on the P2P network. This option will allow wallets to auto-discover public nodes (instead of requiring user to manually find one).
 | `--rpc-bind-ip`                 | IP to listen on. By default `127.0.0.1` because API gives full administrative capabilities over the node. Set it to `0.0.0.0` to listen on all interfaces - but only in connection with one of `*-restricted-*` options **and**  `--confirm-external-bind`.
 | `--rpc-bind-port`               | TCP port to listen on. By default `18081` (mainnet), `28081` (testnet), `38081` (stagenet).
 | `--rpc-restricted-bind-port`    | TCP port to listen on with the limited version of API. The limited API can be made public to create an Open Node. At the same time, you may firewall the full API port to still enjoy local querying and administration.
@@ -164,6 +180,8 @@ These are advanced options that allow you to optimize performance of your `moner
 
 | Option                          | Description
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--prune-blockchain`            | Pruning saves 2/3 of disk space w/o degrading functionality. For maximum effect this should be used already **on the first sync**. If you add this option later the past data will only be pruned logically w/o shrinking the file size and the gain will be delayed. <br /><br />If you already have unpruned blockchain, see the `monero-blockchain-prune` tool. <br /><br />The drawback is that you will contribute less to Monero P2P network in terms of helping new nodes to sync up (up to 1/8 of normal contribution). You will still be useful regarding relaying new transactions and blocks though.
+| `--sync-pruned-blocks`          | Allow syncing from nodes with only pruned blocks.
 | `--db-sync-mode`                | Specify sync option, using format:<br />`[safe|fast|fastest]:[sync|async]:[<nblocks_per_sync>[blocks]|<nbytes_per_sync>[bytes]]`<br /><br />The default is `fast:async:250000000bytes`.<br /><br />The `fast:async:*` can corrupt blockchain database in case of a system crash. It should not corrupt if just `monerod` crashes. If you are concerned with system crashes use `safe:sync`.
 | `--max-concurrency`             | Max number of threads to use for parallel jobs. The default value `0` uses the number of CPU threads.
 | `--prep-blocks-threads`         | Max number of threads to use when computing block hashes (PoW) in groups. Defaults to 4. Decrease this if you don't want `monerod` hog your computer when syncing.
@@ -171,6 +189,7 @@ These are advanced options that allow you to optimize performance of your `moner
 | `--block-sync-size`             | How many blocks are processed in a single batch during chain synchronization. By default this is 20 blocks for newer history and 100 blocks for older history ("pre v4"). Default behavior is represented by value `0`. Intuitively, the more resources you have, the bigger batch size you may want to try out. Example:<br />`./monerod --block-sync-size=500`
 | `--bootstrap-daemon-address`    | The host:port of a "bootstrap" remote open node that the connected wallets can use while this node is still not fully synced. Example:<br/>`./monerod --bootstrap-daemon-address=opennode.xmr-tw.org:18089`. The node will forward selected RPC calls to the bootstrap node. The wallet will handle this automatically and transparently. Obviously, such bootstraping phase has privacy implications similar to directly using a remote node.
 | `--bootstrap-daemon-login`      | Specify username:password for the bootstrap daemon login (if required). This considers the RPC interface used by the wallet. Normally, open nodes do not require any credentials.
+| `--no-sync`                     | Do not sync up. Continue using bootstrap daemon instead (if set). See [commit](https://github.com/monero-project/monero/pull/5195).
 
 #### Mining
 
@@ -199,9 +218,11 @@ These options are useful for Monero project developers and testers. Normal users
 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--keep-alt-blocks`                | Keep alternative blocks on restart. May help with researching reorgs etc. [Commit](https://github.com/monero-project/monero/pull/5524). Research project [www.noncesense.org](https://www.noncesense.org/).
 | `--test-drop-download`             | For net tests: in download, discard ALL blocks instead checking/saving them (very fast).
 | `--test-drop-download-height`      | Like test-drop-download but discards only after around certain height. By default `0`.
 | `--regtest`                        | Run in a regression testing mode.
+| `--keep-fakechain`                 | Don't delete any existing database when in fakechain mode.
 | `--fixed-difficulty`               | Fixed difficulty used for testing. By default `0`.
 | `--test-dbg-lock-sleep`            | Sleep time in ms, defaults to 0 (off), used to debug before/after locking mutex. Values 100 to 1000 are good for tests.
 | `--save-graph`                     | Save data for dr Monero.
@@ -215,8 +236,8 @@ These options should no longer be necessary. They are still present in `monerod`
 | `--fluffy-blocks`     | Relay compact blocks. Default. Compact block is just a header and a list of transaction IDs.
 | `--no-fluffy-blocks`  | Relay classic full blocks. Classic block contains all transactions.
 | `--show-time-stats`   | Official docs say "Show time-stats when processing blocks/txs and disk synchronization" but it does not seem to produce any output during usual blockchain synchronization.
-| `--zmq-rpc-bind-ip`   | IP for ZMQ RPC server to listen on. By default `127.0.0.1`. This is not yet widely used as ZMQ interface currently does not provide meaningful advantage over classic JSON-RPC interface. Unfortunately, currently there is no way to disable the ZMQ server. 
-| `--zmq-rpc-bind-port` | Port for ZMQ RPC server to listen on. By default `18082` for mainnet, `38082` for stagenet, and `28082` for testnet. 
+| `--zmq-rpc-bind-ip`   | IP for ZMQ RPC server to listen on. By default `127.0.0.1`. This is not yet widely used as ZMQ interface currently does not provide meaningful advantage over classic JSON-RPC interface.
+| `--zmq-rpc-bind-port` | Port for ZMQ RPC server to listen on. By default `18082` for mainnet, `38082` for stagenet, and `28082` for testnet.
 | `--db-type`           | Specify database type. The default and only available: `lmdb`.
 
 ## Commands
@@ -229,7 +250,7 @@ The following groups are only to make reference easier to follow.
 The daemon itself does not group commands in any way.
 
 See [running](#running) for example usage.
-You can also type commands directly in the console of the running `monerod` (if not detached). 
+You can also type commands directly in the console of the running `monerod` (if not detached).
 
 #### Help, version, status
 
@@ -243,7 +264,7 @@ You can also type commands directly in the console of the running `monerod` (if 
 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `print_pl`                         | Show the full peer list. 
+| `print_pl`                         | Show the full peer list.
 | `print_pl_stats`                   | Show the full peer list statistics (white vs gray peers). White peers are online and reachable. Grey peers are offline but your `monerod` remembers them from past sessions.
 | `print_cn`                         | Show connected peers with connection initiative (incoming/outgoing) and other stats.
 | `ban <IP> [<seconds>]`             | Ban a given `<IP>` for a given amount of `<seconds>`. By default the ban is for 24h. Example:<br />`./monerod ban 187.63.135.161`.
@@ -278,7 +299,7 @@ You can also type commands directly in the console of the running `monerod` (if 
 |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `print_height`                                             | Show local blockchain height.
 | `sync_info`                                                | Show blockchain sync progress and connected peers along with download / upload stats.
-| `print_bc <begin_height> [<end_height>]`                   | Show blocks in range `<begin_height>`..`<end_height>`. The information will include block id, height, timestamp, version, size, weight, number of non-coinbase transactions, difficulty, nonce, and reward.  
+| `print_bc <begin_height> [<end_height>]`                   | Show blocks in range `<begin_height>`..`<end_height>`. The information will include block id, height, timestamp, version, size, weight, number of non-coinbase transactions, difficulty, nonce, and reward.
 | `print_block <block_hash> | <block_height>`                | Show detailed data of specified block.
 | `hard_fork_info`                                           | Show current consensus version and future hard fork block height, if any.
 | `is_key_image_spent <key_image>`                           | Check if specified [key image](/cryptography/asymmetric/key-image/) is spent. Key image is a hash.
@@ -296,7 +317,7 @@ You can also type commands directly in the console of the running `monerod` (if 
 
 | Option                                                     | Description
 |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `show_hr`                                                  | Ask `monerod` daemon to stop printing current hash rate. Relevant only if `monerod` is mining. 
+| `show_hr`                                                  | Ask `monerod` daemon to stop printing current hash rate. Relevant only if `monerod` is mining.
 | `hide_hr`                                                  | Ask `monerod` daemon to print current hash rate. Relevant only if `monerod` is mining.
 | `start_mining <addr> [<threads>] [do_background_mining] [ignore_battery]`   | Ask `monerod`daemon to start mining. Block reward will go to `<addr>`.
 | `stop_mining`                                              | Ask `monerod` daemon to stop mining.
@@ -312,5 +333,5 @@ You can also type commands directly in the console of the running `monerod` (if 
 
 | Option                                                     | Description
 |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `save`                                                     | Flush blockchain data to disk. This is normally no longer necessary as `monerod` saves the blockchain automatically on exit. 
+| `save`                                                     | Flush blockchain data to disk. This is normally no longer necessary as `monerod` saves the blockchain automatically on exit.
 | `output_histogram [@<amount>] <min_count> [<max_count>]`   | Show number of outputs for each amount denomination. This was only relevant in the pre-RingCT era. The old wallet used this to determine which outputs can be used for the requested mixin. With RingCT denominations are irrelevant as amounts are hidden. More info in [these SA answers](https://monero.stackexchange.com/search?q=%22output_histogram%22).

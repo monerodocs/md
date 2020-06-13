@@ -89,8 +89,8 @@ title: Monero Technical Specification | Monero Documentation
 For the full node (`monerod`):
 
 * dandelion++
-    * assurance: won't protect against ISP/VPN provider, won't protect against the very first remote node in Dandellion++ protocol
-* optional transaction relay over Tor/I2P (block relay is being done on clearnet)
+* assurance: won't protect against ISP/VPN provider, won't protect against the very first remote node in Dandellion++ protocol
+* for the full protection user must manually wrap `monerod` with Tor
 
 For the wallet (`monero-wallet-gui` or `monero-wallet-cli`):
 
