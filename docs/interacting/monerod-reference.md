@@ -115,9 +115,10 @@ The node and peer words are used interchangeably.
 | `--p2p-bind-ip`        | IPv4 network interface to bind to for p2p network protocol. Default value `0.0.0.0` binds to all network interfaces. This is typically what you want. <br /><br />You must change this if you want to constrain binding, for example to configure connection through Tor via torsocks: <br />`DNS_PUBLIC=tcp://1.1.1.1 TORSOCKS_ALLOW_INBOUND=1 torsocks ./monerod --p2p-bind-ip 127.0.0.1 --no-igd --hide-my-port`
 | `--p2p-bind-port`      | TCP port to listen for p2p network connections. Defaults to `18080` for mainnet, `28080` for testnet, and `38080` for stagenet. You normally wouldn't change that. This is helpful to run several nodes on your machine to simulate private Monero p2p network (likely using private Testnet). Example: <br/>`./monerod --p2p-bind-port=48080`
 | `--p2p-external-port`  | TCP port to listen for p2p network connections on your router. Relevant if you are behind a NAT and still want to accept incoming connections. You must then set this to relevant port on your router. This is to let `monerod` know what to advertise on the network. Default is `0`.
-| `--p2p-use-ipv6`       | Enable IPv6 for p2p.
+| `--p2p-use-ipv6`       | Enable IPv6 for p2p (disabled by default).
 | `--p2p-bind-ipv6-address` | IPv6 network interface to bind to for p2p network protocol. Default value `::` binds to all network interfaces.
 | `--p2p-ignore-ipv4`    | Ignore unsuccessful IPv4 bind for p2p. Useful if you only want to use IPv6.
+| `--igd`                | Set UPnP port mapping on the router ("Internet Gateway Device"). One of: `disabled` \| `enabled` \| `delayed` (=`delayed` by default). Relevant if you are behind NAT and want to accept incoming P2P network connections. The `delayed` value means it will wait for incoming connections in hope UPnP may not be necessary. After a while w/o incoming connections found it will attempt to map ports with UPnP. If you know you need UPnP change it to `enabled` to fast track the process.
 | `--hide-my-port`       | `monerod` will still open and listen on the p2p port. However, it will not announce itself as a peer list candidate. Technically, it will return port `0` in a response to p2p handshake (`node_data.my_port = 0` in `get_local_node_data` function). In effect nodes you connect to won't spread your IP to other nodes. To sum up, it is not really hiding, it is more like "do not advertise".
 | `--seed-node`          | Connect to a node to retrieve other nodes' addresses, and disconnect. If not specified, `monerod` will use hardcoded seed nodes on the first run, and peers cached on disk on subsequent runs.
 | `--add-peer`           | Manually add node to local peer list.
@@ -139,7 +140,7 @@ This is experimental. It may be best to start with this [guide](https://github.c
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--tx-proxy`           | Send out your local transactions through SOCKS5 proxy (Tor or I2P). Format:<br />`<network-type>,<socks-ip:port>[,max_connections][,disable_noise]` <br /><br />Example:<br />`./monerod --tx-proxy "tor,127.0.0.1:9050,10,disable_noise"`<br /><br />This was introduced to make publishing transactions over Tor easier (no need for torsocks) while allowing clearnet for blocks at the same time (while torsocks affected everything). <br /><br />Note that forwarded transactions (those not originating from connected wallet) will still be relayed over clearnet.<br /><br />Requires multiple `--add-peer`. See [commit](https://github.com/monero-project/monero/pull/6021) and [guide](https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#p2p-commands).
 | `--anonymous-inbound`  | Allow anonymous incoming connections to your onionized P2P interface. Format: <br />`<hidden-service-address>,<[bind-ip:]port>[,max_connections]`<br /><br />Example:<br />`./monerod --anonymous-inbound "rveahdfho7wo4b2m.onion:18083,127.0.0.1:18083,100"`.<br /><br />Obviously, you first need to setup the hidden service in your Tor config. See the [guide](https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#p2p-commands).
-
+| `--pad-transactions`   | Pad relayed transactions to next 1024 bytes to help defend against traffic volume analysis. This only makes sense if you are behind Tor or I2P. See [commit](https://github.com/monero-project/monero/pull/4787).
 
 #### Node RPC API
 
@@ -153,16 +154,28 @@ This API is typically referred to as "RPC" because it is mostly based on JSON/RP
 
 The following options define how the API behaves.
 
+
 | Option                          | Description
 |---------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--public-node`                 | Advertise to other users they can use this node as a remote one for connecting their wallets. Requires `--restricted-rpc`, `--rpc-bind-ip` and `--confirm-external-bind`. Without `--public-node` the node can still be public (assuming other relevant options are set) but won't be advertised as such on the P2P network. This option will allow wallets to auto-discover public nodes (instead of requiring user to manually find one).
 | `--rpc-bind-ip`                 | IP to listen on. By default `127.0.0.1` because API gives full administrative capabilities over the node. Set it to `0.0.0.0` to listen on all interfaces - but only in connection with one of `*-restricted-*` options **and**  `--confirm-external-bind`.
 | `--rpc-bind-port`               | TCP port to listen on. By default `18081` (mainnet), `28081` (testnet), `38081` (stagenet).
+| `--rpc-bind-ipv6-address`       | IPv6 to listen on. By default `::1` (localhost). All remarks for `--rpc-bind-ip` are applicable here as well.
+| `--rpc-use-ipv6`                | Enable IPv6 for RPC server (disabled by default).
+| `--rpc-ignore-ipv4`             | Ignore unsuccessful IPv4 bind for RPC. Useful if you only want to use IPv6.
 | `--rpc-restricted-bind-port`    | TCP port to listen on with the limited version of API. The limited API can be made public to create an Open Node. At the same time, you may firewall the full API port to still enjoy local querying and administration.
 | `--confirm-external-bind`       | Confirm you consciously set `--rpc-bind-ip` to non-localhost IP and you understand the consequences.
 | `--restricted-rpc`              | Restrict API to view only commands and do not return privacy sensitive data. Note this does not make sense with `--rpc-restricted-bind-port` because you would end up with two restricted APIs.
-| `--rpc-login`                   | Specify `username[:password]` required to connect to API. Practical usage seems limited because API communication is in plain text over HTTP.
+| `--rpc-ssl`                     | Enable TLS on RPC connections. One of: `enabled` \| `disabled` \| `autodetect` (`=autodetect` by default). You **should** enable this if you connect a remote wallet.
+| `--rpc-ssl-private-key`         | Path to server's private key in PEM format. Generate it with `monero-gen-ssl-cert` tool. This is to facilitate server authentication to client.
+| `--rpc-ssl-certificate`         | Path to server's certificate in PEM format. Generate it with `monero-gen-ssl-cert` tool. This is to facilitate server authentication to client.
+| `--rpc-ssl-allowed-fingerprints`  | List of certificate fingerprints to accept. This is a way to authenticate clients.
+| `--rpc-ssl-allow-any-cert`      | Allow any certificate of connecting client.
+| `--rpc-ssl-ca-certificates`     | Path to file containing concatenated PEM format certificate(s) to replace system CA(s).
+| `--rpc-ssl-allow-chained`       | Allow user chained certificates. This is only applicable if user has a "real" CA issued certificate.
+| `--rpc-login`                   | Specify `username[:password]` required to connect to API.
 | `--rpc-access-control-origins`  | Specify a comma separated list of origins to allow cross origin resource sharing. This is useful if you want to use `monerod` API directly from a web browser via JavaScript (say in a pure-fronted web appp scenario). With this option `monerod` will put proper HTTP CORS headers to its responses. You will also need to set `--rpc-login` if you use this option. Normally though, the API is used by backend app and this option isn't necessary.
+
 
 #### Accepting Monero
 
