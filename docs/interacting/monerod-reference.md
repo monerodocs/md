@@ -330,8 +330,8 @@ You can also type commands directly in the console of the running `monerod` (if 
 
 | Option                                                     | Description
 |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `show_hr`                                                  | Ask `monerod` daemon to stop printing current hash rate. Relevant only if `monerod` is mining.
-| `hide_hr`                                                  | Ask `monerod` daemon to print current hash rate. Relevant only if `monerod` is mining.
+| `show_hr`                                                  | Ask `monerod` daemon to print current hash rate. Relevant only if `monerod` is mining.
+| `hide_hr`                                                  | Ask `monerod` daemon to stop printing current hash rate. Relevant only if `monerod` is mining.
 | `start_mining <addr> [<threads>] [do_background_mining] [ignore_battery]`   | Ask `monerod`daemon to start mining. Block reward will go to `<addr>`.
 | `stop_mining`                                              | Ask `monerod` daemon to stop mining.
 
