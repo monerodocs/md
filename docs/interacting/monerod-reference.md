@@ -231,7 +231,7 @@ These options are useful for Monero project developers and testers. Normal users
 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--keep-alt-blocks`                | Keep alternative blocks on restart. May help with researching reorgs etc. [Commit](https://github.com/monero-project/monero/pull/5524). Research project [noncesense.org](https://noncesense.org/).
+| `--keep-alt-blocks`                | Keep alternative blocks on restart. May help with researching reorgs etc. [Commit](https://github.com/monero-project/monero/pull/5524). Research project by [noncesense research lab](https://noncesense-research-lab.github.io/).
 | `--test-drop-download`             | For net tests: in download, discard ALL blocks instead checking/saving them (very fast).
 | `--test-drop-download-height`      | Like test-drop-download but discards only after around certain height. By default `0`.
 | `--regtest`                        | Run in a regression testing mode.
