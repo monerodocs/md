@@ -124,7 +124,7 @@ The node and peer words are used interchangeably.
 | `--add-peer`           | Manually add node to local peer list.
 | `--add-priority-node`  | Specify list of nodes to connect to and then attempt to keep the connection open. <br /><br />To add multiple nodes use the option several times. Example: <br />`./monerod --add-priority-node=178.128.192.138:18081 --add-priority-node=144.76.202.167:18081`
 | `--add-exclusive-node` | Specify list of nodes to connect to only. If this option is given the options `--add-priority-node` and `--seed-node` are ignored. <br /><br />To add multiple nodes use the option several times. Example: <br />`./monerod --add-exclusive-node=178.128.192.138:18081 --add-exclusive-node=144.76.202.167:18081`
-| `--out-peers`          | Set max number of outgoing connections to other nodes. By default 8. Value `-1` represents the code default.
+| `--out-peers`          | Set max number of outgoing connections to other nodes. By default 12. Value `-1` represents the code default.
 | `--in-peers`           | Set max number of incoming connections (nodes actively connecting to you). By default unlimited. Value `-1` represents the code default.
 | `--limit-rate-up`      | Set outgoing data transfer limit [kB/s]. By default 2048 kB/s. Value `-1` represents the code default.
 | `--limit-rate-down`    | Set incoming data transfer limit [kB/s]. By default 8192 kB/s. Value `-1` represents the code default.
