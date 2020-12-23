@@ -163,7 +163,8 @@ The following options define how the API behaves.
 | `--rpc-bind-ipv6-address`       | IPv6 to listen on. By default `::1` (localhost). All remarks for `--rpc-bind-ip` are applicable here as well.
 | `--rpc-use-ipv6`                | Enable IPv6 for RPC server (disabled by default).
 | `--rpc-ignore-ipv4`             | Ignore unsuccessful IPv4 bind for RPC. Useful if you only want to use IPv6.
-| `--rpc-restricted-bind-port`    | TCP port to listen on with the limited version of API. The limited API can be made public to create an Open Node. At the same time, you may firewall the full API port to still enjoy local querying and administration.
+| `--rpc-restricted-bind-ip`      | IP to listen on with the limited version of API. The limited API can be made public to create an Open Node.
+| `--rpc-restricted-bind-port`    | TCP port to listen on with the limited version of API. To be used in combination with ``--rpc-restricted-bind-port`.
 | `--confirm-external-bind`       | Confirm you consciously set `--rpc-bind-ip` to non-localhost IP and you understand the consequences.
 | `--restricted-rpc`              | Restrict API to view only commands and do not return privacy sensitive data. Note this does not make sense with `--rpc-restricted-bind-port` because you would end up with two restricted APIs.
 | `--rpc-ssl`                     | Enable TLS on RPC connections. One of: `enabled` \| `disabled` \| `autodetect` (`=autodetect` by default). You **should** enable this if you connect a remote wallet.
