@@ -1,4 +1,8 @@
-# monero-wallet-rpc Guide
+---
+title: monero-wallet-rpc - Reference | Monero Documentation
+---
+# `monero-wallet-rpc` - Reference
+
 ## Introduction
 
 This is a list of the monero-wallet-rpc calls, their inputs and outputs, and examples of each. The program monero-wallet-rpc replaced the rpc interface that was in simplewallet and then monero-wallet-cli.
