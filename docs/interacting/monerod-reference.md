@@ -134,7 +134,7 @@ The node and peer words are used interchangeably.
 
 #### Tor/I2P
 
-This is experimental. It may be best to start with this [guide](https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#p2p-commands).
+This is experimental. It may be best to start with this [guide](https://github.com/monero-project/monero/blob/master/docs/ANONYMITY_NETWORKS.md#p2p-commands).
 
 | Option                 | Description
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------
