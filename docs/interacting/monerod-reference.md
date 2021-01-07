@@ -63,8 +63,8 @@ The following groups are only to make reference easier to follow. The daemon its
 | Option              | Description
 |---------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `--help`            | Enlist available options.
-| `--version`         | Show `monerod` version to stdout. Example: <br />`Monero 'Boron Butterfly' (v0.14.0.0-release)`
-| `--os-version`      | Show build timestamp and target operating system. Example output:<br />`OS: Linux #1 SMP PREEMPT Wed, 27 May 2020 23:42:26 +0000 5.6.15-arch1-1`.
+| `--version`         | Show `monerod` version to stdout. Example output: <br />`Monero 'Oxygen Orion' (v0.17.1.8-release)`
+| `--os-version`      | Show build timestamp and target operating system. Example output:<br />`OS: Linux #65-Ubuntu SMP Thu Dec 10 12:01:51 UTC 2020 5.4.0-59-generic`.
 | `--check-updates`   | One of: `disabled` \| `notify` \| `download` (=`notify` by default). Check for new versions of Monero and optionally download it. You should probably prefer your OS package manager to do the update, if possible. There is also unimplemented `update` option shown by the help system.
 
 #### Pick network
@@ -112,7 +112,7 @@ The node and peer words are used interchangeably.
 
 | Option                 | Description
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--p2p-bind-ip`        | IPv4 network interface to bind to for p2p network protocol. Default value `0.0.0.0` binds to all network interfaces. This is typically what you want. <br /><br />You must change this if you want to constrain binding, for example to configure connection through Tor via torsocks: <br />`DNS_PUBLIC=tcp://1.1.1.1 TORSOCKS_ALLOW_INBOUND=1 torsocks ./monerod --p2p-bind-ip 127.0.0.1 --no-igd --hide-my-port`
+| `--p2p-bind-ip`        | IPv4 network interface to bind to for p2p network protocol. Default value `0.0.0.0` binds to all network interfaces. This is typically what you want. <br /><br />You must change this if you want to constrain binding, for example to force working through Tor via torsocks: <br />`DNS_PUBLIC=tcp://1.1.1.1 TORSOCKS_ALLOW_INBOUND=1 torsocks ./monerod --p2p-bind-ip 127.0.0.1  --no-igd  --hide-my-port`
 | `--p2p-bind-port`      | TCP port to listen for p2p network connections. Defaults to `18080` for mainnet, `28080` for testnet, and `38080` for stagenet. You normally wouldn't change that. This is helpful to run several nodes on your machine to simulate private Monero p2p network (likely using private Testnet). Example: <br/>`./monerod --p2p-bind-port=48080`
 | `--p2p-external-port`  | TCP port to listen for p2p network connections on your router. Relevant if you are behind a NAT and still want to accept incoming connections. You must then set this to relevant port on your router. This is to let `monerod` know what to advertise on the network. Default is `0`.
 | `--p2p-use-ipv6`       | Enable IPv6 for p2p (disabled by default).
@@ -121,7 +121,7 @@ The node and peer words are used interchangeably.
 | `--igd`                | Set UPnP port mapping on the router ("Internet Gateway Device"). One of: `disabled` \| `enabled` \| `delayed` (=`delayed` by default). Relevant if you are behind NAT and want to accept incoming P2P network connections. The `delayed` value means it will wait for incoming connections in hope UPnP may not be necessary. After a while w/o incoming connections found it will attempt to map ports with UPnP. If you know you need UPnP change it to `enabled` to fast track the process.
 | `--hide-my-port`       | `monerod` will still open and listen on the p2p port. However, it will not announce itself as a peer list candidate. Technically, it will return port `0` in a response to p2p handshake (`node_data.my_port = 0` in `get_local_node_data` function). In effect nodes you connect to won't spread your IP to other nodes. To sum up, it is not really hiding, it is more like "do not advertise".
 | `--seed-node`          | Connect to a node to retrieve other nodes' addresses, and disconnect. If not specified, `monerod` will use hardcoded seed nodes on the first run, and peers cached on disk on subsequent runs.
-| `--add-peer`           | Manually add node to local peer list.
+| `--add-peer`           | Manually add node to local peer list, `host:port`. Syntax supports IP addresses, domain names, onion and i2p hosts.
 | `--add-priority-node`  | Specify list of nodes to connect to and then attempt to keep the connection open. <br /><br />To add multiple nodes use the option several times. Example: <br />`./monerod --add-priority-node=178.128.192.138:18081 --add-priority-node=144.76.202.167:18081`
 | `--add-exclusive-node` | Specify list of nodes to connect to only. If this option is given the options `--add-priority-node` and `--seed-node` are ignored. <br /><br />To add multiple nodes use the option several times. Example: <br />`./monerod --add-exclusive-node=178.128.192.138:18081 --add-exclusive-node=144.76.202.167:18081`
 | `--out-peers`          | Set max number of outgoing connections to other nodes. By default 12. Value `-1` represents the code default.
@@ -247,11 +247,14 @@ These options should no longer be necessary. They are still present in `monerod`
 
 | Option                | Description
 |-----------------------|--------------------------------------------------------------------------------------------------------------------------------------
+| `--ban-list`          | Specify ban list file, one IP address per line. This was introduced as an emergency measure to deal with large DDoS attacks on Monero p2p network in Dec 2020 / Jan 2021. Example: <br />`./monerod --ban-list=block_tor.txt`. Here is the popular [block_tor.txt](https://gui.xmr.pm/files/block_tor.txt) file.<br /><br />It is **not recommended** to statically ban any IP addresses unless you absolutely need to. Banning IPs often excludes the most vulnerable users who are forced to operate entirely behind Tor or other anonymity networks.
+| `--enable-dns-blocklist` | Similar to `--ban-list` but instead of a static file uses dynamic IP blocklist available as DNS TXT entries. The DNS blocklist is centrally managed by Monero contributors. It is **not recommended** unless in emergency situations.
 | `--fluffy-blocks`     | Relay compact blocks. Default. Compact block is just a header and a list of transaction IDs.
 | `--no-fluffy-blocks`  | Relay classic full blocks. Classic block contains all transactions.
 | `--show-time-stats`   | Official docs say "Show time-stats when processing blocks/txs and disk synchronization" but it does not seem to produce any output during usual blockchain synchronization.
 | `--zmq-rpc-bind-ip`   | IP for ZMQ RPC server to listen on. By default `127.0.0.1`. This is not yet widely used as ZMQ interface currently does not provide meaningful advantage over classic JSON-RPC interface.
 | `--zmq-rpc-bind-port` | Port for ZMQ RPC server to listen on. By default `18082` for mainnet, `38082` for stagenet, and `28082` for testnet.
+| `--zmq-pub`           | Address for ZMQ pub - `tcp://ip:port` or `ipc://path`
 | `--db-type`           | Specify database type. The default and only available: `lmdb`.
 
 ## Commands
@@ -349,3 +352,4 @@ You can also type commands directly in the console of the running `monerod` (if 
 |------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `save`                                                     | Flush blockchain data to disk. This is normally no longer necessary as `monerod` saves the blockchain automatically on exit.
 | `output_histogram [@<amount>] <min_count> [<max_count>]`   | Show number of outputs for each amount denomination. This was only relevant in the pre-RingCT era. The old wallet used this to determine which outputs can be used for the requested mixin. With RingCT denominations are irrelevant as amounts are hidden. More info in [these SA answers](https://monero.stackexchange.com/search?q=%22output_histogram%22).
+
