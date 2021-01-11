@@ -41,6 +41,7 @@ nav:
 - Multisignature: 'multisignature.md'
 - Infrastructure:
     - Mainnet, stagenet, testnet: 'infrastructure/networks.md'
+    - Tor onion seed nodes: 'infrastructure/tor-onion-p2p-seed-nodes.md'
     - MoneroPulse: 'infrastructure/monero-pulse.md'
 - Accepting Monero:
     - Overview: 'accepting-monero/overview.md'
