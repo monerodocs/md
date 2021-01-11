@@ -15,7 +15,7 @@ Monero project nicely decouples network node logic from wallet logic.
 Wallet logic is offered through three independent user interfaces - the GUI, the CLI, and the HTTP API.
 
 ```
-# cd monero-gui-v0.16.0.0
+# cd monero-gui-v0.17.1.9
 
 # ---- guide to Monero GUI ----
 
@@ -28,24 +28,24 @@ monero-wallet-gui
 
 # ---- extra executable files -----------
 
-extra/monero-wallet-cli
-extra/monero-wallet-rpc
+extras/monero-wallet-cli
+extras/monero-wallet-rpc
 
-extra/monero-blockchain-prune
-extra/monero-gen-trusted-multisig
-extra/monero-gen-ssl-cert
+extras/monero-blockchain-prune
+extras/monero-gen-trusted-multisig
+extras/monero-gen-ssl-cert
 
-extra/monero-blockchain-export
-extra/monero-blockchain-import
+extras/monero-blockchain-export
+extras/monero-blockchain-import
 
 # ---- don't bother with these ----------
 
-extra/monero-blockchain-stats
-extra/monero-blockchain-mark-spent-outputs
-extra/monero-blockchain-prune-known-spent-data
-extra/monero-blockchain-usage
-extra/monero-blockchain-ancestry
-extra/monero-blockchain-depth
+extras/monero-blockchain-stats
+extras/monero-blockchain-mark-spent-outputs
+extras/monero-blockchain-prune-known-spent-data
+extras/monero-blockchain-usage
+extras/monero-blockchain-ancestry
+extras/monero-blockchain-depth
 ```
 
 ## Executables
@@ -56,8 +56,8 @@ extra/monero-blockchain-depth
 | `monero-wallet-gui`        | Wallet logic and __graphical__ user interface. <br />Requires `monerod` running.
 | `monero-wallet-cli`        | Wallet logic and __commandline__ user interface. <br />Requires `monerod` running.
 | `monero-wallet-rpc`        | Wallet logic and __HTTP API__ (JSON-RPC protocol). <br />Requires `monerod` running.
-| `monero-blockchain-prune`  | Prune existing local blockchain. This saves 2/3 of disk space (85GB -> 28GB as of June 2020). This is preferable over `monerod --prune-blockchain` which only logically releases space inside the file while the file remains large. The `monero-blockchain-prune` creates a shrinked copy of the blockchain file. See [tutorial1](https://monero.stackexchange.com/questions/11454/how-do-i-utilize-blockchain-pruning-in-the-gui-monero-wallet-gui), [tutorial2](https://www.publish0x.com/solareclipse/howto-prune-shrink-the-database-of-the-monero-blockchain-on-xpgwjx).
-| `monero-gen-ssl-cert`      | Generate 4096 bit RSA private key and self signed TLS certificate for use with `monerod` RPC interface. See the [pull request](https://github.com/monero-project/monero/pull/5495).
+| `monero-blockchain-prune`  | Prune existing local blockchain. This saves 2/3 of disk space (down to 40GB as of Jan 2021). This is preferable over `monerod --prune-blockchain` which only logically releases space inside the file while the file remains large. The `monero-blockchain-prune` creates a shrinked copy of the blockchain file. See [tutorial1](https://monero.stackexchange.com/questions/11454/how-do-i-utilize-blockchain-pruning-in-the-gui-monero-wallet-gui), [tutorial2](https://www.publish0x.com/solareclipse/howto-prune-shrink-the-database-of-the-monero-blockchain-on-xpgwjx).
+| `monero-gen-ssl-cert`      | Generate 4096 bit RSA private key and self signed TLS certificate for use with `monerod` RPC interface. Note, Monero daemon automatically generates TLS certificate on each restart. Manual generation with this tool is only useful if you want to pin TLS certificate fingerprint in your monero wallet. See the [pull request](https://github.com/monero-project/monero/pull/5495).
 | `monero-gen-trusted-multisig`          | Tool to generate a set of multisig wallets. <br />See chapter on [multisignatures](/multisignature).
 | `monero-blockchain-export` | Tool to export blockchain to `blockchain.raw` file.
 | `monero-blockchain-import` | Tool to import [blockchain.raw](https://downloads.getmonero.org/blockchain.raw) - ideally your own trusted copy.

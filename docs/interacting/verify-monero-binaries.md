@@ -52,7 +52,7 @@ The last step is to compare published hash with downloaded archive SHA-256 hash.
 
 Replace the example file name with actual one:
 
-    file_name=monero-gui-linux-x64-v0.16.0.0.tar.bz2
+    file_name=monero-gui-linux-x64-v0.17.1.9.tar.bz2
 
     file_hash=`sha256sum $file_name | cut -c 1-64`
 
