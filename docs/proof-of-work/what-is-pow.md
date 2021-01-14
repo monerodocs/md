@@ -1,5 +1,5 @@
 ---
-title: Proof of Work | Monero Documentation
+title: Proof of Work
 ---
 # Proof of Work
 

@@ -1,5 +1,5 @@
 ---
-title: CryptoNight | Monero Documentation
+title: CryptoNight
 ---
 # CryptoNight
 

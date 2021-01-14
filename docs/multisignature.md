@@ -1,5 +1,5 @@
 ---
-title: Multisignature | Monero Documentation
+title: Multisignature
 ---
 # Multisignature
 

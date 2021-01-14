@@ -1,5 +1,5 @@
 ---
-title: Edwards25519 Elliptic Curve | Monero Documentation
+title: Edwards25519 Elliptic Curve
 ---
 # Edwards25519 Elliptic Curve
 

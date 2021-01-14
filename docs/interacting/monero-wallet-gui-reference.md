@@ -1,5 +1,5 @@
 ---
-title: monero-wallet-gui - Reference | Monero Documentation
+title: monero-wallet-gui - Reference
 ---
 # `monero-wallet-gui` - Reference
 

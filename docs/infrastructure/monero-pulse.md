@@ -1,5 +1,5 @@
 ---
-title: MoneroPulse | Monero Documentation
+title: MoneroPulse
 ---
 # MoneroPulse
 

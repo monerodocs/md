@@ -1,5 +1,5 @@
 ---
-title: Cryptography in Monero | Monero Documentation
+title: Cryptography in Monero
 ---
 # Cryptography in Monero 
 

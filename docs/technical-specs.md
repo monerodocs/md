@@ -1,5 +1,5 @@
 ---
-title: Monero Technical Specification | Monero Documentation
+title: Monero Technical Specification
 ---
 # Monero Technical Specs
 

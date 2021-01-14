@@ -1,5 +1,5 @@
 ---
-title: Standard Address | Monero Documentation
+title: Standard Address
 ---
 # Address
 

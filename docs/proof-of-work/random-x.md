@@ -1,5 +1,5 @@
 ---
-title: RandomX | Monero Documentation
+title: RandomX
 ---
 # RandomX
 

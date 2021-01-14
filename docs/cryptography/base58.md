@@ -1,5 +1,5 @@
 ---
-title: Base58 | Monero Documentation
+title: Base58
 ---
 # Base58
 

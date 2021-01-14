@@ -1,5 +1,5 @@
 ---
-title: Public Keys in Monero | Monero Documentation
+title: Public Keys in Monero
 ---
 # Public Keys in Monero
 

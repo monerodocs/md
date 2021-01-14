@@ -1,5 +1,5 @@
 ---
-title: Monero Pseudorandom Number Generator | Monero Documentation
+title: Monero Pseudorandom Number Generator
 ---
 # Monero Pseudorandom Number Generator
 

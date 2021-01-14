@@ -1,5 +1,5 @@
 ---
-title: Download Monero | Monero Documentation
+title: Download Monero
 ---
 # Download Monero
 

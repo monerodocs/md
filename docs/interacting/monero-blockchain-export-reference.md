@@ -1,5 +1,5 @@
 ---
-title: monero-blockchain-export - Reference | Monero Documentation
+title: monero-blockchain-export - Reference
 ---
 # `monero-blockchain-export` - Reference
 

@@ -1,5 +1,5 @@
 ---
-title: Private Keys in Monero | Monero Documentation
+title: Private Keys in Monero
 ---
 # Private Keys in Monero
 

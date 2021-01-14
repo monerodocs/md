@@ -1,5 +1,5 @@
 ---
-title: Keccak-256 Hash Function | Monero Documentation
+title: Keccak-256 Hash Function
 ---
 # Keccak-256 Hash Function
 

@@ -1,5 +1,5 @@
 ---
-title: Mainnet, Stagenet, Testnet | Monero Documentation
+title: Mainnet, Stagenet, Testnet
 ---
 # Networks
 

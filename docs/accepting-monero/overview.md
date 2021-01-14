@@ -1,5 +1,5 @@
 ---
-title: Accepting Monero for Businesses | Monero Documentation
+title: Accepting Monero for Businesses
 ---
 # Accepting Monero for Businesses
 

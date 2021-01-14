@@ -1,5 +1,5 @@
 ---
-title: Monero Configuration File | Monero Documentation
+title: Monero Configuration File
 ---
 # Monero Configuration File
 

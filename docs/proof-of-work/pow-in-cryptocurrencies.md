@@ -1,5 +1,5 @@
 ---
-title: Proof of Work in Cryptocurrencies | Monero Documentation
+title: Proof of Work in Cryptocurrencies
 ---
 # Proof of Work in Cryptocurrencies
 

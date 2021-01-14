@@ -1,5 +1,5 @@
 ---
-title: monero-blockchain-import - Reference | Monero Documentation
+title: monero-blockchain-import - Reference
 ---
 # `monero-blockchain-import` - Reference
 

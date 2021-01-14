@@ -1,5 +1,5 @@
 ---
-title: Transaction | Monero Documentation
+title: Transaction
 ---
 # Monero transaction
 

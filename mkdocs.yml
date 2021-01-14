@@ -2,7 +2,7 @@
 site_name: Monero Documentation
 site_description: 'Unofficial Monero Documentation'
 site_author: "Piotr 'Qertoip' Włodarek"
-site_url: 'https://monerodocs.org/'
+site_url: 'https://monerodocs.org'
 
 nav:
 - Home: 'index.md'
@@ -43,34 +43,39 @@ nav:
     - Mainnet, stagenet, testnet: 'infrastructure/networks.md'
     - Tor onion seed nodes: 'infrastructure/tor-onion-p2p-seed-nodes.md'
     - MoneroPulse: 'infrastructure/monero-pulse.md'
+- Running a Node:
+  # - On your Laptop: 'localhost-node.md'
+  # - Remote Node: 'remote-node.md'
+  # - Open Remote Node: 'open-remote-node.md'
+  - Open Node + Tor Onion: 'running-node/open-node-tor-onion.md'
 - Accepting Monero:
     - Overview: 'accepting-monero/overview.md'
 
 theme:
   name: 'material'
   palette:
-#    primary: 'Indigo'
-#    primary: 'Deep Orange'
-#    primary: 'Orange'
-    primary: 'White'
-    accent: 'Indigo'
+    primary: white
+    accent: indigo
   logo: 'images/monero.svg'
   language: 'en'
-#   feature:
-#     tabs: true
 
-extra_css: ['extra.css', 'overrides.css']
+extra_css: ['overrides.css']
 
 repo_name: 'monerodocs/md'
 repo_url: 'https://github.com/monerodocs/md'
 
 markdown_extensions:
   # https://squidfunk.github.io/mkdocs-material/extensions/admonition/
-  - markdown.extensions.admonition
-  - markdown.extensions.codehilite:
-      guess_lang: false
-  - markdown.extensions.def_list
-  - markdown.extensions.footnotes
-  - markdown.extensions.meta
-  - markdown.extensions.toc:
+  - admonition
+  - abbr
+  - def_list
+  - footnotes
+  - meta
+  - toc:
       permalink: true
+  - pymdownx.details
+  - pymdownx.highlight:
+      use_pygments: true         # build time highlighting, not client side
+  - pymdownx.inlinehilite
+  - pymdownx.superfences         # nest code blocks inside codeblocks
+  - pymdownx.snippets            # insert content from other files

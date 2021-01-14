@@ -1,5 +1,5 @@
 ---
-title: Interacting with Monero | Monero Documentation
+title: Interacting with Monero
 ---
 # Interacting with Monero
 
@@ -56,7 +56,7 @@ extras/monero-blockchain-depth
 | `monero-wallet-gui`        | Wallet logic and __graphical__ user interface. <br />Requires `monerod` running.
 | `monero-wallet-cli`        | Wallet logic and __commandline__ user interface. <br />Requires `monerod` running.
 | `monero-wallet-rpc`        | Wallet logic and __HTTP API__ (JSON-RPC protocol). <br />Requires `monerod` running.
-| `monero-blockchain-prune`  | Prune existing local blockchain. This saves 2/3 of disk space (down to 40GB as of Jan 2021). This is preferable over `monerod --prune-blockchain` which only logically releases space inside the file while the file remains large. The `monero-blockchain-prune` creates a shrinked copy of the blockchain file. See [tutorial1](https://monero.stackexchange.com/questions/11454/how-do-i-utilize-blockchain-pruning-in-the-gui-monero-wallet-gui), [tutorial2](https://www.publish0x.com/solareclipse/howto-prune-shrink-the-database-of-the-monero-blockchain-on-xpgwjx).
+| `monero-blockchain-prune`  | Prune existing local blockchain. This saves 2/3 of disk space (down to 31GB as of Jan 2021). This is preferable over `monerod --prune-blockchain` which only logically releases space inside the file while the file remains large. The `monero-blockchain-prune` creates a shrinked copy of the blockchain file. See [tutorial1](https://monero.stackexchange.com/questions/11454/how-do-i-utilize-blockchain-pruning-in-the-gui-monero-wallet-gui), [tutorial2](https://www.publish0x.com/solareclipse/howto-prune-shrink-the-database-of-the-monero-blockchain-on-xpgwjx).
 | `monero-gen-ssl-cert`      | Generate 4096 bit RSA private key and self signed TLS certificate for use with `monerod` RPC interface. Note, Monero daemon automatically generates TLS certificate on each restart. Manual generation with this tool is only useful if you want to pin TLS certificate fingerprint in your monero wallet. See the [pull request](https://github.com/monero-project/monero/pull/5495).
 | `monero-gen-trusted-multisig`          | Tool to generate a set of multisig wallets. <br />See chapter on [multisignatures](/multisignature).
 | `monero-blockchain-export` | Tool to export blockchain to `blockchain.raw` file.

@@ -1,5 +1,5 @@
 ---
-title: monero-wallet-cli - Reference | Monero Documentation
+title: monero-wallet-cli - Reference
 ---
 # `monero-wallet-cli` - Reference
 

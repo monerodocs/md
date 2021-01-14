@@ -1,5 +1,5 @@
 ---
-title: Verifying Monero Binaries Signature | Monero Documentation
+title: Verifying Monero Binaries Signature
 ---
 # Verify Monero Binaries
 
@@ -7,7 +7,7 @@ Verification must be carried on **before extracting the archive and before using
 
 Instructions were tested on Linux. They should also work on macOS with slight modifications.
 
-## 1. Import core dev PGP key
+## 1. Import lead maintainer PGP key
 
 This is a one time action. Skip this step for subsequent Monero releases.
 

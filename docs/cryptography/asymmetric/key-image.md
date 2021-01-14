@@ -1,5 +1,5 @@
 ---
-title: Monero Private Key Image | Monero Documentation
+title: Monero Private Key Image
 ---
 # Monero Private Key Image
 

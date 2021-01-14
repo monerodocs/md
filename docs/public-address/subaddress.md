@@ -1,5 +1,5 @@
 ---
-title: Subaddress | Monero Documentation
+title: Subaddress
 ---
 # Subaddress
 

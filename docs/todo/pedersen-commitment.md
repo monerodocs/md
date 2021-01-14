@@ -1,5 +1,5 @@
 ---
-title: Pedersen Commitment | Monero Documentation
+title: Pedersen Commitment
 ---
 # Pedersen Commitment
 

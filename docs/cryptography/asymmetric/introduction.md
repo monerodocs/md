@@ -1,5 +1,5 @@
 ---
-title: Asymmetric Cryptography in Monero | Monero Documentation
+title: Asymmetric Cryptography in Moner
 ---
 # Asymmetric Cryptography in Monero
 

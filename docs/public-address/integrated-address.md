@@ -1,5 +1,5 @@
 ---
-title: Integrated Address | Monero Documentation
+title: Integrated Address
 ---
 # Integrated Address
 

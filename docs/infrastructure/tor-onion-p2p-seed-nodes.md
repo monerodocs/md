@@ -1,7 +1,7 @@
 ---
-title: Tor Onion Seed Nodes for Monero P2P Network | Monero Documentation
+title: Tor Onion Seed Nodes for Monero P2P Network
 ---
-# Tor onion seed nodes for Monero P2P network
+# Tor onion seed nodes for Monero network
 
 
 ## When this is necessary?

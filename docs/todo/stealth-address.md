@@ -1,5 +1,5 @@
 ---
-title: Stealth Address | Monero Documentation
+title: Stealth Address
 ---
 # Stealth Address
 
