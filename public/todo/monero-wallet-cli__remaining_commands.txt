@@ -1,0 +1,21 @@
+
+### TODO
+
+    payment_id
+    payments <PID_1> [<PID_2> ... <PID_N>]
+    print_ring <key_image> | <txid>
+    save_known_rings
+    save_watch_only
+    set <option> [<value>]
+    set_daemon <host>[:<port>] [trusted|untrusted]
+    set_log <level>|{+,-,}<categories>
+    set_ring <filename> | ( <key_image> absolute|relative <index> [<index>...])
+    set_tx_note <txid> [free text note]
+    sign_transfer [export_raw]
+    submit_transfer
+    sweep_all [index=<N1>[,<N2>,...]] [<priority>] [<ring_size>] [outputs=<N>] <address> [<payment_id>]
+    sweep_below <amount_threshold> [index=<N1>[,<N2>,...]] [<priority>] [<ring_size>] <address> [<payment_id>]
+    sweep_single [<priority>] [<ring_size>] [outputs=<N>] <key_image> <address> [<payment_id>]
+    transfer [index=<N1>[,<N2>,...]] [<priority>] [<ring_size>] (<URI> | <address> <amount>) [<payment_id>]
+
+    locked_transfer [index=<N1>[,<N2>,...]] [<priority>] [<ring_size>] (<URI> | <addr> <amount>) <lockblocks> [<payment_id>]
