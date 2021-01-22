@@ -5,6 +5,8 @@ site_author: "Piotr 'Qertoip' Włodarek"
 site_url: 'https://monerodocs.org'
 site_dir: 'public'
 
+copyright: '© 2021 MoneroDocs under <a href="https://opensource.org/licenses/MIT">MIT</a>'
+
 nav:
 - Home: 'index.md'
 - Interacting:
@@ -53,12 +55,30 @@ nav:
     - Overview: 'accepting-monero/overview.md'
 
 theme:
-  name: 'material'
+  name: null
+  custom_dir: mkdocs-material/material
+
+  # 404 page
+  static_templates:
+    - 404.html
+
+  # Necessary for search to work properly
+  include_search_page: false
+  search_index_only: true
+
+  # Default values, taken from mkdocs_theme.yml
+  language: en
+  font:
+    text: Roboto
+    code: Roboto Mono
+  favicon: assets/favicon.png
+
   palette:
     primary: white
     accent: indigo
+  icon:
+    logo: logo
   logo: 'images/monero.svg'
-  language: 'en'
 
 extra_css: ['overrides.css']
 
@@ -80,3 +100,11 @@ markdown_extensions:
   - pymdownx.inlinehilite
   - pymdownx.superfences         # nest code blocks inside codeblocks
   - pymdownx.snippets            # insert content from other files
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
+      minify_js: true
+      htmlmin_opts:
+        remove_comments: true
