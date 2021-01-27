@@ -16,7 +16,7 @@ This use case overlaps with integrated addresses. Subaddresses are generally pre
 To prevent the payer from linking your payouts together simply generate a new subaddress for each payout.
 This way specific service (like anonymous exchange) that sends you Monero won't (easilly) know it is you again receving Monero.
 
-The exception to this is when a service (or group of colluding services) decides to actively attack you, one address at the time, with the so cold [Janus attack](https://web.getmonero.org/2019/10/18/subaddress-janus.html), which risks them losing funds. If you need perfect unlinkability of your receivables, the only solution remains to use a separate seed (separate Monero wallet).
+The exception to this is when a service (or group of colluding services) decides to actively attack you, one address at the time, with the so-called [Janus attack](https://web.getmonero.org/2019/10/18/subaddress-janus.html), which risks them losing funds. If you need perfect unlinkability of your receivables, the only solution remains to use a separate seed (separate Monero wallet).
 
 Also, note it won't help if you have an account with the service. Then your payouts are already linked in the service database, regardless of Monero.
 
