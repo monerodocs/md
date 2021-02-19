@@ -1180,7 +1180,7 @@ Inputs:
 -   _pool_  - boolean; (Optional) Include transfers from the daemon's transaction pool.
 -   _filter_by_height_  - boolean; (Optional) Filter transfers by block height.
 -   _min_height_  - unsigned int; (Optional) Minimum block height to scan for transfers, if filtering by height is enabled.
--   _max_height_  - unsigned int; (Opional) Maximum block height to scan for transfers, if filtering by height is enabled (defaults to max block height).
+-   _max_height_  - unsigned int; (Optional) Maximum block height to scan for transfers, if filtering by height is enabled (defaults to max block height).
 -   _account_index_  - unsigned int; (Optional) Index of the account to query for transfers. (defaults to 0)
 -   _subaddr_indices_  - array of unsigned int; (Optional) List of subaddress indices to query for transfers. (defaults to 0)
 
