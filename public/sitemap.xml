@@ -1,139 +1,139 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://monerodocs.org/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/download-monero-binaries/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/verify-monero-binaries/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/overview/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/monero-config-file/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/monerod-reference/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/monero-wallet-cli-reference/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/monero-wallet-gui-reference/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/monero-wallet-rpc-reference/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/monero-blockchain-export-reference/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/interacting/monero-blockchain-import-reference/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/technical-specs/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/cryptography/introduction/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/cryptography/asymmetric/introduction/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/cryptography/asymmetric/private-key/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/cryptography/asymmetric/public-key/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/cryptography/asymmetric/edwards25519/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/cryptography/asymmetric/key-image/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/cryptography/base58/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/cryptography/prng/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/cryptography/keccak-256/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/public-address/standard-address/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/public-address/subaddress/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/public-address/integrated-address/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/proof-of-work/what-is-pow/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/proof-of-work/pow-in-cryptocurrencies/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/proof-of-work/cryptonight/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/proof-of-work/random-x/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/multisignature/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/infrastructure/networks/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/infrastructure/tor-onion-p2p-seed-nodes/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/infrastructure/monero-pulse/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/running-node/open-node-tor-onion/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://monerodocs.org/accepting-monero/overview/</loc>
-     <lastmod>2021-01-27</lastmod>
+     <lastmod>2021-02-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
