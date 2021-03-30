@@ -14,6 +14,7 @@ nav:
   - Verify: 'interacting/verify-monero-binaries.md'
   - Overview: 'interacting/overview.md'
   - Config file: 'interacting/monero-config-file.md'
+  - Offline Signing: 'interacting/offline-signing.md'
   - monerod: 'interacting/monerod-reference.md'
   - monero-wallet-cli: 'interacting/monero-wallet-cli-reference.md'
   - monero-wallet-gui: 'interacting/monero-wallet-gui-reference.md'
