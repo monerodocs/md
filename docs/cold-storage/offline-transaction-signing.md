@@ -1,26 +1,36 @@
-# Offline Signing
+# Offline Transaction Signing
 
-Offline signing involves
+!!! warning
+    This is **NOT** necessarily the recommended cold storage setup,
+    due to high complexity, large room for errors and employing
+    a general purpose computer for transaction signing (even if offline).
 
-* Creating an unsigned transaction on a view-only wallet
+    Published for educational purposes only to understand "what would it take to sign offline".
+
+    It is generally better to use a hardware wallet like Trezor or Ledger.
+
+    Opinions may vary.
+
+!!! note
+    This is a guest tutorial contributed by [crocket](https://github.com/crocket).
+
+Offline transaction signing involves:
+
+* Creating an unsigned transaction on an online, view-only wallet
 * Moving the unsigned transaction to an offline machine
-* Signing the unsigned transaction on an offline wallet
-* Moving the signed transaction to a view-only wallet
+* Signing the unsigned transaction on an offline machine
+* Moving the signed transaction back to online, view-only wallet
 * Broadcasting the transaction
-
-It is securer than a hardware wallet connected to an online computer via a USB
-cable. It is also more versatile than a hardware wallet.
 
 ## Creating a new offline wallet
 
-Constructing a new offline wallet is done by executing
+Constructing a new offline wallet is done by executing:
 
 ```
 monero-wallet-cli --generate-new-wallet /path/to/wallet-file
 ```
 
-on an offline machine. Record the seed on paper by executing `seed` on the
-offline wallet.
+on an offline machine. Record the seed on paper by executing `seed` on the offline wallet.
 
 ## Creating a new offline wallet with seed offset passphrase
 
@@ -43,7 +53,7 @@ monero-wallet-cli --generate-new-wallet /path/to/wallet-file \
 ```
 
 to restore from seed and seed offset passphrase. When you restore from seed, you
-can enter seed offset passphrase. 
+can enter seed offset passphrase.
 
 Generate seed offset passphrase on an offline machine or with diceware because
 humans are bad at creating random passphrases.
@@ -160,10 +170,10 @@ wallet. Launch the view-only wallet, and execute
 import_key_images /path/to/key_images
 ```
 
-## Updating wallet softwares on an offline signing machine
+## Updating wallet software on an offline signing machine
 
 When you update an offline machine with offline wallets, you can't just
-connect the machine to the internet and update wallet softwares because
+connect the machine to the internet and update wallet software because
 doing so exposes offline wallets to the internet.
 
 Instead, boot OS installation media, wipe filesystems, and then connect
@@ -175,7 +185,7 @@ they are decrypted.
 
 ## Restoring offline wallet
 
-After updating wallet softwares on an offline signing machine by wiping it out
+After updating wallet software on an offline signing machine by wiping it out
 and reinstalling everything, you have to restore offline wallet.
 
 Restore an offline wallet from seed (and seed offset passphrase) by executing

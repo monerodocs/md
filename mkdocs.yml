@@ -14,7 +14,6 @@ nav:
   - Verify: 'interacting/verify-monero-binaries.md'
   - Overview: 'interacting/overview.md'
   - Config file: 'interacting/monero-config-file.md'
-  - Offline Signing: 'interacting/offline-signing.md'
   - monerod: 'interacting/monerod-reference.md'
   - monero-wallet-cli: 'interacting/monero-wallet-cli-reference.md'
   - monero-wallet-gui: 'interacting/monero-wallet-gui-reference.md'
@@ -52,8 +51,11 @@ nav:
   # - Remote Node: 'remote-node.md'
   # - Open Remote Node: 'open-remote-node.md'
   - Open Node + Tor Onion: 'running-node/open-node-tor-onion.md'
+- Cold storage:
+    - Offline Transaction Signing: 'cold-storage/offline-transaction-signing.md'
 - Accepting Monero:
     - Overview: 'accepting-monero/overview.md'
+
 
 theme:
   name: null
