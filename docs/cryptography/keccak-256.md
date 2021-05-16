@@ -26,8 +26,8 @@ Monero does **not** employ Keccak for Proof-of-Work. Instead, Keccak is used for
 
 ## Keccak-256 vs SHA3-256
 
-SHA3-256 is Keccak-256, except NIST changed padding.
-For that reason original Keccak-256 gives in a different hash value than NIST SHA3-256.  
+SHA3-256 is Keccak-256, except that NIST changed the padding.
+For this reason, the original Keccak-256 gives a different hash value than NIST SHA3-256.  
 
 Monero uses original Keccak-256.
 The NIST standard was only published on August 2015, while Monero went live on 18 April 2014.  
