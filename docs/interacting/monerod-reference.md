@@ -117,6 +117,7 @@ The node and peer words are used interchangeably.
 | `--p2p-external-port`  | TCP port to listen for p2p network connections on your router. Relevant if you are behind a NAT and still want to accept incoming connections. You must then set this to relevant port on your router. This is to let `monerod` know what to advertise on the network. Default is `0`.
 | `--p2p-use-ipv6`       | Enable IPv6 for p2p (disabled by default).
 | `--p2p-bind-ipv6-address` | IPv6 network interface to bind to for p2p network protocol. Default value `::` binds to all network interfaces.
+| `--p2p-bind-port-ipv6` | TCP port to listen for p2p network connections. By default same as IPv4 port for given nettype.
 | `--p2p-ignore-ipv4`    | Ignore unsuccessful IPv4 bind for p2p. Useful if you only want to use IPv6.
 | `--igd`                | Set UPnP port mapping on the router ("Internet Gateway Device"). One of: `disabled` \| `enabled` \| `delayed` (=`delayed` by default). Relevant if you are behind NAT and want to accept incoming P2P network connections. The `delayed` value means it will wait for incoming connections in hope UPnP may not be necessary. After a while w/o incoming connections found it will attempt to map ports with UPnP. If you know you need UPnP change it to `enabled` to fast track the process.
 | `--hide-my-port`       | `monerod` will still open and listen on the p2p port. However, it will not announce itself as a peer list candidate. Technically, it will return port `0` in a response to p2p handshake (`node_data.my_port = 0` in `get_local_node_data` function). In effect nodes you connect to won't spread your IP to other nodes. To sum up, it is not really hiding, it is more like "do not advertise".
@@ -163,8 +164,9 @@ The following options define how the API behaves.
 | `--rpc-bind-ipv6-address`       | IPv6 to listen on. By default `::1` (localhost). All remarks for `--rpc-bind-ip` are applicable here as well.
 | `--rpc-use-ipv6`                | Enable IPv6 for RPC server (disabled by default).
 | `--rpc-ignore-ipv4`             | Ignore unsuccessful IPv4 bind for RPC. Useful if you only want to use IPv6.
-| `--rpc-restricted-bind-ip`      | IP to listen on with the limited version of API. The limited API can be made public to create an Open Node.
-| `--rpc-restricted-bind-port`    | TCP port to listen on with the limited version of API. To be used in combination with ``--rpc-restricted-bind-ip`.
+| `--rpc-restricted-bind-ip`      | IP to listen on with the limited version of API. The limited API can be made public to create an Open Node. By default `127.0.0.1`, set it to `0.0.0.0` to listen on all interfaces.
+| `--rpc-restricted-bind-ipv6-address` | IPv6 to listen on with the limited version of API. The limited API can be made public to create an Open Node. By default `::1` (localhost). Set it to `::` to listen on all interfaces.
+| `--rpc-restricted-bind-port`    | TCP port to listen on with the limited version of API. To be used in combination with `--rpc-restricted-bind-ip`.
 | `--confirm-external-bind`       | Confirm you consciously set `--rpc-bind-ip` to non-localhost IP and you understand the consequences.
 | `--restricted-rpc`              | Restrict API to view only commands and do not return privacy sensitive data. Note this does not make sense with `--rpc-restricted-bind-port` because you would end up with two restricted APIs.
 | `--rpc-ssl`                     | Enable TLS on RPC connections. One of: `enabled` \| `disabled` \| `autodetect` (`=autodetect` by default). You **should** enable this if you connect a remote wallet.
@@ -176,6 +178,7 @@ The following options define how the API behaves.
 | `--rpc-ssl-allow-chained`       | Allow user chained certificates. This is only applicable if user has a "real" CA issued certificate.
 | `--rpc-login`                   | Specify `username[:password]` required to connect to API.
 | `--rpc-access-control-origins`  | Specify a comma separated list of origins to allow cross origin resource sharing. This is useful if you want to use `monerod` API directly from a web browser via JavaScript (say in a pure-fronted web appp scenario). With this option `monerod` will put proper HTTP CORS headers to its responses. You will also need to set `--rpc-login` if you use this option. Normally though, the API is used by backend app and this option isn't necessary.
+| `--disable-rpc-ban`             | Do not ban hosts on RPC errors. May help to prevent monerod from banning traffic originating from the Tor daemon.
 
 
 #### Accepting Monero
