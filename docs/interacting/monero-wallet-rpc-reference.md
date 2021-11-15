@@ -4,6 +4,7 @@ title: monero-wallet-rpc - Reference
 # `monero-wallet-rpc` - Reference
 
 ## Introduction
+**1 XMR = 1e12 atomic units** where "atomic units" is the smallest fraction of 1 XMR according to the monerod implementation.
 
 This is a list of the monero-wallet-rpc calls, their inputs and outputs, and examples of each. The program monero-wallet-rpc replaced the rpc interface that was in simplewallet and then monero-wallet-cli.
 
@@ -35,85 +36,231 @@ curl \
 
 ```
 
-Note: "atomic units" refer to the smallest fraction of 1 XMR according to the monerod implementation.  **1 XMR = 1e12  atomic units.**
+## Usage
 
-### Index of JSON RPC Methods:
+`./monero-wallet-rpc --rpc-bind-port <port> (--wallet-file <file>|--generate-from-json <file>|--wallet-dir <directory>) [options]`
 
--   [add_address_book](#add_address_book)
--   [change_wallet_password](#change_wallet_password)
--   [check_reserve_proof](#check_reserve_proof)
--   [check_spend_proof](#check_spend_proof)
--   [check_tx_key](#check_tx_key)
--   [check_tx_proof](#check_tx_proof)
--   [close_wallet](#close_wallet)
--   [create_account](#create_account)
--   [create_address](#create_address)
--   [create_wallet](#create_wallet)
--   [delete_address_book](#delete_address_book)
--   [export_key_images](#export_key_images)
--   [export_multisig_info](#export_multisig_info)
--   [export_outputs](#export_outputs)
--   [finalize_multisig](#finalize_multisig)
--   [get_accounts](#get_accounts)
--   [get_account_tags](#get_account_tags)
--   [get_address_book](#get_address_book)
--   [get_address](#get_address)
--   [get_address_index](#get_address_index)
--   [get_attribute](#get_attribute)
--   [get_balance](#get_balance)
--   [get_bulk_payments](#get_bulk_payments)
--   [get_height](#get_height)
--   [get_languages](#get_languages)
--   [get_payments](#get_payments)
--   [get_reserve_proof](#get_reserve_proof)
--   [get_spend_proof](#get_spend_proof)
--   [get_transfer_by_txid](#get_transfer_by_txid)
--   [get_transfers](#get_transfers)
--   [get_tx_key](#get_tx_key)
--   [get_tx_notes](#get_tx_notes)
--   [get_tx_proof](#get_tx_proof)
--   [get_version](#get_version)
--   [import_key_images](#import_key_images)
--   [import_multisig_info](#import_multisig_info)
--   [import_outputs](#import_outputs)
--   [incoming_transfers](#incoming_transfers)
--   [is_multisig](#is_multisig)
--   [label_account](#label_account)
--   [label_address](#label_address)
--   [make_integrated_address](#make_integrated_address)
--   [make_multisig](#make_multisig)
--   [make_uri](#make_uri)
--   [open_wallet](#open_wallet)
--   [parse_uri](#parse_uri)
--   [prepare_multisig](#prepare_multisig)
--   [query_key](#query_key)
--   [refresh](#refresh)
--   [relay_tx](#relay_tx)
--   [rescan_blockchain](#rescan_blockchain)
--   [rescan_spent](#rescan_spent)
--   [set_account_tag_description](#set_account_tag_description)
--   [set_attribute](#set_attribute)
--   [set_tx_notes](#set_tx_notes)
--   [sign_multisig](#sign_multisig)
--   [sign](#sign)
--   [sign_transfer](#sign_transfer)
--   [split_integrated_address](#split_integrated_address)
--   [start_mining](#start_mining)
--   [stop_mining](#stop_mining)
--   [stop_wallet](#stop_wallet)
--   [store](#store)
--   [submit_multisig](#submit_multisig)
--   [submit_transfer](#submit_transfer)
--   [sweep_all](#sweep_all)
--   [sweep_dust](#sweep_dust)
--   [sweep_single](#sweep_single)
--   [tag_accounts](#tag_accounts)
--   [transfer_split](#transfer_split)
--   [transfer](#transfer)
--   [untag_accounts](#untag_accounts)
--   [verify](#verify)
+### With a Config File
 
+`./monero-wallet-rpc --config-file <arg>`
 
+### Examples
+
+#### Unix (Production Example)
+
+`~/bin/monero-wallet-rpc --rpc-bind-port 28088 --wallet-file ~/monero/wallets/main/main --password {walletPWD} '--rpc-login', monero:{uncommonPWD} --log-file logs/monero-wallet-rpc.log --max-log-files 2 --trusted-daemon --non-interactive`
+
+- If only incoming transactions matter, ideally the wallet should be a view-only to prevent abuse
+- `--rpc-login` should be used in production to protect against any network attacks. An uncommon password protects against the case where the RPC port is open to the public
+
+#### Windows (Development Example)
+
+`"C:\Program Files\Monero GUI Wallet\monero-wallet-rpc.exe" --rpc-bind-port 28088 --wallet-file C:\monero\wallets\main\main --password {walletPWD} --daemon-address http://node.supportxmr.com:18081 --untrusted-daemon --disable-rpc-login --non-interactive`
+
+- Specifying `--untrusted-daemon` is not neccesary but it's there to tell yourself that the daemon is untrusted and that commands requiring a trusted daemon will be disabled
+
+## Running
+
+- A locally run daemon is required or supply a daemon address of a remote node
+
+## Trouble Shooting
+
+If http://127.0.0.1:28088/json_rpc or your expected RPC URL is inaccessible, or there is no terminal output saying that the server has been started, `monero-wallet-rpc` might be trying to synchronize the wallet. In that case, you should use the GUI or CLI to sync that wallet file as it is faster and has a measurable process.
+
+The recommended way is to have two wallet files for the same keys. One that is used manually (synced often), and one that is used by `monero-wallet-rpc`. Whenever you decide to use `monero-wallet-rpc` and encounter the non-responsive issue, simply copy the files of the GUI/CLI wallet and replace the ones that were being used by `monero-wallet-rpc`. This problem should only occur on the development system where `monerod` or `monero-wallet-rpc` might not have been running for weeks. In production, `monerod` and `monero-wallet-rpc` should have minimal downtimes, ensuring the wallet is always synchronized.
+
+## Options
+
+### Help and Version
+
+| Option       | Description
+|--------------|------------
+|  `--help`    | Produce help message
+|  `--version` | Output version information
+
+### Pick Network
+
+| Option        | Description
+|---------------|------------
+|  `--testnet`  | For testnet. Daemon must also be launched with --testnet flag
+|  `--stagenet` | For stagenet. Daemon must also be launched with --stagenet flag
+
+### Logging
+
+| Option                                 | Description
+|----------------------------------------|------------
+|  `--log-file <arg>`                    | Specify log file
+|  `--log-level <arg>`                   | 0-4 or categories
+|  `--max-log-file-size <arg=104850000>` | Specify maximum log file size [B]
+|  `--max-log-files <arg=50>`            | Specify maximum number of rotated log files to be saved (no limit by setting to 0)
+
+### Daemon (Node)
+
+| Option                                     | Description
+|--------------------------------------------|-----
+|  `--daemon-address <arg>`                  | Use daemon instance at \<host>:\<port>
+|  `--daemon-host <arg>`                     | Use daemon instance at host \<arg> instead of localhost
+|  `--proxy <arg>`                           | \[\<ip>:]\<port> socks proxy to use for daemon connections
+|  `--trusted-daemon`                        | Enable commands which rely on a trusted daemon
+|  `--untrusted-daemon`                      | Disable commands which rely on a trusted daemon
+|  `--password <arg>`                        | Wallet password (escape/quote as \| needed)
+|  `--password-file <arg>`                   | Wallet password file
+|  `--daemon-port <arg=0>`                   | Use daemon instance at port \<arg> instead of 18081
+|  `--daemon-login <arg>`                    | Specify username\[:password] for daemon RPC client
+|  `--daemon-ssl <arg=autodetect)`           | Enable SSL on daemon RPC connections: enabled\|disabled\|autodetect
+|  `--daemon-ssl-private-key <arg>`          | Path to a PEM format private key
+|  `--daemon-ssl-certificate <arg>`          | Path to a PEM format certificate
+|  `--daemon-ssl-ca-certificates <arg>`      | Path to file containing concatenated PEM format certificate(s) to replace system CA(s).
+|  `--daemon-ssl-allowed-fingerprints <arg>` | List of valid fingerprints of allowed RPC servers
+|  `--daemon-ssl-allow-any-cert`             | Allow any SSL certificate from the daemon
+|  `--daemon-ssl-allow-chained`              | Allow user (via --daemon-ssl-ca-certificates) chain certificates
+
+### Other Useful
+
+| Option                | Description
+|-----------------------|-----
+| `--tx-notify <arg>`   | Run a program for each new incoming transaction, '%s' will be replaced by the transaction hash
+| `--non-interactive`   | Run non-interactive (useful when input is DEVNULL)
+| `--config-file <arg>` | Config file
+
+### RPC
+
+| Option                                          | Description
+|-------------------------------------------------|-----
+|  `--rpc-bind-port <arg>`                        | Sets bind port for server
+|  `--disable-rpc-login`                          | Disable HTTP authentication for RPC connections served by this process
+|  `--restricted-rpc`                             | Restricts to view-only commands
+|  `--rpc-bind-ip <arg=127.0.0.1>`                | Specify IP to bind RPC server
+|  `--rpc-bind-ipv6-address <arg=::1>`            | Specify IPv6 address to bind RPC server
+|  `--rpc-restricted-bind-ip <arg=127.0.0.1>`     | Specify IP to bind restricted RPC server
+|  `--rpc-restricted-bind-ipv6-address <arg=::1>` | Specify IPv6 address to bind restricted RPC server
+|  `--rpc-use-ipv6`                               | Allow IPv6 for RPC
+|  `--rpc-ignore-ipv4`                            | Ignore unsuccessful IPv4 bind for RPC
+|  `--rpc-login <arg>`                            | Specify username\[:password] required for RPC server
+|  `--confirm-external-bind`                      | Confirm rpc-bind-ip value is NOT a loopback (local) IP
+|  `--rpc-access-control-origins <arg>`           | Specify a comma separated list of origins to allow cross origin resource sharing
+|  `--rpc-ssl <arg=autodetect>`                   | Enable SSL on RPC connections: enabled\|disabled\|autodetect
+|  `--rpc-ssl-private-key <arg>`                  | Path to a PEM format private key
+|  `--rpc-ssl-certificate <arg>`                  | Path to a PEM format certificate
+|  `--rpc-ssl-ca-certificates <arg>`              | Path to file containing concatenated PEM format certificate(s) to replace system CA(s).
+|  `--rpc-ssl-allowed-fingerprints <arg>`         | List of certificate fingerprints to allow
+|  `--rpc-ssl-allow-chained`                      | Allow user (via --rpc-ssl-certificates) chain certificates
+|  `--disable-rpc-ban`                            | Do not ban hosts on RPC errors
+|  `--rpc-client-secret-key <arg>`                | Set RPC client secret key for RPC payments
+
+### Open Existing Wallet
+
+| Option                      | Description
+|-----------------------------|-----
+| `--wallet-file <arg>`       | Use wallet \<arg>
+| `--wallet-dir <arg>`        | Directory for newly created wallets
+| `--prompt-for-password`     | Prompts for password when not provided
+| `--max-concurrency <arg=0>` | Max number of threads to use for a parallel job
+
+### Create new Wallet
+
+| Option                         | Description
+|--------------------------------|-----
+| `--kdf-rounds <arg=1>`         | Number of rounds for the key derivation function
+| `--hw-device <arg>`            | HW device to use
+| `--hw-device-deriv-path <arg>` | HW device wallet derivation path (e.g., SLIP-10)
+| `--extra-entropy <arg>`        | File containing extra entropy to initialize the PRNG (any data, aim for 256 bits of entropy to be useful, which typically means more than 256 its of data)
+| `--generate-from-json <arg>`   | Generate wallet from JSON format file
+
+### Windows Service
+
+| Option                 | Description
+|------------------------|-----
+|  `--run-as-service`    | true if running as windows service
+|  `--install-service`   | Install Windows service
+|  `--uninstall-service` | Uninstall Windows service
+|  `--start-service`     | Start Windows service
+|  `--stop-service`      | Stop Windows service
+
+### Legacy and Rare Uses
+
+| Option                                              | Description
+|-----------------------------------------------------|-----
+| `--shared-ringdb-dir <arg=C:\ProgramData\.shared-ringdb, C:\ProgramData\.shared-ringdb\testnet if 'testnet', C:\ProgramData\.shared-ringdb\stagenet if 'stagenet'>`                | Set shared ring database path
+| `--no-dns`                                          | Do not use DNS
+| `--offline`                                         | Do not connect to a daemon, nor use DNS
+| `--bitmessage-address <arg=http://localhost:8442/>` | Use PyBitmessage instance at URL \<arg>
+| `--bitmessage-login <arg=username:password>`        | Specify \<arg> as username:password for PyBitmessage API
+
+## Index of JSON RPC Methods
+
+- [**add_address_book**](#add_address_book)
+- [**change_wallet_password**](#change_wallet_password)
+- [**check_reserve_proof**](#check_reserve_proof)
+- [**check_spend_proof**](#check_spend_proof)
+- [**check_tx_key**](#check_tx_key)
+- [**check_tx_proof**](#check_tx_proof)
+- [**close_wallet**](#close_wallet)
+- [**create_account**](#create_account)
+- [**create_address**](#create_address)
+- [**create_wallet**](#create_wallet)
+- [**delete_address_book**](#delete_address_book)
+- [**export_key_images**](#export_key_images)
+- [**export_multisig_info**](#export_multisig_info)
+- [**export_outputs**](#export_outputs)
+- [**finalize_multisig**](#finalize_multisig)
+- [**get_account_tags**](#get_account_tags)
+- [**get_accounts**](#get_accounts)
+- [**get_address**](#get_address)
+- [**get_address_book**](#get_address_book)
+- [**get_address_index**](#get_address_index)
+- [**get_attribute**](#get_attribute)
+- [**get_bulk_payments**](#get_bulk_payments)
+- [**get_height**](#get_height)
+- [**get_languages**](#get_languages)
+- [**get_payments**](#get_payments)
+- [**get_reserve_proof**](#get_reserve_proof)
+- [**get_spend_proof**](#get_spend_proof)
+- [**get_transfer_by_txid**](#get_transfer_by_txid)
+- [**get_transfers**](#get_transfers)
+- [**get_tx_key**](#get_tx_key)
+- [**get_tx_notes**](#get_tx_notes)
+- [**get_tx_proof**](#get_tx_proof)
+- [**get_version**](#get_version)
+- [**import_key_images**](#import_key_images)
+- [**import_multisig_info**](#import_multisig_info)
+- [**import_outputs**](#import_outputs)
+- [**incoming_transfers**](#incoming_transfers)
+- [**is_multisig**](#is_multisig)
+- [**label_account**](#label_account)
+- [**label_address**](#label_address)
+- [**make_integrated_address**](#make_integrated_address)
+- [**make_multisig**](#make_multisig)
+- [**make_uri**](#make_uri)
+- [**open_wallet**](#open_wallet)
+- [**parse_uri**](#parse_uri)
+- [**prepare_multisig**](#prepare_multisig)
+- [**query_key**](#query_key)
+- [**refresh**](#refresh)
+- [**relay_tx**](#relay_tx)
+- [**rescan_blockchain**](#rescan_blockchain)
+- [**rescan_spent**](#rescan_spent)
+- [**set_account_tag_description**](#set_account_tag_description)
+- [**set_attribute**](#set_attribute)
+- [**set_tx_notes**](#set_tx_notes)
+- [**sign**](#sign)
+- [**sign_multisig**](#sign_multisig)
+- [**sign_transfer**](#sign_transfer)
+- [**split_integrated_address**](#split_integrated_address)
+- [**start_mining**](#start_mining)
+- [**stop_mining**](#stop_mining)
+- [**stop_wallet**](#stop_wallet)
+- [**store**](#store)
+- [**submit_multisig**](#submit_multisig)
+- [**submit_transfer**](#submit_transfer)
+- [**sweep_all**](#sweep_all)
+- [**sweep_dust**](#sweep_dust)
+- [**sweep_single**](#sweep_single)
+- [**tag_accounts**](#tag_accounts)
+- [**transfer**](#transfer)
+- [**transfer_split**](#transfer_split)
+- [**untag_accounts**](#untag_accounts)
+- [**verify**](#verify)
 
 ## JSON RPC Methods:
 
@@ -1984,7 +2131,7 @@ $ curl -X POST http://localhost:18082/json_rpc -d '{"jsonrpc":"2.0","id":"0","me
 
 ### **rescan_blockchain**
 
-Rescan the blockchain from scratch, losing any information which can not be recovered from the blockchain itself.  
+Rescan the blockchain from scratch, losing any information which can not be recovered from the blockchain itself.
 This includes destination addresses, tx secret keys, tx notes, etc.
 
 Alias:  _None_.
