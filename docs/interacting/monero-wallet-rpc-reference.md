@@ -91,7 +91,7 @@ The recommended way is to have two wallet files for the same keys. One that is u
 |----------------------------------------|------------
 |  `--log-file <arg>`                    | Specify log file
 |  `--log-level <arg>`                   | 0-4 or categories
-|  `--max-log-file-size <arg=104850000>` | Specify maximum log file size [B]
+|  `--max-log-file-size <arg=104850000>` | Specify maximum log file size in bytes
 |  `--max-log-files <arg=50>`            | Specify maximum number of rotated log files to be saved (no limit by setting to 0)
 
 ### Daemon (Node)
