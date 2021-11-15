@@ -57,7 +57,7 @@ curl \
 
 `"C:\Program Files\Monero GUI Wallet\monero-wallet-rpc.exe" --rpc-bind-port 28088 --wallet-file C:\monero\wallets\main\main --password {walletPWD} --daemon-address http://node.supportxmr.com:18081 --untrusted-daemon --disable-rpc-login --non-interactive`
 
-- Specifying `--untrusted-daemon` is not neccesary but it's there to tell yourself that the daemon is untrusted and that commands requiring a trusted daemon will be disabled
+- Specifying `--untrusted-daemon` is not necessary but it's there to tell yourself that the daemon is untrusted and that commands requiring a trusted daemon will be disabled
 
 ## Running
 
