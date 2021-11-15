@@ -262,7 +262,7 @@ The recommended way is to have two wallet files for the same keys. One that is u
 - [**untag_accounts**](#untag_accounts)
 - [**verify**](#verify)
 
-## JSON RPC Methods:
+## JSON RPC Methods
 
 ### **add_address_book**
 
