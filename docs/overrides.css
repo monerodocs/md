@@ -8,3 +8,18 @@ article .md-typeset__table td:nth-child(1) {
 article .md-typeset__table {
     width: 100%;
 }
+
+:root {
+    --md-primary-fg-color: #121212;
+}
+
+[data-md-color-scheme="default"] {
+    --md-typeset-a-color:  #4051b5;
+}
+
+
+[data-md-color-scheme="slate"] {
+    --md-hue: 232;
+    --md-default-bg-color: #121212;
+    --md-typeset-a-color:  #FF6600;
+}

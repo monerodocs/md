@@ -75,10 +75,16 @@ theme:
     text: Roboto
     code: Roboto Mono
   favicon: assets/favicon.png
-
   palette:
-    primary: white
-    accent: indigo
+    - scheme: default
+      primary: white
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
   icon:
     logo: logo
   logo: 'images/monero.svg'
