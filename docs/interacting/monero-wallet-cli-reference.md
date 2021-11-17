@@ -19,11 +19,11 @@ transactions history, and to facilitate creating transactions.
 
 However, wallet does not store the blockchain and does not directly participate in the p2p network.
 
-The CLI wallet is the most reliable and most feature complete wallet for Monero.  
+The CLI wallet is the most reliable and most feature complete wallet for Monero.
 
-### Depends on the full node 
+### Depends on the full node
 
-Wallet connects to a [full node](/interacting/monerod-reference) to scan the blockchain for your transaction outputs and to send your transactions out to the network.   
+Wallet connects to a [full node](/interacting/monerod-reference) to scan the blockchain for your transaction outputs and to send your transactions out to the network.
 
 The full node can be either local (same computer) or remote.
 
@@ -34,7 +34,7 @@ Connection happens over HTTP and uses [this API](https://www.getmonero.org/resou
 Any transaction leaving the wallet is already blinded by all Monero privacy features.
 This means plain text HTTP communication isn't an issue on its own even if you connect to a remote node.
 
-However, connecting to a remote node has other nuanced trade-offs, which is a topic for a separate article. 
+However, connecting to a remote node has other nuanced trade-offs, which is a topic for a separate article.
 
 ## Syntax
 
@@ -79,7 +79,7 @@ In a separate terminal window, run the wallet:
 |-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------
 | `--log-file <arg>`          | Full path to the log file.
 | `--log-level <arg>`         | `0-4` with `0` being minimal logging and `4` being full tracing. Defaults to `0`. These are general presets and do not directly map to severity levels. For example, even with minimal `0`, you may see some most important `INFO` entries.
-| `--max-log-file-size <arg>` | Soft limit in bytes for the log file (=104850000 by default, which is just under 100MB). Once log file grows past that limit, monero creates the next log file with a UTC timestamp postfix `-YYYY-MM-DD-HH-MM-SS`.<br /><br />In production deployments, you would probably prefer to use established solutions like logrotate instead. In that case, set `--max-log-file-size 0` to prevent monero from managing the log files. 
+| `--max-log-file-size <arg>` | Soft limit in bytes for the log file (=104850000 by default, which is just under 100MB). Once log file grows past that limit, monero creates the next log file with a UTC timestamp postfix `-YYYY-MM-DD-HH-MM-SS`.<br /><br />In production deployments, you would probably prefer to use established solutions like logrotate instead. In that case, set `--max-log-file-size 0` to prevent monero from managing the log files.
 | `--max-log-files <arg>`     | Limit on the number of log files (=50 by default). The oldest log files are removed. In production deployments, you would probably prefer to use established solutions like logrotate instead.
 
 #### Full node connection
@@ -160,7 +160,7 @@ These options are either legacy or rarely useful.
 | `--shared-ringdb-dir <arg>`  | Set shared ring database path. [No longer worthwhile](https://www.reddit.com/r/Monero/comments/9rtnpx/are_there_any_updated_blackball_databases/).
 | `--create-address-file`      | Has no effect. The `*.address.txt` file is created regardless of this option.
 | `--electrum-seed <arg>`      | Provide mnemonic seed as a commandline option for `--restore-deterministic-wallet` instead of interactively. This is not recommended b/c the seed will be saved in your command history and also visible in the process list.
-| `--generate-from-json <arg>` | You would run `monero-wallet-rpc` to use this option. It seems exposed in `monero-wallet-cli` by accident. 
+| `--generate-from-json <arg>` | You would run `monero-wallet-rpc` to use this option. It seems exposed in `monero-wallet-cli` by accident.
 | `--tx-notify <arg>`          | You would run `monero-wallet-rpc` to use this option. It seems exposed in `monero-wallet-cli` by accident.
 
 ## Defaults
@@ -195,12 +195,12 @@ Use `help command_name` to learn more.
 `fee` - show current fee-per-byte and full node's mempool (the backlog of transactions depending on the priority)
 
 `wallet_info` - show wallet file path, standard address, type and network
-    
+
 ### Balance
 
 `account` - total balance; list accounts with respective balances
 
-`balance detail` - within the current account, list addresses with respective balances  
+`balance detail` - within the current account, list addresses with respective balances
 
 `refresh` - force refresh the balance and transactions by pulling latest blocks from the full node; this is often useful because auto-refresh only kicks in once in 90 seconds
 
@@ -256,7 +256,7 @@ Use `help command_name` to learn more.
 
 `get_spend_proof` -> `check_spend_proof` - prove you made the payment
 
-`sign <file>` -> `verify <filename> <address> <signature>` - prove ownership of the address; allows to verify the file was signed by the owner of specific Monero address  
+`sign <file>` -> `verify <filename> <address> <signature>` - prove ownership of the address; allows to verify the file was signed by the owner of specific Monero address
 
 `get_tx_proof` -> `check_tx_proof`
 
@@ -320,7 +320,7 @@ Use `help command_name` to learn more.
 These allow to learn and verify transaction's private key `r`.
 This was useful to create a [proof of payment](https://www.getmonero.org/resources/user-guides/prove-payment.html)
 but got superseded by `get_spend_proof`.
-                                                          
+
 `get_tx_key <txid>`
 
 `check_tx_key <txid> <txkey> <address>`
@@ -338,7 +338,7 @@ but got superseded by `get_spend_proof`.
 `address_book [(add ((<address> [pid <id>])|<integrated address>) [<description possibly with whitespaces>])|(delete <index>)]`
 
 `set_description [free text note]` -> `get_description` - manage convenience description of the wallet (the information is local)
-  
+
 ### Legacy
 
 `save` - this now happens automatically
