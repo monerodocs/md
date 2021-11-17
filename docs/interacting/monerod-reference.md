@@ -36,7 +36,7 @@ Their names follow the `command_name` pattern.
 
 Go to directory where you unpacked Monero.
 
-The [stagenet](/infrastructure/networks) is what your should be using for learning and experimentation.
+The [stagenet](/infrastructure/networks) is what you should be using for learning and experimentation.
 
 ```
 ./monerod --stagenet --detach                # run as a daemon in background

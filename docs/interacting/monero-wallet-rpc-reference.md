@@ -4,11 +4,74 @@ title: monero-wallet-rpc - Reference
 
 # `monero-wallet-rpc` - Reference
 
+!!! note
+    This is only relevant for programmers. Everyday users won't need `monero-wallet-rpc`.
+
+!!! note
+    Use [stagenet](/infrastructure/networks) for learning and development on top of `monero-wallet-rpc`.
+
 ## Overview
 
-This is a documentation for how to use `monero-wallet-rpc` which replaced the rpc interface that was in `simplewallet` and then `monero-wallet-cli`.
+### Provides wallet API over HTTP
 
-All monero-wallet-rpc methods use the same JSON RPC interface. For example:
+Programmers can build thin user interfaces (UIs) on top of `monero-wallet-rpc`.
+
+Programmers can also use `monero-wallet-rpc` to build arbitrary wallet automation driven by HTTP calls.
+
+Think of `monero-wallet-rpc` as complete wallet logic exposed via JSON-RPC over HTTP.
+
+Wallet uses your private keys to understand your total balance,
+transactions history, and to facilitate creating transactions.
+
+However, wallet does not store the blockchain and does not directly participate in the p2p network.
+
+### Depends on the full node
+
+Wallet connects to a [full node](/interacting/monerod-reference) to scan the blockchain for your transaction outputs and to send your transactions out to the network.
+
+The full node can be either local (same computer) or remote.
+
+You can play with [CLI wallet](/interacting/monero-wallet-cli-reference) and [GUI wallet](/interacting/monero-wallet-gui-reference) first to understand the relationship between the full node, the wallet and the user.
+
+## Syntax
+
+`./monero-wallet-rpc --rpc-bind-port <port> (--wallet-file <file>|--generate-from-json <file>|--wallet-dir <directory>) [options]`
+
+Or with a config file:
+
+`./monero-wallet-rpc --config-file <arg>`
+
+## Running
+
+Make sure you are running a locally synced `monerod` or point to a remote daemon with `--daemon-address` option.
+
+#### Linux (Production Example)
+
+`./monero-wallet-rpc --rpc-bind-port 28088 --wallet-file wallets/main/main --password walletPassword --rpc-login monero:rpcPassword --log-file logs/monero-wallet-rpc.log --max-log-files 2 --trusted-daemon --non-interactive`
+
+- If the RPC is used to retrieve information not dependent on any spending, consider using a view-only to prevent abuse.
+- `--rpc-login` should be used in production to protect against any network attacks. An uncommon password protects against the case where the RPC port is open to the public
+
+#### Windows (Development Example)
+
+`monero-wallet-rpc --rpc-bind-port 28088 --wallet-file wallets\main\main --password walletPassword --daemon-address http://node.supportxmr.com:18081 --untrusted-daemon --disable-rpc-login`
+
+- Specifying `--untrusted-daemon` is not necessary but tells yourself that the daemon is untrusted and that commands requiring a trusted daemon will be disabled
+- Default installation on Windows is `"C:\Program Files\Monero GUI Wallet"`
+
+### Trouble Shooting
+
+If the expected RPC URL, say [http://127.0.0.1:28088/json_rpc](http://127.0.0.1:28088/json_rpc), is unavailabe, or there is no terminal output saying that the server has been started, `monero-wallet-rpc` might be trying to synchronize the wallet. In that case, you should use the GUI or CLI to sync that wallet file because using the GUI/CLI results in faster and measurable syncing.
+
+The suggested way is to have two wallet files for the same keys. One that is used manually (synced often), and one that is used by `monero-wallet-rpc`. Whenever you decide to use `monero-wallet-rpc` and encounter the unresponsive issue, simply copy the files of the GUI/CLI wallet and replace the ones that were being used by `monero-wallet-rpc`. This problem should only occur on the development system where `monerod` or `monero-wallet-rpc` might not have been running for weeks. In production, `monerod` and `monero-wallet-rpc` should have minimal downtimes, ensuring that the wallet is always synchronized.
+
+## API conventions
+
+The API is based on [JSON-RPC standard](https://en.wikipedia.org/wiki/JSON-RPC) version 2.0.
+
+All `monero-wallet-rpc` method calls use the same JSON-RPC interface.
+
+Assuming your `monero-wallet-rpc` is running on 127.0.0.1:18082, you would call it like this:
 
 ``` Bash
 IP=127.0.0.1
@@ -22,42 +85,8 @@ curl \
     -H 'Content-Type: application/json'
 ```
 
-**1 XMR = 1e12 atomic units** where "atomic units" is the smallest fraction of 1 XMR according to the monerod implementation.
-
-## Syntax
-
-`./monero-wallet-rpc --rpc-bind-port <port> (--wallet-file <file>|--generate-from-json <file>|--wallet-dir <directory>) [options]`
-
-### With Config File
-
-`./monero-wallet-rpc --config-file <arg>`
-
-### Examples
-
-#### Unix (Production Example)
-
-`./monero-wallet-rpc --rpc-bind-port 28088 --wallet-file wallets/main/main --password walletPassword --rpc-login monero:rpcPassword --log-file logs/monero-wallet-rpc.log --max-log-files 2 --trusted-daemon --non-interactive`
-
-- If the RPC is used to retrieve information not dependent on any spending, consider using a view-only to prevent abuse.
-- `--rpc-login` should be used in production to protect against any network attacks. An uncommon password protects against the case where the RPC port is open to the public
-- A good place to keep Monero binaries is `~/bin/monero`, in order to be used by many programs without needing root to update it.
-
-#### Windows (Development Example)
-
-`monero-wallet-rpc --rpc-bind-port 28088 --wallet-file wallets\main\main --password walletPassword --daemon-address http://node.supportxmr.com:18081 --untrusted-daemon --disable-rpc-login`
-
-- Specifying `--untrusted-daemon` is not necessary but tells yourself that the daemon is untrusted and that commands requiring a trusted daemon will be disabled
-- Default installation on Windows is `"C:\Program Files\Monero GUI Wallet"`
-
-## Running
-
-Make sure you are running a locally synced `monerod` or have a daemon address to supply to `--daemon-address`
-
-### Trouble Shooting
-
-If the expected RPC URL, say [http://127.0.0.1:28088/json_rpc](http://127.0.0.1:28088/json_rpc), is unavailabe, or there is no terminal output saying that the server has been started, `monero-wallet-rpc` might be trying to synchronize the wallet. In that case, you should use the GUI or CLI to sync that wallet file because using the GUI/CLI results in faster and measurable syncing.
-
-The recommended way is to have two wallet files for the same keys. One that is used manually (synced often), and one that is used by `monero-wallet-rpc`. Whenever you decide to use `monero-wallet-rpc` and encounter the unresponsive issue, simply copy the files of the GUI/CLI wallet and replace the ones that were being used by `monero-wallet-rpc`. This problem should only occur on the development system where `monerod` or `monero-wallet-rpc` might not have been running for weeks. In production, `monerod` and `monero-wallet-rpc` should have minimal downtimes, ensuring that the wallet is always synchronized.
+The **atomic unit** used by the API is the smallest fraction of 1 XMR according to the monerod implementation.
+1 XMR = 1e12 atomic units.
 
 ## Options
 
@@ -177,7 +206,7 @@ The recommended way is to have two wallet files for the same keys. One that is u
 | `--bitmessage-address <arg=http://localhost:8442/>` | Use PyBitmessage instance at URL \<arg>
 | `--bitmessage-login <arg=username:password>`        | Specify \<arg> as username:password for PyBitmessage API
 
-## Index of JSON RPC Methods
+## Index of JSON-RPC Methods
 
 - [**add_address_book**](#add_address_book)
 - [**change_wallet_password**](#change_wallet_password)
@@ -252,7 +281,7 @@ The recommended way is to have two wallet files for the same keys. One that is u
 - [**untag_accounts**](#untag_accounts)
 - [**verify**](#verify)
 
-## JSON RPC Methods
+## JSON-RPC Methods
 
 ### **add_address_book**
 
