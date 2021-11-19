@@ -58,7 +58,7 @@ A fresh onion address and corresponding key pair got created for you by the `tor
 Monero daemon itself is not necessary at this point. The onion services (AKA hidden services) will just wait until localhost `monerod` shows up at specified ports 18081 and 18083.
 
 ### /etc/tor/torrc
-    
+
 ``` ApacheConf
 HiddenServiceDir /var/lib/tor/monero
 HiddenServicePort 18081 127.0.0.1:18081    # interface for wallet ("RPC")
@@ -107,7 +107,7 @@ Print your onion address with `cat /var/lib/tor/monero/hostname` and paste it to
 
 ``` YAML
 # /etc/monero.conf
-# 
+#
 # Configuration file for monerod. For all available options see the MoneroDocs:
 # https://monerodocs.org/interacting/monerod-reference/
 
@@ -157,11 +157,49 @@ limit-rate-down=1048576   # 1048576 kB/s == 1GB/s; a raise from default 8192 kB/
 tx-proxy=tor,127.0.0.1:9050,16
 
 # Tor: add P2P seed nodes for the Tor network
-add-peer=moneroxmrxw44lku6qniyarpwgznpcwml4drq7vb24ppatlcg4kmxpqd.onion:18080
-add-peer=monerozf6koypqrt.onion:18080
-add-peer=zbjkbsxc5munw3qusl7j2hpcmikhqocdf4pqhnhtpzw5nt5jrmofptid.onion:18083        # https://github.com/monero-project/monero/blob/master/src/p2p/net_node.inl
+# For an up-to-date list of working nodes see:
+# * https://xmrguide.org/remote_nodes
+# * https://monero.fail/
+add-peer=monerobpsls5krmdra2rousd7qgze6v5dyylqkdzruejcbgddjxum6yd.onion:18089
+add-peer=usexmr2eeexmlwpuvsfe6tyjmdqliplb2b7uxju6yrrziq3n7fksnxyd.onion:18081
+add-peer=mxcd4577fldb3ppzy7obmmhnu3tf57gbcbd4qhwr2kxyjj2qi3dnbfqd.onion:18081
+add-peer=56wl7y2ebhamkkiza4b7il4mrzwtyvpdym7bm2bkg3jrei2je646k3qd.onion:18089
+add-peer=lpngjswsmnsixjddt7hb3aru4kjqpkro2fyg4wb7vjrmqlmlpatfu7id.onion:18089
+add-peer=xmrnodesarnt4w35aqmu66aart3o324yw6qbnv6pglpof6uqaydzk5id.onion:18081
+add-peer=ghziyspoobhmp5oun2xcomrmetqiwbvuaegmte3s47nnqv7hkaa64sid.onion:18089
+add-peer=wwcsd33eo5gysrzzdu547p3atudruzevh7rbxxo7tras4iz4pm626did.onion:18089
+add-peer=xmrnodeanyunhzcmhsjnbgchvslugtbrvvxbibnwsfmiq7ks3cwkqzad.onion:18081
+add-peer=5nvd6jbefgto3u74nzzdkcsbqgxyzrkk7bz5qupsdqg4gbuj5valiaqd.onion:18081
+add-peer=poysibicsj73uhw7sjrv3fyopoyulrns4nlr5amyqdtafkqzlocd4qad.onion:18081
+add-peer=ode6i5zdrm4xjqeubacrwmgnihzpfsfvpdf4kvcphhnrqkmrhq5idxyd.onion:28089
+add-peer=6dsdenp6vjkvqzy4wzsnzn6wixkdzihx3khiumyzieauxuxslmcaeiad.onion:18081
+add-peer=xmrrpcmyrz3imrldcwiqt4vm5asq2vefgzybamxdigx37p3ctfcjnsad.onion:18089
+add-peer=hashvaultsvg2rinvxz7kos77hdfm6zrd5yco3tx2yh2linsmusfwyad.onion:18081
+add-peer=fk65gptl47nt3fkxt53bszjmwpnzzhegk2yelrut3zazfuuttv4pvaad.onion:18081
 add-peer=rno75kjcw3ein6i446sqby2xkyqjarb75oq36ah6c2mribyklzhurpyd.onion:28083        # it's mainnet despite the weird port, according to reddit
 add-peer=sqzrokz36lgkng2i2nlzgzns2ugcxqosflygsxbkybb4xn6gq3ouugqd.onion:18083        # very flaky, works 1 in 3 times
+
+# Make the seed nodes permanent to fix monerod issue of not maintaining enough connections,
+# based on this reddit comment:
+# https://www.reddit.com/r/monerosupport/comments/k3m3x2/comment/ge5ehcy/?utm_source=share&utm_medium=web2x&context=3
+add-priority-node=monerobpsls5krmdra2rousd7qgze6v5dyylqkdzruejcbgddjxum6yd.onion:18089
+add-priority-node=usexmr2eeexmlwpuvsfe6tyjmdqliplb2b7uxju6yrrziq3n7fksnxyd.onion:18081
+add-priority-node=mxcd4577fldb3ppzy7obmmhnu3tf57gbcbd4qhwr2kxyjj2qi3dnbfqd.onion:18081
+add-priority-node=56wl7y2ebhamkkiza4b7il4mrzwtyvpdym7bm2bkg3jrei2je646k3qd.onion:18089
+add-priority-node=lpngjswsmnsixjddt7hb3aru4kjqpkro2fyg4wb7vjrmqlmlpatfu7id.onion:18089
+add-priority-node=xmrnodesarnt4w35aqmu66aart3o324yw6qbnv6pglpof6uqaydzk5id.onion:18081
+add-priority-node=ghziyspoobhmp5oun2xcomrmetqiwbvuaegmte3s47nnqv7hkaa64sid.onion:18089
+add-priority-node=wwcsd33eo5gysrzzdu547p3atudruzevh7rbxxo7tras4iz4pm626did.onion:18089
+add-priority-node=xmrnodeanyunhzcmhsjnbgchvslugtbrvvxbibnwsfmiq7ks3cwkqzad.onion:18081
+add-priority-node=5nvd6jbefgto3u74nzzdkcsbqgxyzrkk7bz5qupsdqg4gbuj5valiaqd.onion:18081
+add-priority-node=poysibicsj73uhw7sjrv3fyopoyulrns4nlr5amyqdtafkqzlocd4qad.onion:18081
+add-priority-node=ode6i5zdrm4xjqeubacrwmgnihzpfsfvpdf4kvcphhnrqkmrhq5idxyd.onion:28089
+add-priority-node=6dsdenp6vjkvqzy4wzsnzn6wixkdzihx3khiumyzieauxuxslmcaeiad.onion:18081
+add-priority-node=xmrrpcmyrz3imrldcwiqt4vm5asq2vefgzybamxdigx37p3ctfcjnsad.onion:18089
+add-priority-node=hashvaultsvg2rinvxz7kos77hdfm6zrd5yco3tx2yh2linsmusfwyad.onion:18081
+add-priority-node=fk65gptl47nt3fkxt53bszjmwpnzzhegk2yelrut3zazfuuttv4pvaad.onion:18081
+add-priority-node=rno75kjcw3ein6i446sqby2xkyqjarb75oq36ah6c2mribyklzhurpyd.onion:28083        # it's mainnet despite the weird port, according to reddit
+add-priority-node=sqzrokz36lgkng2i2nlzgzns2ugcxqosflygsxbkybb4xn6gq3ouugqd.onion:18083        # very flaky, works 1 in 3 times
 
 # Tor: tell monerod your onion address so it can be advertised on P2P network
 anonymous-inbound=PASTE_YOUR_ONION_HOSTNAME:18083,127.0.0.1:18083,64
@@ -218,12 +256,12 @@ To verify, use `ufw status`. The output should be similar to the following (the 
 ```
 To                         Action      From
 --                         ------      ----
-22/tcp                     LIMIT       Anywhere                  
-18080/tcp                  ALLOW       Anywhere                  
-18081/tcp                  ALLOW       Anywhere                  
-22/tcp (v6)                LIMIT       Anywhere (v6)             
-18080/tcp (v6)             ALLOW       Anywhere (v6)             
-18081/tcp (v6)             ALLOW       Anywhere (v6)   
+22/tcp                     LIMIT       Anywhere
+18080/tcp                  ALLOW       Anywhere
+18081/tcp                  ALLOW       Anywhere
+22/tcp (v6)                LIMIT       Anywhere (v6)
+18080/tcp (v6)             ALLOW       Anywhere (v6)
+18081/tcp (v6)             ALLOW       Anywhere (v6)
 ```
 
 
@@ -238,12 +276,12 @@ List all services listening on ports and make sure it is what you expect:
 The output should include these (in any order); obviously the PID values will differ.
 
 ```
-Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name
 ...
-tcp        0      0 0.0.0.0:18080           0.0.0.0:*               LISTEN      259255/monerod      
-tcp        0      0 0.0.0.0:18081           0.0.0.0:*               LISTEN      259255/monerod      
-tcp        0      0 127.0.0.1:18083         0.0.0.0:*               LISTEN      259255/monerod      
-tcp        0      0 127.0.0.1:9050          0.0.0.0:*               LISTEN      258786/tor          
+tcp        0      0 0.0.0.0:18080           0.0.0.0:*               LISTEN      259255/monerod
+tcp        0      0 0.0.0.0:18081           0.0.0.0:*               LISTEN      259255/monerod
+tcp        0      0 127.0.0.1:18083         0.0.0.0:*               LISTEN      259255/monerod
+tcp        0      0 127.0.0.1:9050          0.0.0.0:*               LISTEN      258786/tor
 ```
 
 ### On client machine
