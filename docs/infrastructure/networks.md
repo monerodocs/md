@@ -28,8 +28,8 @@ Stagenet is technically equivalent to mainnet, both in terms of features and con
 To get started:
 
 * Connect your GUI or CLI to stagenet open node **monero-stagenet.exan.tech:38081**
-* Get free XMR from [stagenet faucet 1](https://community.xmr.to/faucet/stagenet/) or [stagenet faucet 2](http://stagenet.xmr-tw.org:38085/)
-* Check the [stagenet block explorer 1](https://community.xmr.to/explorer/stagenet/) or [stagenet block explorer 2](http://162.210.173.150:8083/)
+* Get free stagenet XMR from [stagenet faucet](https://melo.tools/faucet/stagenet/) or [stagenet faucet 2](https://stagenet-faucet.xmr-tw.org/)
+* Check the [stagenet block explorer 1](https://stagenet.xmrchain.net/) or [stagenet block explorer 2](https://melo.tools/explorer/stagenet/)
 
 Default TCP ports (listening):
 
@@ -51,8 +51,8 @@ To get started:
 
 * Build Monero from [source](https://github.com/monero-project/monero)
 * Connect your GUI or CLI to testnet open node **monero-testnet.exan.tech:28081**
-* Get free XMR from [testnet faucet 1](https://community.xmr.to/faucet/testnet/) or [testnet faucet 2](https://dis.gratis/)
-* Check the [testnet block explorer 1](https://community.xmr.to/explorer/testnet/) or [testnet block explorer 2](https://testnet.xmrchain.net)
+* Get free XMR from [testnet faucet](https://melo.tools/faucet/testnet/)
+* Check the [testnet block explorer 1](https://testnet.xmrchain.net/) or [testnet block explorer 2](https://melo.tools/explorer/testnet/)
 
 Default TCP ports (listening):
 
