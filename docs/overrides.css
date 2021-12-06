@@ -21,5 +21,8 @@ article .md-typeset__table {
 [data-md-color-scheme="slate"] {
     --md-hue: 232;
     --md-default-bg-color: #121212;
+    --md-footer-bg-color: #181818;
+    --md-footer-bg-color--dark: #181818;
     --md-typeset-a-color:  #FF6600;
+    --md-code-bg-color: #191919;
 }
