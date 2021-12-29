@@ -304,9 +304,9 @@ Use `help command_name` to learn more.
 
 `export_outputs <file>` -> `import_outputs <file>` - helps with cold spending; export outputs from a view-wallet to the cold-wallet to make it aware of what had been sent to it
 
-`mark_output_spent <amount>/<offset> | <filename> [add]`
+`mark_output_spent <amount>/<offset> | <filename> [add]` - "blackball"/mark an output known to be spent, so that it will no longer be selected as a decoy
 
-`mark_output_unspent <amount>/<offset>`
+`mark_output_unspent <amount>/<offset>` - unmark an output not known to be spent, so that it will possibly be selected as a decoy
 
 `is_output_spent <amount>/<offset>`
 
