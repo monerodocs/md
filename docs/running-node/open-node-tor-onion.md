@@ -126,13 +126,12 @@ log-level=0                    # Minimal logs, WILL NOT log peers or wallets con
 max-log-file-size=2147483648   # Set to 2GB to mitigate log trimming by monerod; configure logrotate instead
 
 # P2P full node
-p2p-bind-ip=0.0.0.0            # Bind to all interfaces (the default)
-p2p-bind-port=18080            # Bind to default port
+p2p-bind-ip=127.0.0.1          # Bind to loopback network interface
 
 # RPC open node
 public-node=1                  # Advertise to other users they can use this node as a remote one for connecting their wallets
 confirm-external-bind=1        # Open Node (confirm)
-rpc-bind-ip=0.0.0.0            # Bind to all interfaces (the Open Node)
+rpc-bind-ip=127.0.0.1          # Bind to loopback network interface (the Open Node)
 rpc-bind-port=18081            # Bind to default port (the Open Node)
 restricted-rpc=1               # Obligatory for Open Node interface
 no-igd=1                       # Disable UPnP port mapping
