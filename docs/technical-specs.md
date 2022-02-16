@@ -35,7 +35,7 @@ title: Monero Technical Specification
 
 ## Block reward
 
-* smoothly decreasing and subject to penalties for blocks greater then median size of the last 100 blocks (M100)
+* smoothly decreasing and subject to penalties for blocks greater than median size of the last 100 blocks (M100)
 * ~1.6 XMR as of June 2020; for the current reward check the coinbase transaction of the [latest block](https://xmrchain.net/)
 
 ## Block size
