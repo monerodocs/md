@@ -20,8 +20,8 @@ This goal has since failed, as it inevitably happens with "ASIC hard" algorithms
 Efficient CryptoNight ASIC was developed in 2017 by Bitmain. 
 
 Monero inherited CryptoNight as its proof of work in 2014.
-Since then Monero slightly evolved the algorithm to intentionally break compatibility with released ASIC-s.
-Currently Monero implements CryptoNight v2, a third iteration of original CryptoNight (v0, v1, v2).
+Since then Monero slightly evolved the algorithm to intentionally break compatibility with released ASIC-s. Three used variants existed: Cryptonightv1, Cryptonightv2 and [Cryptonight-R](https://github.com/SChernykh/CryptonightR).
+**Monero no longer uses CryptoNight or any variant. Monero changed its mining algorithm to [RandomX](/proof-of-work/random-x) in November 2019.**
 
 ## The goal is to find small-enough hash
 
