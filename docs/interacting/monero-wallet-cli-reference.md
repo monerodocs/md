@@ -232,6 +232,8 @@ Use `help command_name` to learn more.
 
 `get_tx_note <txid>` - get a string note for transaction id
 
+`export_transfers [in|out|all|pending|failed|pool|coinbase] [index=<N1>[,<N2>,...]] [<min_height> [<max_height>]] [output=<filepath>] [option=<with_keys>]` - exports a list of all transfer information to a CSV file. You can filter by type `[in|out|all|pending|failed|pool|coinbase]`, by index, by minimum and maximum block height, specify the output path for the CSV file, and optionally include the tx private keys (if available) with the export.
+
 ### Keys and Passwords
 
 #### Secret mnemonic seed
