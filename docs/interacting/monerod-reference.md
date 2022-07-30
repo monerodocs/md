@@ -44,7 +44,7 @@ tail -f ~/.bitmonero/stagenet/bitmonero.log  # watch the logs
 ./monerod --stagenet exit                    # ask daemon to exit gracefully
 ```
 
-The [mainnnet](/infrastructure/networks) is when you want to deal with the real XMR.
+The [mainnet](/infrastructure/networks) is when you want to deal with the real XMR.
 
 ```
 ./monerod --detach                           # run as a daemon in background
