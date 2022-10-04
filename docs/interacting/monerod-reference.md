@@ -67,7 +67,7 @@ The following groups are only to make reference easier to follow. The daemon its
 | `--os-version`      | Show build timestamp and target operating system. Example output:<br />`OS: Linux #65-Ubuntu SMP Thu Dec 10 12:01:51 UTC 2020 5.4.0-59-generic`.
 | `--check-updates`   | One of: `disabled` \| `notify` \| `download` (=`notify` by default). Check for new versions of Monero and optionally download it. You should probably prefer your OS package manager to do the update, if possible. There is also unimplemented `update` option shown by the help system.
 
-#### Pick network
+#### Pick Monero network (blockchain)
 
 | Option           | Description
 |------------------|------------------------------------------------------------------------------------------------
@@ -132,16 +132,18 @@ The node and peer words are used interchangeably.
 | `--limit-rate`         | Set the same limit value for incoming and outgoing data transfer. By default (`-1`) the individual up/down default limits will be used. It is better to use `--limit-rate-up` and `--limit-rate-down` instead to avoid confusion.
 | `--offline`            | Do not listen for peers, nor connect to any. Useful for working with a local, archival blockchain.
 | `--allow-local-ip`     | Allow adding local IP to peer list. Useful mostly for debug purposes when you may want to have multiple nodes on a single machine.
+| `--max-connections-per-ip` | Maximum number of connections allowed from the same IP address.
 
-#### Tor/I2P
+#### Tor/I2P and proxies
 
 This is experimental. It may be best to start with this [guide](https://github.com/monero-project/monero/blob/master/docs/ANONYMITY_NETWORKS.md#p2p-commands).
 
 | Option                 | Description
 |------------------------|--------------------------------------------------------------------------------------------------------------------------------------
-| `--tx-proxy`           | Send out your local transactions through SOCKS5 proxy (Tor or I2P). Format:<br />`<network-type>,<socks-ip:port>[,max_connections][,disable_noise]` <br /><br />Example:<br />`./monerod --tx-proxy "tx-proxy=tor,127.0.0.1:9050,16"`<br /><br />This was introduced to make publishing transactions over Tor easier (no need for torsocks) while allowing clearnet for blocks at the same time (while torsocks affected everything).<br /><br />Adding `,disable_noise` disables white noise and Dandelion++ (will speed up tx broadcast but is otherwise not recommended). <br /><br />Note that forwarded transactions (those not originating from connected wallet) will still be relayed over clearnet.<br /><br />**Requires multiple `--add-peer`** to manually add onion-enabled p2p seed nodes - see [Tor onion seed nodes for Monero P2P network](/infrastructure/tor-onion-p2p-seed-nodes). See this [guide](https://github.com/monero-project/monero/blob/master/docs/ANONYMITY_NETWORKS.md#p2p-commands) and [commit](https://github.com/monero-project/monero/pull/6021).
+| `--tx-proxy`           | Send out your local transactions through SOCKS5 proxy (Tor or I2P). Format:<br />`<network-type>,<socks-ip:port>[,max_connections][,disable_noise]` <br /><br />Example:<br />`./monerod --tx-proxy "tx-proxy=tor,127.0.0.1:9050,16"`<br /><br />This was introduced to make publishing transactions over Tor easier (no need for torsocks) while allowing clearnet for blocks at the same time (while torsocks affected everything).<br /><br />Adding `,disable_noise` disables white noise and Dandelion++ (will speed up tx broadcast but is otherwise not recommended). <br /><br />Note that forwarded transactions (those not originating from the connected wallet(s)) will still be relayed over clearnet.<br /><br />**Requires multiple `--add-peer`** to manually add onion-enabled p2p seed nodes - see [Tor onion seed nodes for Monero P2P network](/infrastructure/tor-onion-p2p-seed-nodes). See this [guide](https://github.com/monero-project/monero/blob/master/docs/ANONYMITY_NETWORKS.md#p2p-commands) and [commit](https://github.com/monero-project/monero/pull/6021).
 | `--anonymous-inbound`  | Allow anonymous incoming connections to your onionized P2P interface. Format: <br />`<hidden-service-address>,<[bind-ip:]port>[,max_connections]`<br /><br />Example:<br />`./monerod --anonymous-inbound "rveahdfho7wo4b2m.onion:18083,127.0.0.1:18083,100"`.<br /><br />Obviously, you first need to setup the hidden service in your Tor config. See the [guide](https://github.com/monero-project/monero/blob/master/ANONYMITY_NETWORKS.md#p2p-commands).
 | `--pad-transactions`   | Pad relayed transactions to next 1024 bytes to help defend against traffic volume analysis. This only makes sense if you are behind Tor or I2P. See [commit](https://github.com/monero-project/monero/pull/4787).
+| `--proxy`              | Network communication through proxy. Works with any service that supports SOCKS4, including Tor, i2p, and commercial VPN/proxy services. SOCKS5 support is anticipated in the future. Enabling this setting sends all traffic through this proxy. Can be used in conjunction with `--tx-proxy`, in which case transaction broadcasts originating from the connected wallet(s) will be sent through Tor or i2p as specified in `--tx-proxy`, and all other traffic will be sent through the SOCKS proxy. Format:<br />`<socks-ip:port>`
 
 #### Node RPC API
 
@@ -179,6 +181,10 @@ The following options define how the API behaves.
 | `--rpc-login`                   | Specify `username[:password]` required to connect to API.
 | `--rpc-access-control-origins`  | Specify a comma separated list of origins to allow cross origin resource sharing. This is useful if you want to use `monerod` API directly from a web browser via JavaScript (say in a pure-fronted web appp scenario). With this option `monerod` will put proper HTTP CORS headers to its responses. You will also need to set `--rpc-login` if you use this option. Normally though, the API is used by backend app and this option isn't necessary.
 | `--disable-rpc-ban`             | Do not ban hosts on RPC errors. May help to prevent monerod from banning traffic originating from the Tor daemon.
+| `rpc-payment-address`           | Restrict RPC to clients sending micropayment to this address.
+| `rpc-payment-difficulty`        | Restrict RPC to clients sending micropayment at this difficulty in thousands.
+| `rpc-payment-credits`           | Restrict RPC to clients sending micropayment, yields that many credits per payment in hundreds.
+| `rpc-payment-allow-free-loopback` | Allow free access from the loopback address (ie, the local host).
 
 
 #### Accepting Monero
