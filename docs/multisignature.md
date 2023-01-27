@@ -62,6 +62,12 @@ Error: You can enable it with:
 Error:   set enable-multisig-experimental 1
 ```
 
+This warning message is there to let people know that Multisig is still an experimental feature and may have bugs.
+
+While none are known at this time, malicious group members, in a worst case scenario, will be able to acquire all funds within the multisig wallet.
+
+Two of the steps to get Monero's multisig implementation further tested and more secure would be the completion of a formal specification and a third-party audit. However, there is currently no timeline for this.
+
 **Recommendation:** By default the CLI applies a screen timeout of 90 seconds. After which, you will be asked to input your password to continue using the wallet. Unfortunately, once the wallet times out, it interrupts the multisig creation process.
 
 To extend the timeout to 10 minutes, use the command:
