@@ -21,9 +21,7 @@ Transactions are still signed with a single spend key. The spend key is a sum of
 
 Let's consider the 2-of-3 scheme. We have 3 participants. Each participant is granted exactly 2 private keys in a way that pairs do not repeat between participants. This way any 2 participants together have all 3 private keys required to create the private spend key.
 
-Multi-signing is a wallet-level feature. There is no way to learn from the blockchain which transactions were created using multiple signatures.
-
-It is also worth noting in Monero there is no multisig addresses as such. [Address structure](/public-address/standard-address/) does not care how the underlying private spend key got created.
+Multi-signing is a wallet-level feature, and there is no separate multisig address type. This means there is no way to learn from the blockchain which transactions were created using multiple signatures.
 
 After multisig wallet setup every participant ends up knowing the public address and private view key. This is necessary for participants to recognize and decipher transactions they are supposed to co-sign.
 
@@ -53,6 +51,15 @@ Next, **enable** multisig via:
 
 ```
 set enable-multisig-experimental 1
+```
+
+If you don't set this flag, then try to issue the first command, you will see:
+
+```
+Error: Multisig is disabled.
+Error: Multisig is an experimental feature and may have bugs. Things that could go wrong include: funds sent to a multisig wallet can't be spent at all, can only be spent with the participation of a malicious group member, or can be stolen by a malicious group member.
+Error: You can enable it with:
+Error:   set enable-multisig-experimental 1
 ```
 
 **Recommendation:** By default the CLI applies a screen timeout of 90 seconds. After which, you will be asked to input your password to continue using the wallet. Unfortunately, once the wallet times out, it interrupts the multisig creation process.
@@ -97,11 +104,13 @@ Send this multisig info to all other participants, then use make_multisig <thres
 This includes the PRIVATE view key, so needs to be disclosed only to that multisig wallet's participants 
 ```
 
-As the instructions above say, you then want to share this initialization data (the long string that begins Multisig) with the other multisig participants.
+The long string that begins Multisig is important, and will be shared with the other wallets in the next step.
+
+Before you move to the next step, you'll want to run the **prepare_multisig** command on the rest of the wallets you want to use in your multisig setup. For example, 2 more if you're doing a 2/3 multisig.
 
 ### 3: make_multisig
 
-This command is where you set the threshold for your multisig wallet and then pass the initialization data from the other participants.
+This command is where you set the threshold for your multisig wallet and then pass the initialization data from the other participants. The initialization data is the long string beginning **Multisig** mentioned above.
 
 For example, if you're doing a 2 of 2 multisig, then your threshold is 2 and you'll pass 1 piece of data. If you're doing a 3 of 5 multisig, then your threshold is 3 and you'll pass 4 pieces of data.
 
@@ -111,7 +120,11 @@ Continuing with our 2/3 multisig example, you would then type into your CLI:
 make_multisig 2 <data1> <data2>
 ```
 
-With the number **2** above being our threshold, and the parameters **<data1\>** and **<data2\>** being the initialization data you received via the other wallets which ran prepare_multisig.
+Which in practice would look similar to:
+
+```
+make_multisig 2 MultisigxV2R1MyhE1hgED7AFwytsfW44s7G4abNHFKhwfJH9kvB2Q7xNVBdJAyY9gm7eJkHVRo1T3Hb6PeYsyzUrqQsmpBByDq4iRywanpRLxLN2JKuvKPBDayAywAHBzGxdnGiyoXhLdnZiU6Azy3VNocwH1jgfFvYDUUCo7H8mFacnLUFVLC8LjEfz MultisigxV2R1CzwgGBTPxb51nWfvLg7mYPRBnqDgppZq85E745qR1NvGNCLBaHSCmUQ4JRb41tW9PUerAgz9pKHJ5NpKgE6vsZnpLJkCP3u4zwcXJW3UHjABc446jdQegP1hyHnGgJpah8RmdeLcLCAqa6WXgt3xJoz6QF5o66tnCiyJkYyebjWeXV2y
+```
 
 If you were doing a 3/5 multisig, you'd instead run:
 
@@ -119,7 +132,7 @@ If you were doing a 3/5 multisig, you'd instead run:
 make_multisig 3 <data1> <data2> <data3> <data4>
 ```
 
-Once this command is run on each wallet, you will then receive a second round of initialization data, that looks something like:
+Once this command is run on each wallet, you will then receive a second round of initialization data, that looks similar to:
 
 ```
 Another step is needed
@@ -166,18 +179,15 @@ Multisig address: 56MD1L4zky3bFXDQb9qvSx7PDbg8F4x1HgPrFNrDnGnYDqFZcWGswWc1p2moFa
 
 ```
 
-This results in a wallet **public address** and **private view key** to be known for all participants. 
+This results in a wallet **public address** and **private view key** to be known for all participants.
 
-Please note: 
-
-- Actions are symmetric for all participants. Every participant cooperates with everyone else. The secret splitting is performed internally by the wallet.
-- Secure sharing of initialization data between participants is manual. The wallet itself does not provide any secure communication channel.
+So if you're the sole participant in the multisig setup, you'll know it has worked when you see the same multisig address across all the wallets.
 
 ## Receiving funds
 
 ### 1: Funding the Multisig Account
 
-Fortunately, addresses created by a multisig wallet operate the same as normal, non-multisig addresses. This means:
+Addresses created by a multisig wallet operate the same as normal, non-multisig addresses. This means:
 
 - Each wallet can create subaddresses independently, no collaboration needed.
 
@@ -186,7 +196,6 @@ Fortunately, addresses created by a multisig wallet operate the same as normal, 
 The main difference comes when trying to spend funds from a multisig wallet. See the **Spending Funds** section below for how to do this.
 
 ### 2: Check Account Balance
-
 
 To check the account balance, open one of the multisig wallets and type the **refresh** command.
 
@@ -204,7 +213,7 @@ If you see that last sentence:
 ```
 (Some owned outputs have partial key images - import_multisig_info needed)
 ```
-this means that you haven't synchronized your wallet with the threshold amount (1 other in the case of 2/3 multisig) needed for the outputs to become spendable.
+This means that you haven't synchronized your wallet with the threshold amount of wallets needed (1 other in the case of 2/3 multisig) for the outputs to become spendable.
 
 You can also use the command **show_transfers** to display a list of funds received and the transfer date, with the output looking similar to:
 
@@ -218,7 +227,7 @@ Prior to explaining the process for spending multisig funds, it may help to have
 
 1) **First, the sharing of partial key-images** - At minimum, the spender needs to get a partial key image from the people (1 or more) who will sign the transaction with him later. They need to export a file and share it with the future spender, who then imports the file to their wallet.
 
-2) Preparing / Signing / Submitting the transaction - 
+2) **Second, creating, signing & submitting the transaction** - A transfer is created, written to file, and then this file needs to be signed by the co-signers, before it can lastly be submitted to the network.
 
 
 ### Preparation for spending
@@ -347,7 +356,6 @@ The transaction has now been broadcast to the network. If you want to create ano
 
 ## Mnemonic Seeds
 
-
 With a regular wallet is it possible to create a mnemonic seed that you can backup, and later use to recreate the wallet.
 
 Fortunately, multisig wallets have the same feature. The only difference is that the seed is a **long string** of letters and numbers, rather than a set of dictionary words. Unfortunately, it needs to encode too much data to fit neatly into the regular mnemonic seed dictionary output.
@@ -363,6 +371,8 @@ NOTE: the following string can be used to recover access to your wallet. Write t
 **Note:** This seed will only recreate the individual wallet it is created from. Each wallet would need to be backed up separately.
 
 ## References
+
+The below guides are very detailed, and were formative in the creation of this document. Note that they are both a little out of date, as a few of the CLI commands have been updated in the interim.
 
 * [https://monero.stackexchange.com/questions/5646/how-to-use-monero-multisignature-wallets-2-2-2-3](https://monero.stackexchange.com/questions/5646/how-to-use-monero-multisignature-wallets-2-2-2-3)
 * [https://taiga.getmonero.org/project/rbrunner7-really-simple-multisig-transactions/wiki/23-multisig-in-cli-wallet](https://taiga.getmonero.org/project/rbrunner7-really-simple-multisig-transactions/wiki/23-multisig-in-cli-wallet)
