@@ -62,11 +62,7 @@ Error: You can enable it with:
 Error:   set enable-multisig-experimental 1
 ```
 
-This warning message is there to let people know that Multisig is still an experimental feature and may have bugs.
-
-While none are known at this time, malicious group members, in a worst case scenario, will be able to acquire all funds within the multisig wallet.
-
-Two of the steps to get Monero's multisig implementation further tested and more secure would be the completion of a formal specification and a third-party audit. However, there is currently no timeline for this.
+This warning message is there to let people know that Multisig is still an experimental feature and may have bugs. You can [read more](#warning) about this message below.
 
 **Recommendation:** By default the CLI applies a screen timeout of 90 seconds. After which, you will be asked to input your password to continue using the wallet. Unfortunately, once the wallet times out, it interrupts the multisig creation process.
 
@@ -375,6 +371,30 @@ NOTE: the following string can be used to recover access to your wallet. Write t
 ```
 
 **Note:** This seed will only recreate the individual wallet it is created from. Each wallet would need to be backed up separately.
+
+## <a id="warning"></a>About the experimental feature warning message
+
+Prior to a pull request in mid 2022 ([PR #8149](https://github.com/monero-project/monero/pull/8149)) Monero's multisig feature had some known bugs.
+
+PR #8149 fixed these issues, including findings identified by an [independent audit](https://github.com/monero-project/monero/pull/8149#issuecomment-1167912258) of multisig.
+
+However, there is still a possibility of a yet **unknown** bug that would allow a malicious group member, in a worst-case scenario, to acquire all funds within the multisig wallet.
+
+Two potential steps to get Monero's multisig implementation further tested and more secure would be the completion of a formal specification and a third-party audit. However, there is currently no timeline for this.
+
+It's worth noting that the risks implied by this unknown bug scenario depend upon the individual use-case. For example:
+
+a) If one planned to use multisig in collaboration with other people, then this risk is there.
+
+b) If one planned to use multisig solely to shard a cold wallet, and store it in multiple locations, then this risk may be lessened. On the basis that it requires two coincidences to come together: 
+
+i) A malicious actor who has the capability to exploit an unknown bug in Monero's multisig.
+
+ii) This malicious actor is then able to access one of the, presumably secured, multisig wallets.
+
+However, if an exploit was made public knowledge, then the risk increases, because the attacker no longer needs to figure out the exploit, they simply need to locate your wallet and then implement the public exploit.
+
+Thus, if one took the risk to use multisig in method b), they would be prudent to stay up to date on multisig development. Such that they would learn quickly if such an exploit was discovered.
 
 ## References
 
