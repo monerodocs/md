@@ -36,7 +36,7 @@ title: Monero Technical Specification
 ## Block reward
 
 * smoothly decreasing and subject to penalties for blocks greater than median size of the last 100 blocks (M100)
-* ~1.6 XMR as of June 2020; for the current reward check the coinbase transaction of the [latest block](https://xmrchain.net/)
+* 0.6 XMR as of June 2023; for the current reward check the coinbase transaction of the [latest block](https://xmrchain.net/)
 
 ## Block size
 
@@ -49,18 +49,18 @@ title: Monero Technical Specification
 ### Main emission
 
 * first, the main emission is about to produce ~18.132 million coins by the end of May 2022
-* as of June 2020 the emission is about 8 XMR per 10 minutes
+* as of June 2023 the emission is about 3 XMR per 10 minutes
 * see [charts and details](https://www.reddit.com/r/Monero/comments/512kwh/useful_for_learning_about_monero_coin_emission/)
 
 ### Tail emission
 
-* the tail emission kicks in once main emission is done
+* the tail emission kicked in after main emission is done
 * it will produce 0.6 XMR per 2-minute block
 * this translates to <1% inflation decreasing over time
 
 ## Max supply
 
-* ~18.132 million XMR + 0.6 XMR per 2 minutes
+* ~18.293 million XMR + 0.6 XMR per 2 minutes
 * technically infinite but practically deflationary if accounted for lost coins
 
 ## Divisibility
@@ -71,7 +71,7 @@ title: Monero Technical Specification
 ## Sender privacy
 
 * ring signatures
-    * the ring size is 11 (10 decoys)
+    * the ring size is 16 (15 decoys)
 * assurance: probabilistic / plausible deniability
 
 ## Recipient privacy
@@ -96,4 +96,4 @@ For the wallet (`monero-wallet-gui` or `monero-wallet-cli`):
 
 * typically wallet runs on the same machine as full node so there is no risk
 * if wallet connects to remote full node, there is no IP protection by default
-    * user must manually wrap wallet with Tor
+    * user must manually wrap wallet with Tor or I2P
