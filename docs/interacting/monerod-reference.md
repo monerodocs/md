@@ -44,7 +44,7 @@ tail -f ~/.bitmonero/stagenet/bitmonero.log  # watch the logs
 ./monerod --stagenet exit                    # ask daemon to exit gracefully
 ```
 
-The [mainnnet](/infrastructure/networks) is when you want to deal with the real XMR.
+The [mainnet](/infrastructure/networks) is when you want to deal with the real XMR.
 
 ```
 ./monerod --detach                           # run as a daemon in background
@@ -216,7 +216,7 @@ The following options configure **solo mining** using **CPU** with the standard 
 * experimentation and learning
 * if you have access to vast CPU resources
 
-Be advised though that it may take a **long** time to find a mainnet block. For this reason, it is often better to mine with p2pool instead.
+Be advised though that real mining happens **in pools** like p2pool, and with dedicated miner software like xmrig.
 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
