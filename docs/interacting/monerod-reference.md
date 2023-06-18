@@ -216,7 +216,7 @@ The following options configure **solo mining** using **CPU** with the standard 
 * experimentation and learning
 * if you have super cheap access to vast CPU resources
 
-Be advised though that real mining happens **in pools** and with high-end **GPU-s** instead of CPU-s.
+Be advised though that real mining happens **in pools** like p2pool, and with dedicated miner software like xmrig.
 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
