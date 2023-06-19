@@ -291,7 +291,7 @@ You can also type commands directly in the console of the running `monerod` (if 
 | Option                             | Description
 |------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------
 | `print_pl`                         | Show the full peer list.
-| `print_pl_stats`                   | Show the full peer list statistics (white vs gray peers). White peers are online and reachable. Grey peers are offline but your `monerod` remembers them from past sessions.
+| `print_pl_stats`                  | Show the full peer list statistics (white vs gray peers). White peers are any peers your node has completed a handshake with. Grey nodes are your node hasn't tried to connect to yet.
 | `print_cn`                         | Show connected peers with connection initiative (incoming/outgoing) and other stats.
 | `ban <IP> [<seconds>]`             | Ban a given `<IP>` for a given amount of `<seconds>`. By default the ban is for 24h. Example:<br />`./monerod ban 187.63.135.161`.
 | `unban <IP>`                       | Unban a given `<IP>`.
