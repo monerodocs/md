@@ -32,7 +32,7 @@ Trust binaryFate's public key (fingerprint must be exactly this):
 ## 2. Verify signature of hash list (hashes.txt)
 
 The list of binaries and their hashes is published on [getmonero.org](https://www.getmonero.org/downloads/hashes.txt) and a few other places like release notes on [r/monero](https://reddit.com/r/monero).
-Please note the publication channel does not matter as long as you properly verify the signature!                                                                        u
+Please note the publication channel does not matter as long as you properly verify the signature!
 
 To verify these are real hashes (not tampered with) run:
 
